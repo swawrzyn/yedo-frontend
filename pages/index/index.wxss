@@ -1,0 +1,17 @@
+/**index.wxss**/
+.container {
+  background: #FFFF00;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.title {
+  font-size: 72px;
+  font-weight: light;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
