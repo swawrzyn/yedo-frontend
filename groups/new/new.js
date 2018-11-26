@@ -1,15 +1,21 @@
 // groups/new/new.js
 import initCalendar from '../../template/calendar/index';
+import { getSelectedDay } from '../../template/calendar/index';
 const conf = {
-  disablePastDay: true
+  disablePastDay: true,
+
 };
+let meals = new wx.BaaS.TableObject(58396);
+let currentUser = new wx.BaaS.User();
+currentUser = currentUser.get(wx.BaaS.storage.get('uid')); 
+
 Page({
 
   /**
    * Page initial data
    */
   data: {
-    region_zh: ["浦东新区", "徐汇区", "长宁区", "普陀区", "闸北区", "虹口区", "杨浦区", "黄浦区", "卢湾区", "静安区", "宝山区", "闵行区", "嘉定区", "金山区", "松江区", "青浦区", "南汇区", "奉贤区", "崇明区"],
+    region_zh: ["浦东新", "徐汇", "长宁", "普陀", "闸北", "虹口", "杨浦", "黄浦", "卢湾", "静安", "宝山", "闵行", "嘉定", "金山", "松江", "青浦", "南汇", "奉贤", "崇明"],
     region_en: ["pudong dist.", "xuhui dist.", "changning dist.", "putuo dist.", "zhabei dist.", "hongkou dist.", "yangpu dist.", "huangpu dist.", "luwan dist.", "jingan dist.", "baoshan dist.", "minhang dist.", "jiading dist.", "jinshan dist.", "songjiang dist.", "qingpu dist.", "nanhui dist.", "fengxian dist.", "chongming dist."],
   },
 
@@ -17,6 +23,7 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+    // setting the table as meals, it's tableid is 58396
 
   },
 
@@ -74,5 +81,24 @@ Page({
     this.setData({
       region_index: e.detail.value
     });
+  },
+
+  formSubmit: function(e) {
+    const day = getSelectedDay()[0];
+    const inputDate = new Date(`${day.year}-${day.month}-${day.day}`);
+    const User = new wx.BaaS.TableObject()
+    const newMeal = {
+      name: e.detail.value.name,
+      location: this.data.region_zh[e.detail.value.district],
+      meal_date: (inputDate.toISOString()).toString()
+    }
+    console.log(currentUser); 
+    let meal = meals.create();   
+    meal.set(newMeal).save().then(res => {
+      console.log(res); 
+      wx.redirectTo({
+        url: '/users/show/show'
+      })
+    })
   }
 })

@@ -8,9 +8,9 @@
     <view bindtap="" class="card">
        <image class="user-avatar" src="../../pages/images/用户.png"/> 
       <view class="card-text">
-         <text class="card-title">{{meal.title}}</text>
-        <text class ="card-date">{{meal.date}}</text>
+         <text class="card-title">{{meal.name}}</text>
+        <text class ="card-date">{{meal.meal_date}}</text>
       </view>
     </view>
   </block>
-  <button bindtap="submitNow" class="btn"> Organise your meal</button>
+  <button bindtap="toNewMeal" class="btn">organise your meal</button>
