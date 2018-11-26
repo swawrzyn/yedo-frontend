@@ -50,5 +50,10 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  toNewMeal: () => {
+    wx.navigateTo({
+      url: '/groups/new/new'
+    })
   }
 })
