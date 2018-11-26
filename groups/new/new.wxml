@@ -12,6 +12,8 @@
       <view class="district-select">
         <text wx:if="{{region_index}}">{{region_en[region_index]}}</text>
         <text style="opacity: 0.5;" wx:if="{{!region_index}}">district?</text>
+        <text style="arrow" wx:if="{{region_index}}">▾</text>
+        <text style="arrow" style="opacity: 0.5;" wx:if="{{!region_index}}">▾</text>
       </view>
     </view>
   </picker>
