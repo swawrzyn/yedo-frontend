@@ -1,0 +1,16 @@
+<!--users/show/show.wxml-->
+
+  <view class="meal-title"> 
+    <text>Your Meals</text>
+  </view>
+
+  <block wx:for="{{meals}}" wx:for-item="meal">
+    <view bindtap="" class="card">
+       <image class="user-avatar" src="../../pages/images/用户.png"/> 
+      <view class="card-text">
+         <text class="card-title">{{meal.title}}</text>
+        <text class ="card-date">{{meal.date}}</text>
+      </view>
+    </view>
+  </block>
+  <button bindtap="submitNow" class="btn"> Organise your meal</button>
