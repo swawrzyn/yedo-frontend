@@ -1,0 +1,60 @@
+/* pages/stories/stories.wxss */
+
+.meal-title{
+  text-align:center;
+  margin:10px;
+}
+
+
+.card-text{
+  text-align: center;
+}
+
+.card {
+  height: 80px;
+  background-size: cover !important;
+  border:  1px black solid;
+  background-position: center;
+  color: black;
+  position: relative;
+  display:flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 8px;
+  margin: 20px 20px;
+}
+
+
+.user-avatar {
+  position:absolute;
+  left: 40px;
+  width: 40px;
+  height:40px;
+  border-radius: 50%;
+  border: 1px black solid;
+}
+
+
+.card-text{
+  display: block;
+  font-size:15px;
+  font-color:black;
+}
+
+.card-date{
+  display:block;
+}
+
+.btn{
+  width:200px;
+}
+
+.desc {
+  border: 2px solid rgb(240,240,240);
+  margin-bottom:15px;
+  padding: 5px;
+  font-size: 14px;
+}
+
+
