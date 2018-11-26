@@ -1,0 +1,25 @@
+<import src="/template/calendar/index.wxml"/>
+
+<view class="container">
+  <view class="title">
+    <text>what's your plan?</text>
+  </view>
+
+  <view class="input">
+    <input name="name" placeholder-class="input-placeholder" placeholder="group name?" />
+    <picker bindchange="bindPickerChange" value="1" range="{{region_en}}">
+    <view class="picker">
+      <view class="district-select">
+        <text wx:if="{{region_index}}">{{region_en[region_index]}}</text>
+        <text style="opacity: 0.5;" wx:if="{{!region_index}}">district?</text>
+      </view>
+    </view>
+  </picker>
+    <view class="calendar-wrap">
+      <template is="calendar" data="{{...calendar}}" />
+    </view>
+    <view class="input-button">
+      <button formType="submit" hover-class="button-hover">submit</button>
+    </view>
+  </view>
+</view>

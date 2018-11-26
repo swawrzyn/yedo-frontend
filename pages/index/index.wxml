@@ -1,4 +1,8 @@
 <!--index.wxml-->
 <view class="container">
-<text class="title">yedo!</text>
+  <text class="title">yedo!</text>
+  <view class="buttons">
+    <button class="button" hover-class='button-hover' ontap="toNewMeal">Plan a new meal</button>
+    <button class="button" hover-class='button-hover' ontap="toUser">Your meals</button>
+  </view>
 </view>
