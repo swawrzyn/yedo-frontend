@@ -13,7 +13,7 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.4.0",
 	"appid": "wxfb2d864834e64b71",
-	"projectname": "yedo",
+	"projectname": "yedo1",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
@@ -27,13 +27,30 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
 			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
-			"list": []
+			"current": 1,
+			"list": [
+				{
+					"id": -1,
+					"name": "Index",
+					"pathName": "pages/index/index",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "Users Show",
+					"pathName": "users/show/show",
+					"query": ""
+				}
+			]
 		}
 	}
 }
