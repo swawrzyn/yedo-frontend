@@ -26,10 +26,14 @@
   color: black;
   border: 1px solid black;
   margin: 25rpx 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
 }
 
-.input input .placeholder {
+
+.input-placeholder {
   color: black;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  opacity: 0.5; 
 }
 
 .district-select {
