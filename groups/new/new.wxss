@@ -1,0 +1,128 @@
+@import '/template/calendar/index.wxss';
+
+.container {
+  background: #FFFF00;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.title {
+  font-size: 36px;
+}
+
+.input {
+  width: 75%;
+}
+
+.input input {
+  padding: 25rpx;
+  background: transparent;
+  color: black;
+  border: 1px solid black;
+  margin: 25rpx 0;
+}
+
+.input input .placeholder {
+  color: black;
+}
+
+.district-select {
+  border: 1px solid black;
+  padding: 25rpx;
+  margin: 25rpx 0;
+}
+
+.input .calendar-wrap {
+  width: calc(100% - 2px);
+  margin: auto 0;
+  height: 500rpx;
+  border: 1px solid black;
+}
+
+.pink-color {
+  color:black;
+}
+
+.grid,
+.week {
+  width: 80rpx;
+  height: 60rpx;
+}
+
+.day {
+  width: 60rpx;
+  height: 60rpx;
+  font-size: 26rpx;
+  font-weight: 200;
+  border-radius: 0;
+}
+
+.week {
+  line-height: 74rpx;
+  color: black;
+}
+
+.calendar .disable-day-color {
+  color: #999;
+}
+
+.calendar .disable-day-circle {
+  background-color: transparent;
+}
+
+.calendar .normal-day-color {
+  color: #000;
+}
+
+.calendar .day-choosed-color {
+  color: #000;
+}
+
+.calendar .border-radius {
+  border-radius: 0;
+  position: relative;
+  left: 0;
+  top: 0;
+}
+
+.calendar .pink-bg {
+  background-color: transparent;
+  border: 1px black solid;
+  transition: all 0.3s;
+  animation-name: choosed;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: 1;
+}
+
+@keyframes choosed {
+  from {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.1);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+button {
+  background: #FFFF00;
+  border: 1px solid black;
+  margin: 25rpx 0;
+  border-radius: 0;
+}
+
+.button-hover {
+  background: black;
+  color: white;
+}
