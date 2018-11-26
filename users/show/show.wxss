@@ -13,7 +13,7 @@
 .card {
   height: 80px;
   background-size: cover !important;
-  background-color:#f7c242;
+  border:  1px black solid;
   background-position: center;
   color: black;
   position: relative;
@@ -32,7 +32,7 @@
   width: 40px;
   height:40px;
   border-radius: 50%;
-  background-color:black;
+  border: 1px black solid;
 }
 
 
