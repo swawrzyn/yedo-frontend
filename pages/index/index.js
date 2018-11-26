@@ -9,9 +9,19 @@ Page({
   onLoad: function () {
   },
 
-  toNewMeal: () => {
-    wx.navigateTo({
-      url: '/groups/new/new'
+  userInfoHandler(data) {
+    console.log(data);
+    wx.BaaS.handleUserInfo(data).then(res => {
+      if (data.currentTarget.id === 'newmeal') {
+            wx.navigateTo({
+              url: '/groups/new/new'
+            })
+      } else {
+        wx.navigateTo({
+          url: '/groups/new/new'
+        })
+      }
+    }, res => {
     })
   }
 })
