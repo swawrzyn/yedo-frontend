@@ -2,12 +2,19 @@
   "pages":[
     "pages/index/index",
     "pages/logs/logs",
-    "users/show/show"
+    "users/show/show",
+    "groups/new/new"
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#FFFF00",
     "navigationBarTitleText": "yedo!",
     "navigationBarTextStyle":"black"
+  },
+  "plugins": {
+    "sdkPlugin": {
+      "version": "1.10.1",
+      "provider": "wxc6b86e382a1e3294"
+    }
   }
 }
