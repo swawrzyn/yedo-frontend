@@ -75,12 +75,20 @@ Page({
     // this.setData({
     //   citycenter: this.data.cityleft['地铁'],
     // })
+    if (app.globalData.newMeal){
+      this.setData({
+        meal: app.globalData.newMeal,
+        groupId: options.group_id
+      })
+      app.globalData.newMeal = "";
+    } else {
     console.log(options);
     this.setData({
-      meal: app.globalData.newMeal,
+      meal: ,
       groupId: options.group_id
     })
     app.globalData.newMeal = "";
+    }
     this.setData({
       meal_date_string: this.data.meal.meal_date.substr(0, 10)
     })
