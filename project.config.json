@@ -68,10 +68,16 @@
 					"query": "id=5bfcf17bac716719f2859e0d&new=true"
 				},
 				{
-					"id": -1,
+					"id": 5,
 					"name": "share landing",
 					"pathName": "pages/landing/landing",
 					"query": "meal_id=5bfcd35e94516c1e443ba84c"
+        },
+        {
+					"id": 6,
+					"name": "show group",
+					"pathName": "groups/show/show",
+					"query": ""
 				}
 			]
 		}
