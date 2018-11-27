@@ -14,7 +14,7 @@ Page({
     wx.BaaS.handleUserInfo(data).then(res => {
       if (data.currentTarget.id === 'newmeal') {
             wx.navigateTo({
-              url: '/groups/new/new'
+              url: '/choices/new/new'
             })
       } else {
         wx.navigateTo({

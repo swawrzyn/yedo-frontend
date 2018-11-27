@@ -1,22 +1,21 @@
 <!--choices/new/new.wxml-->
+
+<!-- <view class="title">
+  <image src="../../images/menu.png"></image>
+  <image src="../../images/首页.png"></image>
+</view> -->
 <!-- 下拉筛选框 -->
-<view class="page">
+<!-- <view class="page"> -->
   <view class="nav">
     <view class="nav-son {{shownavindex == 1? 'active' : ''}}" bindtap="listqy" data-nav="1">
-      <view class="content">地铁区域</view>
-      <view class="icon"></view>
-    </view>
-    <view class="nav-son borders {{shownavindex == 2? 'active' : ''}}" bindtap="list" data-nav="2">
-      <view class="content">价格</view>
-      <view class="icon"></view>
-    </view>
-    <view class="nav-son {{shownavindex == 3? 'active' : ''}}" bindtap="listpx" data-nav="3">
-      <view class="content">排序</view>
-      <view class="icon"></view>
+      <view class="title">
+        <image src="../../images/menu.png"></image>
+        <image src="../../images/首页.png"></image>
+      </view>
     </view>
   </view>
   <!-- 地铁区域-》区域、地铁标签 -->
-  <view class="quyu {{qyopen ? 'slidown' : 'slidup'}} {{qyshow ? 'disappear':''}}">
+  <!-- <view class="quyu {{qyopen ? 'slidown' : 'slidup'}} {{qyshow ? 'disappear':''}}">
 
     <view class="qy quyu-left">
       <view class="{{select1 == index ? 'current' : ''}}" wx:for="{{cityleft}}" bindtap="selectleft" data-city='{{index}}'>
@@ -38,39 +37,8 @@
       <button class='btn-reset' bindtap='quyuEmpty'>重置</button>
       <button class='btn-submit' bindtap='submitFilter'>确定</button>
     </view>
-  </view>
-  <!-- 价格筛选 -->
-  <view class="temp temp1 {{nzopen ? 'slidown' : 'slidup'}} {{nzshow ? 'disappear':''}}">
-    <!-- <view wx:for="{{content}}">
-      {{item}}
-    </view> -->
-    <view class='sliderHView'>
-      <view class='showMoney'>
-        <text class='valueSty'>￥{{leftValue}}</text>
-        <text class='valueSty'>￥{{rightValue}}</text>
-      </view>
-      <view class='twoSlider'>
-        <slider style='width:{{leftPer}}%;margin-right:0rpx;' bindchange="leftSchange" min='{{leftMin}}' max='{{leftMax}}' value='{{leftValue}}' activeColor='#cecacb' backgroundColor='#f26a36' block-size='18' step='100' />
-        <slider style='width:{{rightPer}}%;margin-left:0rpx;' bindchange="rightSchange" min='{{rightMin}}' max='{{rightMax}}' value='{{rightValue}}' activeColor='#f26a36' backgroundColor='#cecacb' block-size='18' step='100' />
-      </view>
-    </view>
-
-    <view class='form-btn'>
-      <button class='btn-reset' bindtap='PriceEmpty'>重置</button>
-      <button class='btn-submit' bindtap='submitPrice'>确定</button>
-    </view>
-
-  </view>
-
-
-  <!-- 排序筛选 -->
-  <view class="temp temp2 contentCenter {{pxopen ? 'slidown' : 'slidup'}} {{pxshow ? 'disappear':''}}">
-    <view wx:for="{{content}}" bindtap='selectPX' data-index="{{index}}" class="pxTable {{pxIndex == index?'current4':''}}">
-      {{item}}
-    </view>
-  </view>
-  <view class="fullbg {{isfull ?'fullopacity':''}}" bindtap="hidebg"></view>
-</view>
+  </view> -->
+<!-- </view> -->
 
 <view class="home-logo">
   <view class="card">
@@ -85,11 +53,7 @@
         <text>December 4th, 2018</text>
       </view>
     </view>
-    <view class="home">
-      <image src="../../images/首页.png"></image>
-    </view>
   </view>
-
 </view>
 
 <form bindsubmit="userInput" bindreset="formReset" class="form-fields">
@@ -97,12 +61,9 @@
     <text>What do you want to eat?</text>
   </view>
   <view class="text-fields">
-    <input class="desc" name="first-choice" placeholder="NO.1 Choice" value="{{value1}}"/>
-    <input class="desc" name="second-choice" placeholder="NO.2 Choice" value="{{value2}}"/>
-    <input class="desc" name="third-choice" placeholder="NO.3 Choice" value="{{value3}}"/>
+    <input class="desc" placeholder-class="input-placeholder" name="first-choice" placeholder="American" value="{{value1}}"/>
+    <input class="desc" placeholder-class="input-placeholder" name="second-choice" placeholder="Chinese" value="{{value2}}"/>
+    <input class="desc" placeholder-class="input-placeholder" name="third-choice" placeholder="Japanese" value="{{value3}}"/>
   </view>
-
-  <view>
-    <button type="default" class="btn btn-primary" bindtap="default" hover-class="other-button-hover"> Let's Eat! </button>
-  </view>
+  <button class="button" hover-class='button-hover'>Let's Eat!</button>
 </form>

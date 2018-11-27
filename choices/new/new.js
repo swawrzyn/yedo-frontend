@@ -95,30 +95,30 @@ Page({
 
   },
    // 地铁区域列表下拉框是否隐藏
-  listqy: function (e) {
-    if (this.data.qyopen) {
-      this.setData({
-        qyopen: false,
-        nzopen: false,
-        pxopen: false,
-        nzshow: true,
-        pxshow: true,
-        qyshow: false,
-        isfull: false,
-        shownavindex: 0
-      })
-    } else {
-      this.setData({
-        qyopen: true,
-        pxopen: false,
-        nzopen: false,
-        nzshow: true,
-        pxshow: true,
-        qyshow: false,
-        isfull: true,
-        shownavindex: e.currentTarget.dataset.nav
-      })
-    }
+  // listqy: function (e) {
+  //   if (this.data.qyopen) {
+  //     this.setData({
+  //       qyopen: false,
+  //       nzopen: false,
+  //       pxopen: false,
+  //       nzshow: true,
+  //       pxshow: true,
+  //       qyshow: false,
+  //       isfull: false,
+  //       shownavindex: 0
+  //     })
+  //   } else {
+  //     this.setData({
+  //       qyopen: true,
+  //       pxopen: false,
+  //       nzopen: false,
+  //       nzshow: true,
+  //       pxshow: true,
+  //       qyshow: false,
+  //       isfull: true,
+  //       shownavindex: e.currentTarget.dataset.nav
+  //     })
+  //   }
 
   },
   // 价格下拉框是否隐藏
@@ -177,126 +177,86 @@ Page({
   //   console.log(e.target)
   // },
   // 地铁区域第一栏选择内容
-  selectleft: function (e) {
-    console.log('用户选中左边菜单栏的索引值是：' + e.target.dataset.city);
-    this.setData({
-      cityright: {},
-      citycenter: this.data.cityleft[e.currentTarget.dataset.city],
-      select1: e.target.dataset.city,
-      select2: ''
-    });
-  },
+  // selectleft: function (e) {
+  //   console.log('用户选中左边菜单栏的索引值是：' + e.target.dataset.city);
+  //   this.setData({
+  //     cityright: {},
+  //     citycenter: this.data.cityleft[e.currentTarget.dataset.city],
+  //     select1: e.target.dataset.city,
+  //     select2: ''
+  //   });
+  // },
   // 地铁区域中间栏选择的内容
-  selectcenter: function (e) {
-    console.log('选中地铁线下的地铁站' + e.target.dataset.city);
-    this.setData({
-      cityright: this.data.citycenter[e.currentTarget.dataset.city],
-      select2: e.target.dataset.city
-    });
-  },
+  // selectcenter: function (e) {
+  //   console.log('选中地铁线下的地铁站' + e.target.dataset.city);
+  //   this.setData({
+  //     cityright: this.data.citycenter[e.currentTarget.dataset.city],
+  //     select2: e.target.dataset.city
+  //   });
+  // },
   // 地铁区域左边栏选择的内容
-  selectright: function (e) {
-    // console.log(e._relatedInfo.anchorRelatedText)
-    console.log('选中地铁线下的地铁站' + e.currentTarget.dataset.city);
-    this.setData({
-      select3: e._relatedInfo.anchorRelatedText
-    });
-  },
+  // selectright: function (e) {
+  //   // console.log(e._relatedInfo.anchorRelatedText)
+  //   console.log('选中地铁线下的地铁站' + e.currentTarget.dataset.city);
+  //   this.setData({
+  //     select3: e._relatedInfo.anchorRelatedText
+  //   });
+  // },
   // 点击灰色背景隐藏所有的筛选内容
-  hidebg: function (e) {
-    this.setData({
-      qyopen: false,
-      nzopen: false,
-      pxopen: false,
-      nzshow: true,
-      pxshow: true,
-      qyshow: true,
-      isfull: false,
-      shownavindex: 0,
-    })
-  },
+  // hidebg: function (e) {
+  //   this.setData({
+  //     qyopen: false,
+  //     nzopen: false,
+  //     pxopen: false,
+  //     nzshow: true,
+  //     pxshow: true,
+  //     qyshow: true,
+  //     isfull: false,
+  //     shownavindex: 0,
+  //   })
+  // },
   // 地铁区域清空筛选项
-  quyuEmpty: function () {
-    this.setData({
-      select1: '',
-      select2: '',
-      select3: ''
-    })
-  },
+  // quyuEmpty: function () {
+  //   this.setData({
+  //     select1: '',
+  //     select2: '',
+  //     select3: ''
+  //   })
+  // },
   // 地铁区域选择筛选项后，点击提交
-  submitFilter: function () {
-    console.log('选择的一级选项是：' + this.data.select1);
-    console.log('选择的二级选项是：' + this.data.select2);
-    console.log('选择的三级选项是：' + this.data.select3);
-    // 隐藏地铁区域下拉框
-    this.setData({
-      value1: this.data.select1,
-      value2: this.data.select2,
-      value3: this.data.select3,
-      qyopen: false,
-      nzopen: false,
-      pxopen: false,
-      nzshow: true,
-      pxshow: true,
-      qyshow: false,
-      isfull: false,
-      shownavindex: 0
-    })
-  },
-  // 左边滑块滑动的值
-  leftSchange: function (e) {
-    console.log('左边改变的值为：' + e.detail.value);
-    let currentValue = parseInt(e.detail.value);
-    let currentPer = parseInt(currentValue)
-    var that = this;
-    that.setData({
-      leftValue: e.detail.value //设置左边当前值
-    })
-  },
-  // 右边滑块滑动的值
-  rightSchange: function (e) {
-    console.log('右边改变的值为：' + e.detail.value);
-    let currentValue = parseInt(e.detail.value);
-    var that = this;
-    that.setData({
-      rightValue: e.detail.value,
-    })
-  },
-  // 价格筛选框重置内容
-  PriceEmpty: function () {
-    this.setData({
-      leftValue: 1000, //左边滑块默认值
-      rightValue: 6000, //右边滑块默认值
-    })
-  },
-  // 价格筛选框提交内容
-  submitPrice: function () {
-    // 隐藏价格下拉框选项
-    this.setData({
-      nzopen: false,
-      pxopen: false,
-      qyopen: false,
-      nzshow: false,
-      pxshow: true,
-      qyshow: true,
-      isfull: false,
-      shownavindex: 0
-    })
-  },
+  // submitFilter: function () {
+  //   console.log('选择的一级选项是：' + this.data.select1);
+  //   console.log('选择的二级选项是：' + this.data.select2);
+  //   console.log('选择的三级选项是：' + this.data.select3);
+  //   // 隐藏地铁区域下拉框
+  //   this.setData({
+  //     value1: this.data.select1,
+  //     value2: this.data.select2,
+  //     value3: this.data.select3,
+  //     qyopen: false,
+  //     nzopen: false,
+  //     pxopen: false,
+  //     nzshow: true,
+  //     pxshow: true,
+  //     qyshow: false,
+  //     isfull: false,
+  //     shownavindex: 0
+  //   })
+  // },
   // 排序内容下拉框筛选
-  selectPX: function (e) {
-    console.log('排序内容下拉框筛选的内容是' + e.currentTarget.dataset.index);
-    this.setData({
-      pxIndex: e.currentTarget.dataset.index,
-      nzopen: false,
-      pxopen: false,
-      qyopen: false,
-      nzshow: true,
-      pxshow: false,
-      qyshow: true,
-      isfull: false,
-      shownavindex: 0
-    });
-    console.log('当前' + this.data.pxIndex);
-  },
+  // selectPX: function (e) {
+  //   console.log('排序内容下拉框筛选的内容是' + e.currentTarget.dataset.index);
+  //   this.setData({
+  //     pxIndex: e.currentTarget.dataset.index,
+  //     nzopen: false,
+  //     pxopen: false,
+  //     qyopen: false,
+  //     nzshow: true,
+  //     pxshow: false,
+  //     qyshow: true,
+  //     isfull: false,
+  //     shownavindex: 0
+  //   });
+  //   console.log('当前' + this.data.pxIndex);
+  // },
 })
