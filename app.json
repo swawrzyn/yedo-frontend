@@ -5,7 +5,8 @@
     "choices/new/new",
     "users/show/show",
     "groups/new/new",
-    "groups/show/show"
+    "groups/show/show",
+    "pages/landing/landing"
   ],
   "window":{
     "backgroundTextStyle":"light",
