@@ -13,11 +13,11 @@
 	"compileType": "miniprogram",
 	"libVersion": "2.4.0",
 	"appid": "wxfb2d864834e64b71",
-	"projectname": "yedo1",
+	"projectname": "yedo",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
-	"isGameTourist": false,
+	"scripts": {},
 	"condition": {
 		"search": {
 			"current": -1,
@@ -32,7 +32,6 @@
 			"list": []
 		},
 		"game": {
-			"currentL": -1,
 			"list": []
 		},
 		"miniprogram": {
@@ -57,13 +56,10 @@
 					"query": ""
 				},
 				{
-					"id": -1,
-<<<<<<< HEAD
+					"id": 3,
 					"name": "new choice",
-=======
-					"name": "Choices new",
->>>>>>> aa9c5f86a936a175d02c213f5a0b38476b6e9c8c
-					"pathName": "choices/new/new"
+					"pathName": "choices/new/new",
+					"query": "group_id=blahblahblah"
 				}
 			]
 		}

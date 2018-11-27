@@ -47,10 +47,13 @@
     </view>
     <view class="details">
       <view>
-        <text>Stefan’s Bday Dinner</text>
+        <text>{{meal.name}}</text>
       </view>
       <view>
-        <text>December 4th, 2018</text>
+        <text>{{meal.location}}</text>
+      </view>
+      <view>
+        <text>{{meal.meal_date_string}}</text>
       </view>
     </view>
   </view>
@@ -70,21 +73,21 @@
       </picker>
     </view>
     <view class="section">
-      <picker bindchange="bindPickerChange2" value="{{index2}}" range="{{array2}}">
+      <picker bindchange="bindPickerChange2" value="{{index2}}" range="{{array1}}">
         <view class="picker">
-            <input class="desc" placeholder-class="input-placeholder" name="second-choice" placeholder="Chinese" value="{{array2[index2]}}" disabled='disabled'/>
+            <input class="desc" placeholder-class="input-placeholder" name="second-choice" placeholder="Chinese" value="{{array1[index2]}}" disabled='disabled'/>
           <!-- <text class="desc">{{array[index]}}</text> -->
         </view>
       </picker>
     </view>
     <view class="section">
-      <picker bindchange="bindPickerChange3" value="{{index3}}" range="{{array3}}">
+      <picker bindchange="bindPickerChange3" value="{{index3}}" range="{{array1}}">
         <view class="picker">
-            <input class="desc" placeholder-class="input-placeholder" name="third-choice" placeholder="Japanese" value="{{array3[index3]}}" disabled='disabled'/>
+            <input class="desc" placeholder-class="input-placeholder" name="third-choice" placeholder="Japanese" value="{{array1[index3]}}" disabled='disabled'/>
           <!-- <text class="desc">{{array[index]}}</text> -->
         </view>
       </picker>
     </view>
   </view>
-  <button class="button" hover-class='button-hover'>Let's Eat!</button>
+  <button class="button" hover-class='button-hover' bindtap='addChoices'>Let's Eat!</button>
 </form>

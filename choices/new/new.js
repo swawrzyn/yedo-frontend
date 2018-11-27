@@ -34,8 +34,10 @@ Page({
 
     // pxIndex: 0, //排序内容下拉框，默认第一个
     array1: ['American', 'Chinese', 'Italian', 'Japanese','Mexican','Korean'],
-    array2: ['Chinese', 'American', 'Japanese', 'Italian', 'Mexican', 'Korean'],
-    array3: ['American', 'Chinese', 'Italian', 'Japanese', 'Mexican', 'Korean'],
+    array1_zh: ['美国菜', '中国菜', '意大利菜', '日本菜', '墨西哥菜', '韩国菜'],
+    index1: 0,
+    index2: 1,
+    index3: 2
     // objectArray: [
     //   {
     //     id: 0,
@@ -69,10 +71,19 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+    const app = getApp();
     // this.setData({
     //   citycenter: this.data.cityleft['地铁'],
     // })
-
+    console.log(options);
+    this.setData({
+      meal: app.globalData.newMeal,
+      groupId: options.group_id
+    })
+    app.globalData.newMeal = "";
+    this.setData({
+      meal_date_string: this.data.meal.meal_date.substr(0, 10)
+    })
   },
 
   /**
@@ -142,6 +153,32 @@ Page({
       index3: e.detail.value
     })
   },
+
+  addChoices: function() {
+    let MealsTable = new wx.BaaS.TableObject("meals");
+    let newMeal = MealsTable.getWithoutData(this.data.groupId);
+    let ChoicesTable = new wx.BaaS.TableObject("choices");
+    const choices = [
+      {
+        meal_category: this.data.array1_zh[this.data.index1],
+        rank: 3,
+        meal: newMeal,
+      },
+      {
+        meal_category: this.data.array1_zh[this.data.index2],
+        rank: 2,
+        meal: newMeal,
+      },
+      {
+        meal_category: this.data.array1_zh[this.data.index3],
+        rank: 1,
+        meal: newMeal,
+      }
+    ]
+    ChoicesTable.createMany(choices).then(res => {
+      console.log(res.data.succeed);
+    });
+  }
    // 地铁区域列表下拉框是否隐藏
   // listqy: function (e) {
   //   if (this.data.qyopen) {
