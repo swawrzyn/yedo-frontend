@@ -94,8 +94,13 @@ Page({
   /**
    * Called when user click on the top right corner to share
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (res) {
+    if (res.from === 'button') {
+      console.log(res);
+    } return {
+      title: this.data.meals.name,
+      path: `/pages/landing/landing?meal_id=${this.data.mealId}`
+    }
   },
 
   recomputeRecommendation: (page, mealId) => {
