@@ -17,6 +17,13 @@ Page({
       },
   ]
   },
+
+  yourMeals:function(e){
+    console.log(e)
+    wx.navigateTo({
+      url:"/groups/show/show"
+      })
+  },
   /**
    * Lifecycle function--Called when page load
    */
