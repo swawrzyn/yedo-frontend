@@ -84,6 +84,7 @@ Page({
   },
 
   formSubmit: function(e) {
+    const app = getApp();
     const day = getSelectedDay()[0];
     const inputDate = new Date(`${day.year}-${day.month}-${day.day}`);
     const User = new wx.BaaS.TableObject()
@@ -92,12 +93,15 @@ Page({
       location: this.data.region_zh[e.detail.value.district],
       meal_date: (inputDate.toISOString()).toString()
     }
-    console.log(currentUser); 
     let meal = meals.create();   
     meal.set(newMeal).save().then(res => {
-      console.log(res); 
+      app.globalData.newMeal = { 
+        name: res.data.name,
+        meal_date: res.data.meal_date,
+        location: res.data.location
+       }
       wx.redirectTo({
-        url: '/users/show/show'
+        url: `/choices/new/new?group_id=${res.data.id}`
       })
     })
   }
