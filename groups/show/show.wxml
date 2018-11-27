@@ -58,5 +58,5 @@
   </view>
 </view>
 
-<button bindtap="toNewMeal" class="btn">Share</button>
+<button open-type="share" class="btn">Share</button>
 

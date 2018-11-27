@@ -189,6 +189,13 @@ Page({
         url: `/groups/show/show?id=${this.data.groupId}&new=true`,
       })
     });
+  },
+  userInfoHandler(data) {
+    console.log(data);
+    wx.BaaS.handleUserInfo(data).then(res => {
+      this.addChoices();
+    }, res => {
+    })
   }
    // 地铁区域列表下拉框是否隐藏
   // listqy: function (e) {
