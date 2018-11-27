@@ -12,8 +12,9 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.title {
+.title text {
   font-size: 36px;
+  margin-top: 200rpx 0;
 }
 
 .input {
@@ -21,7 +22,8 @@
 }
 
 .input input {
-  padding: 25rpx;
+  height: 80rpx;
+  padding: 0 25rpx;
   background: transparent;
   color: black;
   border: 1px solid black;
@@ -30,15 +32,20 @@
 }
 
 .input-placeholder {
+  
   color: black;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   opacity: 0.5; 
 }
 
 .district-select {
+  height: 80rpx;
+  padding: 0 25rpx;
   border: 1px solid black;
-  padding: 25rpx;
   margin: 25rpx 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .input .calendar-wrap {
@@ -69,10 +76,11 @@
 .week {
   line-height: 74rpx;
   color: black;
+  font-weight: normal;
 }
 
 .calendar .disable-day-color {
-  color: #999;
+  color: #c4c4c4;
 }
 
 .calendar .disable-day-circle {
@@ -81,10 +89,12 @@
 
 .calendar .normal-day-color {
   color: #000;
+  font-weight: bold;
 }
 
 .calendar .day-choosed-color {
   color: #000;
+  font-weight: bold;
 }
 
 .calendar .border-radius {

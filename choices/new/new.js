@@ -6,43 +6,72 @@ Page({
    * Page initial data
    */
   data: {
-    content: [],
-    px: ['最新发布', '推荐排序', '租金由低到高', '租金由高到低', '面积由小到大', '面积由大到小'], //排序列表内容
-    qyopen: false, //点击地铁区域筛选滑动弹窗显示效果，默认不显示
-    qyshow: true, //用户点击闭关区域的弹窗设置，默认不显示
-    nzopen: false, //价格筛选弹窗
-    pxopen: false, //排序筛选弹窗
-    nzshow: true,
-    pxshow: true,
-    isfull: false,
-    cityleft: cityData.getCity(), //获取地铁区域的下拉框筛选项内容
-    citycenter: {}, //选择地铁区域左边筛选框后的显示的中间内容部分
-    cityright: {}, //选择地铁区域的中间内容部分后显示的右边内容
-    select1: '地铁', //地铁区域选中后的第二个子菜单，默认显示地铁下的子菜单
-    select2: '', //地铁区域选择部分的中间
-    select3: '', //地铁区域选择部分的右边
-    shownavindex: '',
-    // 价格筛选框设置
-    leftMin: 0,
-    leftMax: 10000, //左边滑块最大值
-    rightMin: 0, //右边滑块的最小值
-    rightMax: 10000, //右边滑块最大值
-    leftValue: 1000, //左边滑块默认值
-    rightValue: 6000, //右边滑块默认值
-    leftPer: '50', //左边滑块可滑动长度：百分比
-    rightPer: '50', //右边滑块可滑动长度
+    // content: [],
+    // px: ['最新发布', '推荐排序', '租金由低到高', '租金由高到低', '面积由小到大', '面积由大到小'], //排序列表内容
+    // qyopen: false, //点击地铁区域筛选滑动弹窗显示效果，默认不显示
+    // qyshow: true, //用户点击闭关区域的弹窗设置，默认不显示
+    // nzopen: false, //价格筛选弹窗
+    // pxopen: false, //排序筛选弹窗
+    // nzshow: true,
+    // pxshow: true,
+    // isfull: false,
+    // cityleft: cityData.getCity(), //获取地铁区域的下拉框筛选项内容
+    // citycenter: {}, //选择地铁区域左边筛选框后的显示的中间内容部分
+    // cityright: {}, //选择地铁区域的中间内容部分后显示的右边内容
+    // select1: '地铁', //地铁区域选中后的第二个子菜单，默认显示地铁下的子菜单
+    // select2: '', //地铁区域选择部分的中间
+    // select3: '', //地铁区域选择部分的右边
+    // shownavindex: '',
+    // // 价格筛选框设置
+    // leftMin: 0,
+    // leftMax: 10000, //左边滑块最大值
+    // rightMin: 0, //右边滑块的最小值
+    // rightMax: 10000, //右边滑块最大值
+    // leftValue: 1000, //左边滑块默认值
+    // rightValue: 6000, //右边滑块默认值
+    // leftPer: '50', //左边滑块可滑动长度：百分比
+    // rightPer: '50', //右边滑块可滑动长度
 
-    pxIndex: 0, //排序内容下拉框，默认第一个
-
+    // pxIndex: 0, //排序内容下拉框，默认第一个
+    array1: ['American', 'Chinese', 'Italian', 'Japanese','Mexican','Korean'],
+    array2: ['Chinese', 'American', 'Japanese', 'Italian', 'Mexican', 'Korean'],
+    array3: ['American', 'Chinese', 'Italian', 'Japanese', 'Mexican', 'Korean'],
+    // objectArray: [
+    //   {
+    //     id: 0,
+    //     name: 'American'
+    //   },
+    //   {
+    //     id: 1,
+    //     name: 'Chinese'
+    //   },
+    //   {
+    //     id: 2,
+    //     name: 'Italian'
+    //   },
+    //   {
+    //     id: 3,
+    //     name: 'Japanese'
+    //   },
+    //   {
+    //     id: 4,
+    //     name: 'Mexican'
+    //   },
+    //   {
+    //     id: 5,
+    //     name: 'Korean'
+    //   }
+    // ],
+    // index: 0,
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    this.setData({
-      citycenter: this.data.cityleft['地铁'],
-    })
+    // this.setData({
+    //   citycenter: this.data.cityleft['地铁'],
+    // })
 
   },
 
@@ -94,6 +123,25 @@ Page({
   onShareAppMessage: function () {
 
   },
+
+  bindPickerChange1: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      index1: e.detail.value
+    })
+  },
+  bindPickerChange2: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      index2: e.detail.value
+    })
+  },
+  bindPickerChange3: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      index3: e.detail.value
+    })
+  },
    // 地铁区域列表下拉框是否隐藏
   // listqy: function (e) {
   //   if (this.data.qyopen) {
@@ -120,7 +168,7 @@ Page({
   //     })
   //   }
 
-  },
+  // },
   // 价格下拉框是否隐藏
   // list: function (e) {
   //   if (this.data.nzopen) {

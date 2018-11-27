@@ -18,7 +18,7 @@ Page({
             })
       } else {
         wx.navigateTo({
-          url: '/groups/new/new'
+          url: '/users/show/show'
         })
       }
     }, res => {

@@ -1,0 +1,83 @@
+/* groups/show/show.wxss */
+.container {
+  width: 95vw;
+  height: 65vh;
+  margin: 0 auto;
+  padding: 5px 0px;
+  font-family: sans-serif;
+  box-shadow: 1px 4px 7px #c1c1c1;
+}
+.group-card {
+  width: 100%;
+  height: 50vh;
+  margin: 0px;
+  align-content: center;
+  justify-content: center;
+}
+.group-name {
+  font-size: 17px;
+  padding: 5px;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  font-weight: bolder;
+}
+.group-image {
+  position: relative;
+  height: 200px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  background-size: cover;
+  background-position: center;
+  transition: all 1s ease;
+}
+.footer {
+  width: 70%;
+  padding: 0px 10px;
+  border-left: 1px solid #FFFF00;
+}
+.restaurant-name {
+  font-size: 14px;
+  font-weight: bold;
+}
+.restaurant-address {
+  font-size: 11px;
+}
+.rating {
+  color: #FFFF00;
+  font-size: 25px;
+  font-weight: bolder;
+  text-shadow: 0.5px 0.5px 0.25px #4a4a48;
+  padding: 0px;
+  background-color:
+}
+.group-list {
+padding: 10px 25px;
+}
+.user {
+height: 35px;
+padding: 6px 0px;
+display: flex;
+text-align: center;
+border-bottom: 0.25px solid #c1c1c1;
+}
+.user-avatar {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-size: cover;
+  background-position: center;
+}
+.user-name {
+  text-align: center;
+  display: flex;
+  padding: 5px 10px;
+}
+.response {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  right: 25px;
+  display: flex;
+}

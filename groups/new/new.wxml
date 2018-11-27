@@ -6,12 +6,15 @@
   </view>
 
   <view class="input">
+  <form bindsubmit="formSubmit" bindreset="formReset">
     <input name="name" placeholder-class="input-placeholder" placeholder="group name?" />
-    <picker bindchange="bindPickerChange" value="1" range="{{region_en}}">
+    <picker bindchange="bindPickerChange" name="district" value="0" range="{{region_en}}">
     <view class="picker">
       <view class="district-select">
         <text wx:if="{{region_index}}">{{region_en[region_index]}}</text>
         <text style="opacity: 0.5;" wx:if="{{!region_index}}">district?</text>
+        <text style="arrow" wx:if="{{region_index}}">▾</text>
+        <text style="arrow" style="opacity: 0.5;" wx:if="{{!region_index}}">▾</text>
       </view>
     </view>
   </picker>
@@ -21,5 +24,7 @@
     <view class="input-button">
       <button formType="submit" hover-class="button-hover">submit</button>
     </view>
+    </form>
   </view>
+  
 </view>

@@ -1,25 +1,18 @@
-
-
+// groups/show/show.js
 Page({
 
   /**
    * Page initial data
    */
   data: {
-    meals: []
+
   },
 
-  yourMeals:function(e){
-    console.log(e)
-    wx.navigateTo({
-      url:"/groups/show/show"
-      })
-  },
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    this.fetchUserMeals(this);
+
   },
 
   /**
@@ -69,25 +62,5 @@ Page({
    */
   onShareAppMessage: function () {
 
-  },
-
-  toNewMeal: () => {
-    wx.navigateTo({
-      url: '/groups/new/new'
-    });
-  },
-
-  fetchUserMeals: (page) => {
-    const MealsTable = new wx.BaaS.TableObject(58396);
-    let query = new wx.BaaS.Query();
-    query.compare('created_by', '=', wx.BaaS.storage.get('uid'));
-    MealsTable.setQuery(query).orderBy('meal_date').find().then(res => {
-      console.log(res);
-      page.setData({
-        meals: res.data.objects
-      });
-    }, err => {
-      console.log(err);
-    })
   }
 })
