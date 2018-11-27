@@ -155,24 +155,22 @@ Page({
   },
 
   addChoices: function() {
-    let MealsTable = new wx.BaaS.TableObject("meals");
-    let newMeal = MealsTable.getWithoutData(this.data.groupId);
     let ChoicesTable = new wx.BaaS.TableObject("choices");
     const choices = [
       {
         meal_category: this.data.array1_zh[this.data.index1],
         rank: 3,
-        meal: newMeal,
+        meal_id: this.data.groupId,
       },
       {
         meal_category: this.data.array1_zh[this.data.index2],
         rank: 2,
-        meal: newMeal,
+        meal_id: this.data.groupId,
       },
       {
         meal_category: this.data.array1_zh[this.data.index3],
         rank: 1,
-        meal: newMeal,
+        meal_id: this.data.groupId,
       }
     ]
     ChoicesTable.createMany(choices).then(res => {
