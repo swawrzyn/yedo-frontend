@@ -65,7 +65,7 @@
 					"id": 4,
 					"name": "group show",
 					"pathName": "groups/show/show",
-					"query": ""
+					"query": "id=5bfcf17bac716719f2859e0d&new=true"
 				}
 			]
 		}
