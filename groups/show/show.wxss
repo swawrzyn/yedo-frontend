@@ -1,17 +1,42 @@
 /* groups/show/show.wxss */
+/* page {
+  background-color: yellow;
+} */
+
 .container {
   width: 95vw;
-  margin: 0 auto;
+  margin: 10px auto;
   padding: 5px 0px;
   font-family: sans-serif;
   box-shadow: 1px 4px 7px #c1c1c1;
 }
+
 .group-card {
   width: 100%;
   margin: 0px;
   align-content: center;
   justify-content: center;
 }
+
+.meal-name {
+  text-align:center;
+}
+
+.details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-recommend {
+  text-align: center;
+  width: 95vw;
+  margin: 10px auto;
+  padding: 10px 0;
+  font-family: sans-serif;
+  box-shadow: 1px 4px 7px #c1c1c1;
+}
+
 .group-name {
   font-size: 17px;
   padding: 5px;
@@ -81,8 +106,8 @@ border-bottom: 0.25px solid #c1c1c1;
 }
 
 .organisor-avatar{
-  width: 35px;
-  height: 35px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
 }
 
@@ -96,4 +121,8 @@ border-bottom: 0.25px solid #c1c1c1;
 
 .organisor-avatar{
 margin:0 5px;
+}
+
+.btn{
+  width: 50vw;
 }

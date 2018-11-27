@@ -1,23 +1,42 @@
 <!--groups/show/show.wxml-->
 <view class='container'>
-  <view class='group-card'>
+  <view class="group-card">
+    <view class="card">
+      <view class="meal-name">
+        <text>{{meals.name}}</text>
+      </view>
+      <view class="details">
+        <view class="card-image">
+          <image src="{{_userprofile.avatar}}" class='organisor-avatar'/>
+        </view>
+        <view>
+          <text>Organised by: {{_userprofile.nickname}}</text>
+        </view>
+        <view>
+          <text>{{meal.meal_date_string}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+    
+  <!-- <view class='group-card'>
     <view class='group-name'>{{meals.name}}</view>
     <view class='organisor-info'>
     <view class='group-organisor'>Organised by: {{_userprofile.nickname}}</view>
         <image src="{{_userprofile.avatar}}" class='organisor-avatar'/>
+    </view> -->
+    <view class="card-recommend">
+      <text wx:if="{{recommendation}}" class="recommendation">We recommend: {{recommendation}}</text>
     </view>
-
-    <text wx:if="{{recommendation}}" class="recommendation">We recommend: {{recommendation}}</text>
     <!-- <view class="group-image" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.4) 50%), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=67fb2e7b1fbe39b18b51146234ef38aa&auto=format&fit=crop&w=750&q=80');">
     <text class='date'>20/12/2018</text>
     </view> -->
-  </view>
   <!-- <view class='footer'>
     <view class='restaurant-name'>THE LIGHT</view>
     <view class='restaurant-address'>No.14 Hanzhong Rd, Shanghai, China</view>
     <view class='rating'>★★★★★</view>
   </view> -->
-</view>
 
 
 
@@ -38,3 +57,6 @@
     <view class='response' style="background-image: url('https://image.flaticon.com/icons/svg/291/291202.svg')"></view>
   </view>
 </view>
+
+<button bindtap="toNewMeal" class="btn">Share</button>
+
