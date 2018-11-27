@@ -83,6 +83,11 @@ Page({
     query.compare('created_by', '=', wx.BaaS.storage.get('uid'));
     MealsTable.setQuery(query).orderBy('meal_date').find().then(res => {
       console.log(res);
+      res.data.objects.forEach((meal) => {
+        meal.meal_date = meal.meal_date.substr(0,10)
+        return meal.meal_date
+      })
+      // meal_date = meal_date.substr(0, 15)
       page.setData({
         meals: res.data.objects
       });
