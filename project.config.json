@@ -35,7 +35,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 3,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -60,6 +60,12 @@
 					"name": "new choice",
 					"pathName": "choices/new/new",
 					"query": "group_id=blahblahblah"
+				},
+				{
+					"id": 4,
+					"name": "group show",
+					"pathName": "groups/show/show",
+					"query": ""
 				}
 			]
 		}

@@ -4,7 +4,8 @@
     "pages/logs/logs",
     "choices/new/new",
     "users/show/show",
-    "groups/new/new"
+    "groups/new/new",
+    "groups/show/show"
   ],
   "window":{
     "backgroundTextStyle":"light",

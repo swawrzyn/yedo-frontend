@@ -12,7 +12,7 @@ Page({
   yourMeals:function(e){
     console.log(e)
     wx.navigateTo({
-      url:"/groups/show/show"
+      url:`/groups/show/show?id=${e.currentTarget.dataset.meal_id}`
       })
   },
   /**
@@ -78,7 +78,7 @@ Page({
   },
 
   fetchUserMeals: (page) => {
-    const MealsTable = new wx.BaaS.TableObject(58396);
+    const MealsTable = new wx.BaaS.TableObject('meals');
     let query = new wx.BaaS.Query();
     query.compare('created_by', '=', wx.BaaS.storage.get('uid'));
     MealsTable.setQuery(query).orderBy('meal_date').find().then(res => {
