@@ -174,7 +174,9 @@ Page({
       }
     ]
     ChoicesTable.createMany(choices).then(res => {
-      console.log(res.data.succeed);
+      wx.redirectTo({
+        url: `/groups/show/show?id=${this.data.groupId}&new=true`,
+      })
     });
   }
    // 地铁区域列表下拉框是否隐藏
