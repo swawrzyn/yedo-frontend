@@ -74,6 +74,7 @@ Page({
     console.log(options);
     const app = getApp();
     const id = options.group_id
+    const page = this;
     // this.setData({
     //   citycenter: this.data.cityleft['地铁'],
     // })
@@ -84,16 +85,16 @@ Page({
       })
       app.globalData.newMeal = "";
     } else {
-
-
-    this.setData({
-      meal: ,
-      groupId: options.group_id
-    })
+      const MealTable = new wx.BaaS.TableObject('meals');
+      MealTable.get(options.group_id).then( res => {
+        page.setData({
+          meal: res.data,
+          groupId: options.group_id,
+          meal_date_string: res.data.meal_date.substr(0, 10)
+        })
+      });
     }
-    this.setData({
-      meal_date_string: this.data.meal.meal_date.substr(0, 10)
-    })
+    
   },
 
   /**
