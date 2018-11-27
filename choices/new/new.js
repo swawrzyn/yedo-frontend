@@ -71,7 +71,9 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+    console.log(options);
     const app = getApp();
+    const id = options.group_id
     // this.setData({
     //   citycenter: this.data.cityleft['地铁'],
     // })
@@ -82,12 +84,12 @@ Page({
       })
       app.globalData.newMeal = "";
     } else {
-    console.log(options);
+
+
     this.setData({
       meal: ,
       groupId: options.group_id
     })
-    app.globalData.newMeal = "";
     }
     this.setData({
       meal_date_string: this.data.meal.meal_date.substr(0, 10)
