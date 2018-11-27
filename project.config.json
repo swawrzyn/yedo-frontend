@@ -58,7 +58,11 @@
 				},
 				{
 					"id": -1,
+<<<<<<< HEAD
+					"name": "new choice",
+=======
 					"name": "Choices new",
+>>>>>>> aa9c5f86a936a175d02c213f5a0b38476b6e9c8c
 					"pathName": "choices/new/new"
 				}
 			]

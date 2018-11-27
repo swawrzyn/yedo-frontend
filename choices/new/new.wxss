@@ -10,20 +10,19 @@
                  sans-serif;
   height: 100%;
   background: #fff;
-  background-color: yellow;
   overflow: hidden;
 }
 
 page {
-  /* background-color: yellow; */
+  background-color: yellow;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .nav {
   position: relative;
   z-index: 99;
   display: flex;
-  border-bottom: 1rpx solid #f4f4f4;
-  background: #fff;
+  background:yellow;
 }
 
 .nav-son {
@@ -36,23 +35,10 @@ page {
   font-size: 28rpx;
 }
 
-.borders {
-  border-left: 1rpx solid #f4f4f4;
-  border-right: 1rpx solid #f4f4f4;
-}
-
 .content {
   display: inline-block;
   font-size: 32rpx;
   color: #666;
-}
-
-.icon {
-  display: inline-block;
-  border: 10rpx solid transparent;
-  border-top: 10rpx solid #666;
-  margin-left: 10rpx;
-  margin-top: 10rpx;
 }
 
 .temp {
@@ -294,39 +280,79 @@ button {
 }
 
 .label {
-  padding: 20px 10px 10px 10px;
+  padding: 10px;
 }
 
 .text-fields .desc {
   padding: 10px;
   margin: 2px auto;
   width: 90vw;
-  /* background-color: yellow; */
-}
-
-.btn-primary {
   background-color: yellow;
-}
-
-.home-logo .home image {
-  float: right;
-  width: 20px;
-  height: 20px;
-  margin: 10px 10px 10px 0;
+  border:1px solid black;
 }
 
 .home-logo .card .card-image image {
   width: 50px;
   height: 50px;
+  padding-right: 40px;
+}
+
+.title {
+  width: 90vw;
+  margin: 10px auto;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+}
+
+.title image {
+  width: 20px;
+  height: 20px;
+}
+
+.home-logo {
+  margin: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .card {
+  border: 1px solid black;  
   display: flex;
   margin-top: 10px;
   align-items: center;
   justify-content: space-around;
+  padding: 10px;
+  width:90vw;
 }
 
 .detail {
   padding-right: 10px;
+}
+
+.button {
+  background: transparent;
+  border: 1px solid black;
+  border-radius: 0;
+  text-transform: lowercase;
+  height: 100rpx;
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.button-hover {
+  background: black;
+  color: white;
+}
+
+.button button {
+  border: 0;
+  border-radius: 0;
+}
+
+.input-placeholder {
+  color: black;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  opacity: 0.5; 
 }
