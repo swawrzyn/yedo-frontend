@@ -5,7 +5,7 @@
   </view>
 
   <block wx:for="{{meals}}" wx:for-item="meal">
-    <view bindtap="YourMeals" class="card">
+    <view bindtap="yourMeals" data-meal_id="{{meal.id}}" class="card">
        <image class="user-avatar" src="../../pages/images/用户.png"/> 
       <view class="card-text">
          <text class="card-title">{{meal.name}}</text>

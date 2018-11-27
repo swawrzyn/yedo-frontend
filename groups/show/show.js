@@ -6,14 +6,41 @@ Page({
    */
   data: {
 
+    meals: [],
+    _userprofile:[]
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+console.log(options.id)
+const page = this
+    const id = options.id
+    const MealsTable = new wx.BaaS.TableObject('meals');
+      MealsTable.get(id).then(res => {
+        console.log(res);
+        page.setData({
+          meals: res.data
+        });
+        const MyUser = new wx.BaaS.User()
+        MyUser.get(res.data.created_by).then(r => {
+          console.log(r);
+          page.setData({
+            _userprofile: r.data
+          });
+        }, err => {
+          console.log(err);
+        })
 
-  },
+
+
+      }, err => {
+        console.log(err);
+      })
+
+
+    },
 
   /**
    * Lifecycle function--Called when page is initially rendered
@@ -62,5 +89,7 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+
+
 })
