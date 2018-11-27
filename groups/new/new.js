@@ -87,7 +87,6 @@ Page({
     const app = getApp();
     const day = getSelectedDay()[0];
     const inputDate = new Date(`${day.year}-${day.month}-${day.day}`);
-    const User = new wx.BaaS.TableObject()
     const newMeal = {
       name: e.detail.value.name,
       location: this.data.region_zh[e.detail.value.district],
