@@ -72,6 +72,7 @@ createMeal: function (e) {
         }
       })
     this.findGroupUsers(this);
+    wx.hideNavigationBarLoading();
   },
 
   recommendSearch: function () {
@@ -84,7 +85,6 @@ createMeal: function (e) {
       },
       page_size: 5,
       success: function (res) {
-        console.log(res)
         page.setData({
           locations: res.data
         });
@@ -132,7 +132,12 @@ createMeal: function (e) {
    * Page event handler function--Called when user drop down
    */
   onPullDownRefresh: function () {
-
+    const page = this;
+    const app = getApp();
+    const id = app.globalData.meals[0].id;
+    wx.showNavigationBarLoading();
+    page.onLoad();
+    console.log(2)    
   },
 
   /**
