@@ -15,6 +15,7 @@ App({
     wx.BaaS.init('86e9cea993a138b9109a')
 
     wx.BaaS.login(false).then(res => {
+      wx.removeStorageSync('meals');
       this.fetchMeals();
     }, err => {
       // 登录失败

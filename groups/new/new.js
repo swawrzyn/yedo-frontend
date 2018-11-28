@@ -4,7 +4,7 @@ import { getSelectedDay } from '../../template/calendar/index';
 const conf = {
   disablePastDay: true,
 };
-let meals = new wx.BaaS.TableObject(58396);
+let meals = new wx.BaaS.TableObject('meals');
 let currentUser = new wx.BaaS.User();
 currentUser = currentUser.get(wx.BaaS.storage.get('uid')); 
 const app = getApp();
