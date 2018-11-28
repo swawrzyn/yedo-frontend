@@ -18,6 +18,7 @@ Page({
     longitude: "",
     locations: [],
     meal_date: "",
+    // isRefreshing: false,
   },
 
   goHome: function(e){
@@ -77,6 +78,9 @@ createMeal: function (e) {
     this.findGroupUsers(this);
     wx.stopPullDownRefresh()
     wx.hideNavigationBarLoading(); 
+    // this.setData({
+    //   isRefreshing: false
+    // }) 
   },
 
   recommendSearch: function () {
@@ -90,7 +94,8 @@ createMeal: function (e) {
       page_size: 5,
       success: function (res) {
         page.setData({
-          locations: res.data
+          locations: res.data,
+          // isRefreshing: true
         });
       },
     });
@@ -137,7 +142,7 @@ createMeal: function (e) {
    */
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading();
-    this.loadGroup(this.data.mealId, true);    
+    this.loadGroup(this.data.mealId, false);      
   },
 
   /**
