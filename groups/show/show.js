@@ -18,7 +18,7 @@ Page({
     latitude: "",
     longitude: "",
     locations: [],
-    meal_date: ""
+    meal_date: "",
   },
 
   /**
@@ -85,11 +85,12 @@ Page({
     });
   },
 
-  location: function () {
+  location: function (e) {
+    const page = this;
     wx.openLocation({
-      latitude: page.data.locations[0].location.lat,
-      longitude: page.data.locations[0].location.lng,
-      scale: 5
+      latitude: page.data.locations[parseInt(e.currentTarget.id)].location.lat,
+      longitude: page.data.locations[parseInt(e.currentTarget.id)].location.lng,
+      scale: 14
     })
   },
   /**
