@@ -11,7 +11,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.4.0",
+	"libVersion": "2.4.1",
 	"appid": "wxfb2d864834e64b71",
 	"projectname": "yedo",
 	"debugOptions": {
@@ -59,7 +59,7 @@
 					"id": 3,
 					"name": "new choice",
 					"pathName": "choices/new/new",
-					"query": "group_id=blahblahblah"
+					"query": "group_id=5bfccf5485052f1daf766dc0"
 				},
 				{
 					"id": 4,
@@ -69,14 +69,15 @@
 				},
 				{
 					"id": 5,
-					"name": "show group",
-					"pathName": "groups/show/show",
-					"query": ""
+					"name": "share landing",
+					"pathName": "pages/landing/landing",
+					"query": "meal_id=5bfcd35e94516c1e443ba84c"
 				},
 				{
-					"id": -1,
-					"name": "pages test",
-					"pathName": "pages/test/test"
+					"id": 6,
+					"name": "show group",
+					"pathName": "groups/show/show",
+					"query": "id=5bfcf17bac716719f2859e0d&new=true"
 				}
 			]
 		}

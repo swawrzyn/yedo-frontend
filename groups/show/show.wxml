@@ -1,40 +1,59 @@
 <!--groups/show/show.wxml-->
 <view class='container'>
-  <view class='group-card'>
+  <view class="group-card">
+    <view class="card">
+      <view class="meal-name">
+        <text>{{meals.name}}</text>
+      </view>
+      <view class="details">
+        <view class="card-image">
+          <image src="{{_userprofile.avatar}}" class='organisor-avatar'/>
+        </view>
+        <view class="card-info">
+          <view>Organised by: {{_userprofile.nickname}}</view>
+          <view>{{meals.meal_date}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+    
+  <!-- <view class='group-card'>
     <view class='group-name'>{{meals.name}}</view>
     <view class='organisor-info'>
     <view class='group-organisor'>Organised by: {{_userprofile.nickname}}</view>
         <image src="{{_userprofile.avatar}}" class='organisor-avatar'/>
+    </view> -->
+<view class="card-recommend">
+  <text wx:if="{{recommendation}}"  class="recommendation">We recommend: {{recommendation}}</text>
+</view>
+<view class='recommend-list' wx:for="{{locations}}" wx:for-index="index" wx:for-item="location">
+  <view class='recommend' bindtap="location" id="{{index}}">
+    <view class="title">{{location.title}}</view>
+    <view class="address">{{location.address}}</view>
+    <view class="info">
+      <view class="tel">{{location.tel}}</view>
+      <view class="distance">{{location._distance}}m</view>
     </view>
-
-    <text wx:if="{{recommendation}}" class="recommendation">We recommend: {{recommendation}}</text>
+  </view>  
+</view>
     <!-- <view class="group-image" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.4) 50%), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=67fb2e7b1fbe39b18b51146234ef38aa&auto=format&fit=crop&w=750&q=80');">
     <text class='date'>20/12/2018</text>
     </view> -->
-  </view>
   <!-- <view class='footer'>
     <view class='restaurant-name'>THE LIGHT</view>
     <view class='restaurant-address'>No.14 Hanzhong Rd, Shanghai, China</view>
     <view class='rating'>★★★★★</view>
   </view> -->
-</view>
-
-
-
+  
 <view class='group-list'>
-  <view class='user'>
-    <view class='user-avatar' style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.4) 50%), url('https://images.unsplash.com/photo-1524593689594-aae2f26b75ab?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=4c06a1bc6123a9ac6645a269314334b2&auto=format&fit=crop&w=400&q=80');"></view>
-    <view class='user-name'>Clariss</view>
-    <view class='response' style="background-image: url('https://image.flaticon.com/icons/svg/291/291201.svg')"></view>
-  </view>
-  <view class='user'>
-    <view class='user-avatar' style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.4) 50%), url('https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7e89aa20603ea9fe62ddc6014276ca41&auto=format&fit=crop&w=334&q=80');"></view>
-    <view class='user-name'>Kevin</view>
-    <view class='response' style="background-image: url('https://image.flaticon.com/icons/svg/291/291201.svg')"></view>
-  </view>
-  <view class='user'>
-    <view class='user-avatar' style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.4) 50%), url('https://images.unsplash.com/photo-1528763380143-65b3ac89a3ff?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=92cdfb2d4ffacfaa4bac93ce52519dfe&auto=format&fit=crop&w=335&q=80');"></view>
-    <view class='user-name'>Jason</view>
-    <view class='response' style="background-image: url('https://image.flaticon.com/icons/svg/291/291202.svg')"></view>
+  <text class="group-list-title">We got {{group_users_count}} coming!</text>
+  <view wx:for="{{group_users}}" wx:for-item="user" class="user">
+    <view class='user-avatar' style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.4) 50%), url('{{user.avatar}}');"></view>
+    <view class='user-name'>{{user.nickname}}</view>
+    <view class='response' style="background-image: url('/images/green-check.svg')"></view>
   </view>
 </view>
+
+<button open-type="share" class="btn">Share</button>
+

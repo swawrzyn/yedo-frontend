@@ -53,7 +53,7 @@
         <text>{{meal.location}}</text>
       </view>
       <view>
-        <text>{{meal.meal_date_string}}</text>
+        <text>{{meal_date}}</text>
       </view>
     </view>
   </view>
@@ -89,5 +89,5 @@
       </picker>
     </view>
   </view>
-  <button class="button" hover-class='button-hover' bindtap='addChoices'>Let's Eat!</button>
+  <button class="button" hover-class='button-hover' open-type="getUserInfo" bindgetuserinfo="userInfoHandler">Let's Eat!</button>
 </form>

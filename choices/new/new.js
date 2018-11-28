@@ -34,7 +34,7 @@ Page({
 
     // pxIndex: 0, //排序内容下拉框，默认第一个
     array1: ['American', 'Chinese', 'Italian', 'Japanese','Mexican','Korean'],
-    array1_zh: ['美国菜', '中国菜', '意大利菜', '日本菜', '墨西哥菜', '韩国菜'],
+    array1_zh: ['美国菜', '中餐', '意大利菜', '日本菜', '墨西哥菜', '韩国菜'],
     index1: 0,
     index2: 1,
     index3: 2
@@ -71,19 +71,27 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+    console.log(options);
     const app = getApp();
+    const page = this;
     // this.setData({
     //   citycenter: this.data.cityleft['地铁'],
     // })
-    console.log(options);
-    this.setData({
-      meal: app.globalData.newMeal,
-      groupId: options.group_id
-    })
-    app.globalData.newMeal = "";
-    this.setData({
-      meal_date_string: this.data.meal.meal_date.substr(0, 10)
-    })
+    if (app.globalData.tempMeal){
+      this.setData({
+        meal: app.globalData.tempMeal,
+      })
+    } else {
+      const MealTable = new wx.BaaS.TableObject('meals');
+      MealTable.get(options.group_id).then( res => {
+        const meal_date_string = res.data.meal_date.substr(0, 10);
+        page.setData({
+          meal: res.data,
+          mealId: res.data.id,
+          meal_date: meal_date_string
+        })
+      });
+    }
   },
 
   /**
@@ -156,28 +164,73 @@ Page({
 
   addChoices: function() {
     let ChoicesTable = new wx.BaaS.TableObject("choices");
-    const choices = [
-      {
-        meal_category: this.data.array1_zh[this.data.index1],
-        rank: 3,
-        meal_id: this.data.groupId,
-      },
-      {
-        meal_category: this.data.array1_zh[this.data.index2],
-        rank: 2,
-        meal_id: this.data.groupId,
-      },
-      {
-        meal_category: this.data.array1_zh[this.data.index3],
-        rank: 1,
-        meal_id: this.data.groupId,
-      }
-    ]
-    ChoicesTable.createMany(choices).then(res => {
-      wx.redirectTo({
-        url: `/groups/show/show?id=${this.data.groupId}&new=true`,
+    const app = getApp();
+    const page = this;
+    let choices;
+
+    if (app.globalData.tempMeal) {
+      app.addMeal(this.data.meal).then(res => {
+        page.setData({
+          mealId: res.id
+        });
+        return res.id
+      }).then(res => {
+        choices = [
+          {
+            meal_category: this.data.array1_zh[this.data.index1],
+            rank: 3,
+            meal_id: res,
+          },
+          {
+            meal_category: this.data.array1_zh[this.data.index2],
+            rank: 2,
+            meal_id: res,
+          },
+          {
+            meal_category: this.data.array1_zh[this.data.index3],
+            rank: 1,
+            meal_id: res,
+          }
+        ]
+        ChoicesTable.createMany(choices).then(res => {
+          wx.redirectTo({
+            url: `/groups/show/show?id=${page.data.mealId}&new=true`,
+          })
+        });
       })
-    });
+    } else {
+      choices = [
+        {
+          meal_category: this.data.array1_zh[this.data.index1],
+          rank: 3,
+          meal_id: page.data.mealId,
+        },
+        {
+          meal_category: this.data.array1_zh[this.data.index2],
+          rank: 2,
+          meal_id: page.data.mealId,
+        },
+        {
+          meal_category: this.data.array1_zh[this.data.index3],
+          rank: 1,
+          meal_id: page.data.mealId,
+        }
+      ]
+      ChoicesTable.createMany(choices).then(res => {
+        wx.redirectTo({
+          url: `/groups/show/show?id=${this.data.mealId}&new=true`,
+        })
+      });
+    }
+
+    
+  },
+  userInfoHandler(data) {
+    console.log(data);
+    wx.BaaS.handleUserInfo(data).then(res => {
+      this.addChoices();
+    }, res => {
+    })
   }
    // 地铁区域列表下拉框是否隐藏
   // listqy: function (e) {
