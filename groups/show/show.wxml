@@ -1,4 +1,8 @@
 <!--groups/show/show.wxml-->
+<view wx:if="{{!locations}}" class="weui-loadmore">
+  <view class="weui-loading"></view>
+  <view class="weui-loadmore__tips">Loading...</view>
+</view>
 <view class='container'>
   <view class="group-card">
     <view class="card">

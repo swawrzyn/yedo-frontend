@@ -79,6 +79,10 @@ Page({
 
   fetchUserMeals: (page) => {
     const app = getApp();
+    app.globalData.meals.forEach((meal) => {
+    meal.meal_date = meal.meal_date.substr(0,10)
+    return meal.meal_date
+  })
     page.setData({
       meals: app.globalData.meals
     });

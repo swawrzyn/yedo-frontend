@@ -157,3 +157,10 @@ margin:0 5px;
   margin: 10px
 }
 
+.weui-loadmore {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center
+}
+
