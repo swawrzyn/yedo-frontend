@@ -106,6 +106,8 @@ createMeal: function (e) {
     wx.openLocation({
       latitude: page.data.locations[parseInt(e.currentTarget.id)].location.lat,
       longitude: page.data.locations[parseInt(e.currentTarget.id)].location.lng,
+      name: page.data.locations[parseInt(e.currentTarget.id)].title,
+      address: page.data.locations[parseInt(e.currentTarget.id)].address,
       scale: 14
     })
   },
