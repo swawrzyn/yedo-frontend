@@ -7,7 +7,7 @@
   <block wx:for="{{meals}}" wx:for-item="meal">
     <view bindtap="yourMeals" data-meal_id="{{meal.id}}" class="card">
       <view class="card-avatar">
-        <image class="user-avatar" src="../../pages/images/用户.png"/> 
+        <image class="user-avatar" src="{{user_avatars[meal.created_by]}}"/> 
       </view>
       <view class="card-text">
         <text class="card-title">{{meal.name}}</text>

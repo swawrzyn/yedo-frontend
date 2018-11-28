@@ -100,12 +100,12 @@ app.globalData.meals.forEach(meal=>
     return res.data.objects
   }
   ).then(res => {
-    const users = [];
+    const user_avatars = {};
     res.map(user =>{
-      users.push(user)
+      user_avatars[user.id] = user.avatar
     })
     page.setData({
-      users: users
+      user_avatars: user_avatars
     })
   })
 }
