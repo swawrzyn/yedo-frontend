@@ -45,26 +45,15 @@
     <view class='restaurant-address'>No.14 Hanzhong Rd, Shanghai, China</view>
     <view class='rating'>★★★★★</view>
   </view> -->
-
-
-
-<!-- <view class='group-list'>
-  <view class='user'>
-    <view class='user-avatar' style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.4) 50%), url('https://images.unsplash.com/photo-1524593689594-aae2f26b75ab?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=4c06a1bc6123a9ac6645a269314334b2&auto=format&fit=crop&w=400&q=80');"></view>
-    <view class='user-name'>Clariss</view>
-    <view class='response' style="background-image: url('https://image.flaticon.com/icons/svg/291/291201.svg')"></view>
-  </view>
-  <view class='user'>
-    <view class='user-avatar' style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.4) 50%), url('https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=7e89aa20603ea9fe62ddc6014276ca41&auto=format&fit=crop&w=334&q=80');"></view>
-    <view class='user-name'>Kevin</view>
-    <view class='response' style="background-image: url('https://image.flaticon.com/icons/svg/291/291201.svg')"></view>
-  </view>
-  <view class='user'>
-    <view class='user-avatar' style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.4) 50%), url('https://images.unsplash.com/photo-1528763380143-65b3ac89a3ff?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=92cdfb2d4ffacfaa4bac93ce52519dfe&auto=format&fit=crop&w=335&q=80');"></view>
-    <view class='user-name'>Jason</view>
-    <view class='response' style="background-image: url('https://image.flaticon.com/icons/svg/291/291202.svg')"></view>
+  
+<view class='group-list'>
+  <text class="group-list-title">We got {{group_users_count}} coming!</text>
+  <view wx:for="{{group_users}}" wx:for-item="user" class="user">
+    <view class='user-avatar' style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.4) 50%), url('{{user.avatar}}');"></view>
+    <view class='user-name'>{{user.nickname}}</view>
+    <view class='response' style="background-image: url('/images/green-check.svg')"></view>
   </view>
 </view> -->
 
-<button bindtap="toNewMeal" class="btn">Share</button>
+<button open-type="share" class="btn">Share</button>
 
