@@ -1,7 +1,6 @@
 // groups/show/show.js
 const keys = require('../../keys.js');
 const QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
-const coords = [['静安', 1.2342, 12.2332]]
 const qqMap = new QQMapWX({
   key: keys.qqMapKey
 });
@@ -73,11 +72,12 @@ Page({
     qqMap.search({
       keyword: `${page.data.recommendation}`,
       location: {
-        latitude: 31.22222,
-        longitude: 121.45806
+        latitude: page.data.meals.location.coordinates[1],
+        longitude: page.data.meals.location.coordinates[0]
       },
       page_size: 5,
       success: function (res) {
+        console.log(res)
         page.setData({
           locations: res.data
         });

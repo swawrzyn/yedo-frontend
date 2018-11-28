@@ -34,7 +34,7 @@ Page({
 
     // pxIndex: 0, //排序内容下拉框，默认第一个
     array1: ['American', 'Chinese', 'Italian', 'Japanese','Mexican','Korean'],
-    array1_zh: ['美国菜', '中国菜', '意大利菜', '日本菜', '墨西哥菜', '韩国菜'],
+    array1_zh: ['美国菜', '中餐', '意大利菜', '日本菜', '墨西哥菜', '韩国菜'],
     index1: 0,
     index2: 1,
     index3: 2
