@@ -33,7 +33,7 @@
     <view class="address">{{location.address}}</view>
     <view class="info">
       <view class="tel">{{location.tel}}</view>
-      <view class="distance">{{location._distance}}KM</view>
+      <view class="distance">{{location._distance}}m</view>
     </view>
   </view>  
 </view>
@@ -53,7 +53,7 @@
     <view class='user-name'>{{user.nickname}}</view>
     <view class='response' style="background-image: url('/images/green-check.svg')"></view>
   </view>
-</view> -->
+</view>
 
 <button open-type="share" class="btn">Share</button>
 
