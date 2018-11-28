@@ -13,7 +13,7 @@
           <text>Organised by: {{_userprofile.nickname}}</text>
         </view>
         <view>
-          <text>{{meal.meal_date_string}}</text>
+          <text>{{meals.meal_date}}</text>
         </view>
       </view>
     </view>
@@ -27,7 +27,7 @@
         <image src="{{_userprofile.avatar}}" class='organisor-avatar'/>
     </view> -->
     <view class="card-recommend">
-      <text wx:if="{{recommendation}}" class="recommendation">We recommend: {{recommendation}}</text>
+      <text wx:if="{{recommendation}}" bindtap="location" class="recommendation">We recommend: {{recommendation}}</text>
     </view>
     <!-- <view class="group-image" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.4) 50%), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=67fb2e7b1fbe39b18b51146234ef38aa&auto=format&fit=crop&w=750&q=80');">
     <text class='date'>20/12/2018</text>
