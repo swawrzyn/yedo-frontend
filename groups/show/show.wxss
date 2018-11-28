@@ -149,3 +149,18 @@ margin:0 5px;
 .btn{
   width: 50vw;
 }
+
+.nav-bar{
+  display:flex;
+  justify-content: space-between;
+}
+
+.home{
+  height:30px;
+  width:30px
+}
+
+.add{
+  height:30px;
+  width:30px
+}

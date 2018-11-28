@@ -1,4 +1,8 @@
 <!--groups/show/show.wxml-->
+<view class="nav-bar">
+  <image src="../../pages/images/首页.png" class="home" bindtap="goHome"/>
+  <image src="../../pages/images/plus.png" class="add" bindtap="createMeal"/>
+</view>
 <view class='container'>
   <view class="group-card">
     <view class="card">
