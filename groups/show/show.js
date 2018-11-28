@@ -1,9 +1,9 @@
 // groups/show/show.js
-var QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
-var demo = new QQMapWX({
-  key: 'GKTBZ-7ML64-GBPU4-XPTRK-Q3D2E-Q7FI2' // 必填
+const keys = require('../../keys.js');
+const QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
+const qqMap = new QQMapWX({
+  key: keys.qqMapKey
 });
-
 Page({
 
   /**
@@ -59,6 +59,7 @@ Page({
     },
   location: function () {
     const page = this;
+    const app = getApp();
     wx.getLocation({
       type: 'wgs84',
       success: function (res) {
@@ -69,7 +70,7 @@ Page({
         })
       }
     })
-    demo.search({
+    qqMap.search({
       keyword: '麦当劳',
       location: { 
         latitude: page.data.latitude, 
