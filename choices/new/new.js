@@ -87,10 +87,12 @@ Page({
     } else {
       const MealTable = new wx.BaaS.TableObject('meals');
       MealTable.get(options.group_id).then( res => {
+        const meal_date_string = res.data.meal_date.substr(0, 10);
+        console.log(meal_date_string)
         page.setData({
           meal: res.data,
           groupId: options.group_id,
-          meal_date_string: res.data.meal_date.substr(0, 10)
+          meal_date: meal_date_string
         })
       });
     }
