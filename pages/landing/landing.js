@@ -78,7 +78,8 @@ Page({
     const andQuery = wx.BaaS.Query.and(userQuery, mealQuery);
 
     ChoicesTable.setQuery(andQuery).find().then(res => {
-      if (res.data.objects === []) {
+      console.log(res)
+      if (!(res.data.objects.length === 0)) {
         wx.redirectTo({
           url: `/groups/show/show?id=${page.data.mealId}`,
         })
