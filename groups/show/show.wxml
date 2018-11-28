@@ -55,5 +55,8 @@
   </view>
 </view>
 
-<button open-type="share" class="btn">Share</button>
 
+<view class="nav-bar">
+<button class="btn" bindtap="goHome">Home</button>
+<button open-type="share" class="btn">Share</button>
+</view>

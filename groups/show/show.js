@@ -20,6 +20,13 @@ Page({
     meal_date: "",
   },
 
+  goHome: function(e){
+    wx.navigateTo({ url:'/pages/index/index'})
+  },
+
+createMeal: function (e) {
+    wx.navigateTo({ url: '/groups/new/new' })
+  },
   /**
    * Lifecycle function--Called when page load
    */
