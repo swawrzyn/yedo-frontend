@@ -20,6 +20,7 @@ Page({
    */
   onLoad: function (options) {
     this.fetchUserMeals(this);
+    this.fetchUserDetails(this);
   },
 
   /**
@@ -81,22 +82,31 @@ Page({
     const app = getApp();
     page.setData({
       meals: app.globalData.meals
-    });
-  //   const MealsTable = new wx.BaaS.TableObject('meals');
-  //   let query = new wx.BaaS.Query();
-  //   query.compare('created_by', '=', wx.BaaS.storage.get('uid'));
-  //   MealsTable.setQuery(query).orderBy('meal_date').find().then(res => {
-  //     console.log(res);
-  //     res.data.objects.forEach((meal) => {
-  //       meal.meal_date = meal.meal_date.substr(0,10)
-  //       return meal.meal_date
-  //     })
-  //     // meal_date = meal_date.substr(0, 15)
-  //     page.setData({
-  //       meals: res.data.objects
-  //     });
-  //   }, err => {
-  //     console.log(err);
-  //   })
+  })
+},
+  
+fetchUserDetails: (page) => {
+  const app = getApp();
+let idArray = []
+app.globalData.meals.forEach(meal=>
+{
+  idArray.push(meal.created_by)
+})
+   let query = new wx.BaaS.Query();
+   query.in('created_by', idArray);
+
+  let MyUser = new wx.BaaS.User()
+    MyUser.setQuery(query).find().then(res => {
+    return res.data.objects
   }
+  ).then(res => {
+    const users = [];
+    res.map(user =>{
+      users.push(user)
+    })
+    page.setData({
+      users: users
+    })
+  })
+}
 })
