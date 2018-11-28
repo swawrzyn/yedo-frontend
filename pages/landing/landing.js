@@ -15,8 +15,6 @@ Page({
     this.setData({
       mealId: options.meal_id
     });
-
-    this.checkUserMealStatus(this);
   },
 
   /**
@@ -29,8 +27,8 @@ Page({
   /**
    * Lifecycle function--Called when page show
    */
-  onShow: function () {
-
+  onShow: function (options) {
+    this.checkUserMealStatus(this);
   },
 
   /**
