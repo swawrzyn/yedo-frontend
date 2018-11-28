@@ -29,7 +29,6 @@ Page({
       mealId: options.id
     });
     const recompRec = (options.new === 'true');
-
     const MealsTable = new wx.BaaS.TableObject('meals');
       MealsTable.get(id).then(res => {
         console.log(res);
@@ -46,16 +45,15 @@ Page({
         })
       }, err => {
         console.log(err);
+      }).then(res => {
+        if (recompRec) {
+          this.recomputeRecommendation(this, options.id);
+        } else {
+          this.setData({
+            recommendation: this.data.meals.recommended_category
+          });
+        }
       })
-
-    if (recompRec) {
-      this.recomputeRecommendation(this, options.id);
-    } else {
-      this.setData({
-        recommendation: this.data.meals.recommended_category
-      });
-    }
-
     this.findGroupUsers(this);
 
     },
