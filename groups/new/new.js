@@ -1,8 +1,9 @@
-// groups/new/new.js
 import initCalendar from '../../template/calendar/index';
 import { getSelectedDay } from '../../template/calendar/index';
+const WeValidator = require('../../libs/we-validator');
 const conf = {
   disablePastDay: true,
+  defaultDay: false,
 };
 let meals = new wx.BaaS.TableObject('meals');
 let currentUser = new wx.BaaS.User();
@@ -27,7 +28,7 @@ Page({
    * Lifecycle function--Called when page is initially rendered
    */
   onReady: function () {
-
+    this.initValidator();
   },
 
   /**
@@ -80,16 +81,30 @@ Page({
   },
 
   formSubmit: function(e) {
-    console.log(app);
-    const day = getSelectedDay()[0];
-    const inputDate = new Date(`${day.year}-${day.month}-${day.day}`);
+    let { value } = e.detail;
+    value['inputDate'] = 0;
+    const day = getSelectedDay()[0] || 0;
+    let inputDate;
+
+    if (day) {
+      inputDate = new Date(`${day.year}-${day.month}-${day.day}`);
+      inputDate = (inputDate.toISOString()).toString()
+      value['inputDate'] = 1;
+    } 
+
+    console.log(value);
+
+    if (!this.oValidator.checkData(value)) return
 
     app.globalData.tempMeal = {
       name: e.detail.value.name,
       location: { coordinates: this.data.region_geo[e.detail.value.district], 
                   type: "Point"},
-      meal_date: (inputDate.toISOString()).toString()
+      meal_date: inputDate
     }
+
+    
+
     wx.navigateTo({
       url: '/choices/new/new'
     })
@@ -108,5 +123,32 @@ Page({
     //    }
       
     // })
+  },
+  initValidator() {
+    // 实例化
+    this.oValidator = new WeValidator({
+      rules: {
+        name: {
+          required: true,
+        },
+        district: {
+          intGreater: 0
+        },
+        inputDate: {
+          intGreater: 1 
+        }
+      },
+      messages: {
+        name: {
+          required: 'Please enter a group name',
+        },
+        district: {
+          intGreater: 'Must choose a district'
+        },
+        inputDate: {
+          intGreater: 'Please select a date'
+        }
+      },
+    })
   }
 })
