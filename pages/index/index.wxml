@@ -1,8 +1,26 @@
-<!--index.wxml-->
-<view class="container">
-  <text class="title">yedo!</text>
-  <view class="buttons">
-    <button class="button" hover-class='button-hover' id="newmeal" open-type="getUserInfo" bindgetuserinfo="userInfoHandler">Plan a new meal</button>
-    <button class="button" hover-class='button-hover' id="userpanel" open-type="getUserInfo" bindgetuserinfo="userInfoHandler">Your meals</button>
+<!--pages/test/test.wxml-->
+
+<view class="poly-container">
+
+    <view class="frame1">
+    </view>
+
+<text class="title-cn">一道!</text>
+
+
+  <view class="frame2">
   </view>
+
+  <view class="frame3">
+  </view>
+
+ <view class="buttons-container">
+   <button class="button" hover-class='button-hover' id="newmeal" open-type="getUserInfo" bindgetuserinfo="userInfoHandler">Plan a new meal!</button>
+    <button class="button" hover-class='button-hover' id="userpanel" open-type="getUserInfo" bindgetuserinfo="userInfoHandler">Your meals!</button>
 </view>
+
+
+
+
+</view>
+
