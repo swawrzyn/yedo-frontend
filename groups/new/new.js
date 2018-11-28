@@ -84,18 +84,20 @@ Page({
     const day = getSelectedDay()[0];
     const inputDate = new Date(`${day.year}-${day.month}-${day.day}`);
 
-    const newMeal = {
+    app.globalData.tempMeal = {
       name: e.detail.value.name,
       location: this.data.region_zh[e.detail.value.district],
       meal_date: (inputDate.toISOString()).toString()
     }
-
-    app.addMeal(newMeal).then((res) => {
-      console.log("add new meal: ", res);
-      wx.redirectTo({
-        url: `/choices/new/new?group_id=${res.id}`
-      })
-    });
+    wx.navigateTo({
+      url: '/choices/new/new'
+    })
+    // app.addMeal(newMeal).then((res) => {
+    //   console.log("add new meal: ", res);
+    //   wx.redirectTo({
+    //     url: `/choices/new/new?group_id=${res.id}`
+    //   })
+    // });
     // let meal = meals.create();  
     // meal.set(newMeal).save().then(res => {
     //   app.globalData.newMeal = { 
