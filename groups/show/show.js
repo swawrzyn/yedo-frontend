@@ -25,47 +25,51 @@ Page({
    */
   onLoad: function (options) {
     const page = this
-    const id = options.id
     this.setData({
       mealId: options.id
     });
     const recompRec = (options.new === 'true');
+    this.loadGroup(options.id, recompRec);
+  },
+
+  loadGroup: function(mealId, recalc) {
+    const page = this;
     const MealsTable = new wx.BaaS.TableObject('meals');
-      MealsTable.get(id).then(res => {
-        console.log(res);
-        res.data.meal_date = res.data.meal_date.substr(0, 10);
+    MealsTable.get(mealId).then(res => {
+      res.data.meal_date = res.data.meal_date.substr(0, 10);
+      page.setData({
+        meals: res.data
+      });
+      if (recalc) {
+        this.recomputeRecommendation(this, mealId);
+      } else {
         page.setData({
-          meals: res.data
+          recommendation: this.data.meals.recommended_category
         });
-        if (recompRec) {
-          this.recomputeRecommendation(this, options.id);
-        } else {
-          page.setData({
-            recommendation: this.data.meals.recommended_category
-          });
-          page.recommendSearch();
-        }
-        const MyUser = new wx.BaaS.User()
-        MyUser.get(res.data.created_by).then(r => {
-          page.setData({
-            _userprofile: r.data
-          });
-        }, err => {
-          console.log(err);
-        })
+        page.recommendSearch();
+      }
+      const MyUser = new wx.BaaS.User()
+      MyUser.get(res.data.created_by).then(r => {
+        page.setData({
+          _userprofile: r.data
+        });
       }, err => {
         console.log(err);
-      }).then(res => {
-        if (recompRec) {
-          this.recomputeRecommendation(this, options.id);
-        } else {
-          this.setData({
-            recommendation: this.data.meals.recommended_category
-          });
-        }
       })
+    }, err => {
+      console.log(err);
+    }).then(res => {
+      if (recalc) {
+        this.recomputeRecommendation(this, mealId);
+      } else {
+        this.setData({
+          recommendation: this.data.meals.recommended_category
+        });
+      }
+    })
     this.findGroupUsers(this);
-    wx.hideNavigationBarLoading();
+    wx.stopPullDownRefresh()
+    wx.hideNavigationBarLoading(); 
   },
 
   recommendSearch: function () {
@@ -125,12 +129,8 @@ Page({
    * Page event handler function--Called when user drop down
    */
   onPullDownRefresh: function () {
-    const page = this;
-    const app = getApp();
-    const id = app.globalData.meals[0].id;
     wx.showNavigationBarLoading();
-    page.onLoad();
-    console.log(2)    
+    this.loadGroup(this.data.mealId, true);    
   },
 
   /**
