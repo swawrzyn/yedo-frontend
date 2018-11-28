@@ -28,6 +28,11 @@
   justify-content: space-between;
 }
 
+.card-info {
+  text-align: center;
+  width: 95vw;
+}
+
 .card-recommend {
   text-align: center;
   width: 95vw;
@@ -35,6 +40,24 @@
   padding: 10px 0;
   font-family: sans-serif;
   box-shadow: 1px 4px 7px #c1c1c1;
+}
+
+.recommend {
+  text-align: center;
+  width: 95vw;
+  margin: 10px auto;
+  padding: 10px 0;
+  font-family: sans-serif;
+  box-shadow: 1px 4px 7px #c1c1c1;
+}
+.address {
+  font-size: 12px;
+}
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 20px;
 }
 
 .group-name {

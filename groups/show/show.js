@@ -1,6 +1,7 @@
 // groups/show/show.js
 const keys = require('../../keys.js');
 const QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
+const coords = [['静安', 1.2342, 12.2332]]
 const qqMap = new QQMapWX({
   key: keys.qqMapKey
 });
@@ -16,7 +17,8 @@ Page({
     recommendation: '',
     latitude: "",
     longitude: "",
-    locations: []
+    locations: [],
+    meal_date: ""
   },
 
   /**
@@ -32,9 +34,18 @@ Page({
     const MealsTable = new wx.BaaS.TableObject('meals');
       MealsTable.get(id).then(res => {
         console.log(res);
+        res.data.meal_date = res.data.meal_date.substr(0, 10);
         page.setData({
           meals: res.data
         });
+        if (recompRec) {
+          this.recomputeRecommendation(this, options.id);
+        } else {
+          page.setData({
+            recommendation: this.data.meals.recommended_category
+          });
+          page.recommendSearch();
+        }
         const MyUser = new wx.BaaS.User()
         MyUser.get(res.data.created_by).then(r => {
           page.setData({
@@ -55,44 +66,31 @@ Page({
         }
       })
     this.findGroupUsers(this);
+  },
 
-    },
-  location: function () {
+  recommendSearch: function () {
     const page = this;
-    const app = getApp();
-    wx.getLocation({
-      type: 'wgs84',
-      success: function (res) {
-        // console.log(this.data)
-        page.setData({
-          latitude: res.latitude,
-          longitude: res.longitude
-        })
-      }
-    })
     qqMap.search({
-      keyword: '麦当劳',
-      location: { 
-        latitude: page.data.latitude, 
-        longitude: page.data.longitude 
+      keyword: `${page.data.recommendation}`,
+      location: {
+        latitude: 31.22222,
+        longitude: 121.45806
       },
+      page_size: 5,
       success: function (res) {
         page.setData({
           locations: res.data
         });
-        wx.openLocation({
-          latitude: page.data.locations[0].location.lat,
-          longitude: page.data.locations[0].location.lng,
-          scale: 5
-        })
       },
-      fail: function (res) {
-        console.log(res);
-      },
-      complete: function (res) {
-        console.log(res);
-      }
     });
+  },
+
+  location: function () {
+    wx.openLocation({
+      latitude: page.data.locations[0].location.lat,
+      longitude: page.data.locations[0].location.lng,
+      scale: 5
+    })
   },
   /**
    * Lifecycle function--Called when page is initially rendered
@@ -172,7 +170,7 @@ Page({
         page.setData({
           recommendation: maxKey
         })
-
+        page.recommendSearch();
         page.setRecommended(page, maxKey);
     }, err => {
     })

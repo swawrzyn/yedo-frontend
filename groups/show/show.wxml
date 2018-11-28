@@ -9,11 +9,9 @@
         <view class="card-image">
           <image src="{{_userprofile.avatar}}" class='organisor-avatar'/>
         </view>
-        <view>
-          <text>Organised by: {{_userprofile.nickname}}</text>
-        </view>
-        <view>
-          <text>{{meals.meal_date}}</text>
+        <view class="card-info">
+          <view>Organised by: {{_userprofile.nickname}}</view>
+          <view>{{meals.meal_date}}</view>
         </view>
       </view>
     </view>
@@ -26,9 +24,19 @@
     <view class='group-organisor'>Organised by: {{_userprofile.nickname}}</view>
         <image src="{{_userprofile.avatar}}" class='organisor-avatar'/>
     </view> -->
-    <view class="card-recommend">
-      <text wx:if="{{recommendation}}" bindtap="location" class="recommendation">We recommend: {{recommendation}}</text>
+<view class="card-recommend">
+  <text wx:if="{{recommendation}}"  class="recommendation">We recommend: {{recommendation}}</text>
+</view>
+<view class='recommend-list' wx:for="{{locations}}" wx:for-index="index" wx:for-item="location">
+  <view class='recommend' bindtap="location">
+    <view class="title">{{location.title}}</view>
+    <view class="address">{{location.address}}</view>
+    <view class="info">
+      <view class="tel">{{location.tel}}</view>
+      <view class="distance">{{location._distance}}KM</view>
     </view>
+  </view>  
+</view>
     <!-- <view class="group-image" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.4) 50%), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=67fb2e7b1fbe39b18b51146234ef38aa&auto=format&fit=crop&w=750&q=80');">
     <text class='date'>20/12/2018</text>
     </view> -->
@@ -37,9 +45,7 @@
     <view class='restaurant-address'>No.14 Hanzhong Rd, Shanghai, China</view>
     <view class='rating'>★★★★★</view>
   </view> -->
-
-
-
+  
 <view class='group-list'>
   <text class="group-list-title">We got {{group_users_count}} coming!</text>
   <view wx:for="{{group_users}}" wx:for-item="user" class="user">
@@ -47,7 +53,7 @@
     <view class='user-name'>{{user.nickname}}</view>
     <view class='response' style="background-image: url('/images/green-check.svg')"></view>
   </view>
-</view>
+</view> -->
 
 <button open-type="share" class="btn">Share</button>
 
