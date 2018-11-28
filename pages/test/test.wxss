@@ -1,0 +1,82 @@
+.poly-container{
+  position:relative;
+  height:100vh;
+  overflow:hidden;
+}
+
+.title-cn{
+position:absolute;
+left:0;
+top:0;
+font-size:100px;
+transform:rotate(-29.17deg);
+padding-top:120px;
+padding-left:20px;
+}
+
+.frame1{
+position:absolute;
+z-index:-1;
+width: 1200px;
+height: 581px;
+left: -253px;
+background: #FBE251;
+ clip-path: polygon(100% 0, 0 0, 0 100%);
+}
+
+.frame2{
+position:absolute;
+width:800px;
+height:57.06999999999999px;
+left:-161px;
+top:307.97px;
+background:#fff;
+transform:rotate(-29.17deg);
+
+}
+
+
+.frame3{
+position:absolute;
+z-index:-2;
+width: 1700px;
+height: 2000px;
+left: -253px;
+background: #1C1B1B;
+ clip-path: polygon(100% 0, 0 0, 0 100%);
+}
+
+.buttons-container{
+position: absolute;
+bottom: 0;
+right: 0;
+width: 100vw;
+display: flex;
+font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+margin-bottom:28px;
+margin-right:-48px;
+}
+
+.button {
+  background: transparent;
+  border: 1px solid #FBE251;
+  color: #FBE251;
+  border-radius: 0;
+  margin: 10px;
+  text-transform: lowercase;
+  height: 100rpx;
+  width: 400rpx;
+}
+
+.button-hover {
+  background: #FBE251;
+  color: black;
+}
+
+/* .button button {
+  border: 0;
+  border-radius: 0;
+} */
