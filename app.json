@@ -12,7 +12,8 @@
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#FFFF00",
     "navigationBarTitleText": "yedo!",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle":"black",
+    "enablePullDownRefresh": true
   },
   "plugins": {
     "sdkPlugin": {

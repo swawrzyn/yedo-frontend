@@ -65,6 +65,7 @@ Page({
         }
       })
     this.findGroupUsers(this);
+    wx.hideNavigationBarLoading();
   },
 
   recommendSearch: function () {
@@ -77,7 +78,6 @@ Page({
       },
       page_size: 5,
       success: function (res) {
-        console.log(res)
         page.setData({
           locations: res.data
         });
@@ -125,7 +125,12 @@ Page({
    * Page event handler function--Called when user drop down
    */
   onPullDownRefresh: function () {
-
+    const page = this;
+    const app = getApp();
+    const id = app.globalData.meals[0].id;
+    wx.showNavigationBarLoading();
+    page.onLoad();
+    console.log(2)    
   },
 
   /**
