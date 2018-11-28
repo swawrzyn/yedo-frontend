@@ -1,0 +1,79 @@
+.poly-container{
+  position:relative;
+  height:100vh;
+  overflow:hidden;
+}
+
+.userMeal{
+  display:block;
+  align-items:center;
+}
+
+.yourMeal{
+display:block;
+height:30px;
+width:30px;
+}
+
+.frame1{
+position:absolute;
+width: 642.94px;
+height: 200.73px;
+left: -213px;
+background: #FFF1A3;
+ clip-path: polygon(100% 0, 0 0, 0 100%);
+}
+
+.createMeal{
+  z-index:5;
+}
+
+.title-eng{
+position:absolute;
+left:60px;
+top:20px;
+font-size:40px;
+}
+
+.title-cn{
+position:absolute;
+left:220px;
+top:530px;
+font-size:50px;
+color:#FBE251;
+}
+
+.frame2{
+position:absolute;
+z-index:-1;
+width: 1200px;
+height: 480px;
+left: -253px;
+background: #FBE251;
+ clip-path: polygon(100% 0, 0 0, 0 100%);
+}
+
+
+.frame3{
+position:absolute;
+z-index:-2;
+width: 1700px;
+height: 700px;
+left: -253px;
+background: #484646;
+ clip-path: polygon(100% 0, 0 0, 0 100%);
+}
+
+.frame4{
+position:absolute;
+z-index:-3;
+width:1800px;
+height:670px;
+left:-253px;
+background:#1C1B1B;
+clip-path:polygon(100% 0, 100% 100%, 0 100%);
+
+}
+
+
+
