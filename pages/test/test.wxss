@@ -72,8 +72,8 @@ margin-right:-48px;
 }
 
 .button-hover {
-  background: black;
-  color: white;
+  background: #FBE251;
+  color: black;
 }
 
 /* .button button {
