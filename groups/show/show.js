@@ -1,4 +1,9 @@
 // groups/show/show.js
+var QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
+var demo = new QQMapWX({
+  key: 'GKTBZ-7ML64-GBPU4-XPTRK-Q3D2E-Q7FI2' // 必填
+});
+
 Page({
 
   /**
@@ -8,7 +13,10 @@ Page({
 
     meals: [],
     _userprofile:[],
-    recommendation: ''
+    recommendation: '',
+    latitude: "",
+    longitude: "",
+    locations: []
   },
 
   /**
@@ -21,7 +29,7 @@ Page({
       mealId: options.id
     });
     const recompRec = (options.new === 'true');
-    console.log(recompRec);
+
     const MealsTable = new wx.BaaS.TableObject('meals');
       MealsTable.get(id).then(res => {
         console.log(res);
@@ -39,6 +47,7 @@ Page({
       }, err => {
         console.log(err);
       })
+
     if (recompRec) {
       this.recomputeRecommendation(this, options.id);
     } else {
@@ -48,7 +57,42 @@ Page({
     }
 
     },
-
+  location: function () {
+    const page = this;
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        // console.log(this.data)
+        page.setData({
+          latitude: res.latitude,
+          longitude: res.longitude
+        })
+      }
+    })
+    demo.search({
+      keyword: '麦当劳',
+      location: { 
+        latitude: page.data.latitude, 
+        longitude: page.data.longitude 
+      },
+      success: function (res) {
+        page.setData({
+          locations: res.data
+        });
+        wx.openLocation({
+          latitude: page.data.locations[0].location.lat,
+          longitude: page.data.locations[0].location.lng,
+          scale: 5
+        })
+      },
+      fail: function (res) {
+        console.log(res);
+      },
+      complete: function (res) {
+        console.log(res);
+      }
+    });
+  },
   /**
    * Lifecycle function--Called when page is initially rendered
    */

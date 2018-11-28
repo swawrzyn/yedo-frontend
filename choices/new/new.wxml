@@ -53,7 +53,7 @@
         <text>{{meal.location}}</text>
       </view>
       <view>
-        <text>{{meal.meal_date_string}}</text>
+        <text>{{meal_date}}</text>
       </view>
     </view>
   </view>
