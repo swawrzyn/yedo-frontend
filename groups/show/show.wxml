@@ -28,7 +28,7 @@
   <text wx:if="{{recommendation}}"  class="recommendation">We recommend: {{recommendation}}</text>
 </view>
 <view class='recommend-list' wx:for="{{locations}}" wx:for-index="index" wx:for-item="location">
-  <view class='recommend' bindtap="location">
+  <view class='recommend' bindtap="location" id="{{index}}">
     <view class="title">{{location.title}}</view>
     <view class="address">{{location.address}}</view>
     <view class="info">
