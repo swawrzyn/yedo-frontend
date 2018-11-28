@@ -22,11 +22,11 @@ Page({
 
   goHome: function(e){
     wx.navigateTo({ url:'/pages/index/index'})
-  }
+  },
 
 createMeal: function (e) {
-    wx.navigateTo({ url: '/new/group/group' })
-  }
+    wx.navigateTo({ url: '/groups/new/new' })
+  },
   /**
    * Lifecycle function--Called when page load
    */
