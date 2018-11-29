@@ -1,6 +1,8 @@
 <view class="container">
 
-  <view class="top-image" style="background-image: url('{{meals.photo_url}}')"></view>
+  <view class="top-image" style="background-image: url('{{meals.photo_url}}')">
+  <image src="../../images/home.svg" class="home-button" bindtap='toHome' />
+  </view>
 
   <view class="page-content">
 

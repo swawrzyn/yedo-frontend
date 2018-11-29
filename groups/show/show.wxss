@@ -19,6 +19,15 @@ page {
   background-position: center;
 }
 
+.home-button {
+  height: 72rpx;
+  width: 72rpx;
+  z-index: 10;
+  position: absolute;
+  top: 25rpx;
+  left: 25rpx;
+}
+
 .page-content {
   height: 100%;
   width: 100vw;
@@ -57,11 +66,11 @@ page {
 
 .group-left .group-name {
   padding-top: 10rpx;
-  font-size: 42px;
+  font-size: 52rpx;
 }
 
 .group-left .group-date {
-  font-size: 18px;
+  font-size: 36rpx;
   font-style: italic;
   padding-bottom: 25rpx;
 }
@@ -151,7 +160,7 @@ button::after {
 
 .rec-title {
   width: 95vw;
-  height: 150rpx;
+  height: 175rpx;
   color: white;
   margin: 0 auto;
   display: flex;

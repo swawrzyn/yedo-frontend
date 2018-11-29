@@ -12,9 +12,11 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+
     this.setData({
       mealId: options.meal_id
     });
+    this.checkUserMealStatus(this);
   },
 
   /**
@@ -27,15 +29,25 @@ Page({
   /**
    * Lifecycle function--Called when page show
    */
-  onShow: function (options) {
-    this.checkUserMealStatus(this);
+  onShow: function () {
+    if (app.globalData.scene == 0) {
+      app.globalData.scene = 1;
+
+      this.setData({
+        mealId: null
+      })
+      this.onLoad();
+    }
+
+
+    
   },
 
   /**
    * Lifecycle function--Called when page hide
    */
   onHide: function () {
-
+    app.globalData.scene -= 1;
   },
 
   /**
