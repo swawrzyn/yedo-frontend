@@ -37,36 +37,7 @@ Page({
     array1_zh: ['美国菜', '中餐', '意大利菜', '日本菜', '墨西哥菜', '韩国菜'],
     index1: 0,
     index2: 1,
-    index3: 2,
-    // objectArray: [
-    //   {
-    //     id: 0,
-    //     name: 'American'
-    //   },
-    //   {
-    //     id: 1,
-    //     name: 'Chinese'
-    //   },
-    //   {
-    //     id: 2,
-    //     name: 'Italian'
-    //   },
-    //   {
-    //     id: 3,
-    //     name: 'Japanese'
-    //   },
-    //   {
-    //     id: 4,
-    //     name: 'Mexican'
-    //   },
-    //   {
-    //     id: 5,
-    //     name: 'Korean'
-    //   }
-    // ],
-    // index: 0,
-    covers: ["../../images/food-cover/food1.jpg", "../../images/food-cover/food2.jpg", "../../images/food-cover/food3.jpg", "../../images/food-cover/food4.jpg", "../../images/food-cover/food5.jpg"],
-    cover_url: ""
+    index3: 2
   },
 
   /**
@@ -76,13 +47,7 @@ Page({
     console.log(options);
     const app = getApp();
     const page = this;
-    // this.setData({
-    //   citycenter: this.data.cityleft['地铁'],
-    // })
-    let index = Math.round(Math.random() * (page.data.covers.length - 1));
-    this.setData({
-      cover_url: page.data.covers[index]
-    })
+    
     if (app.globalData.tempMeal){
       const meal_date_string = app.globalData.tempMeal.meal_date.substr(0, 10);
       this.setData({
@@ -96,7 +61,8 @@ Page({
         page.setData({
           meal: res.data,
           mealId: res.data.id,
-          meal_date_string: meal_date_string
+          meal_date_string: meal_date_string,
+          photo_url: res.data.photo_url
         })
       });
     }
@@ -110,6 +76,7 @@ Page({
         photo_url: this.data.meal.photo_url
       })
     }
+
   },
 
   /**
@@ -130,7 +97,6 @@ Page({
    * Lifecycle function--Called when page hide
    */
   onHide: function () {
-
   },
 
   /**
@@ -179,6 +145,7 @@ Page({
       index3: e.detail.value
     })
   },
+
 
   addChoices: function() {
     let ChoicesTable = new wx.BaaS.TableObject("choices");

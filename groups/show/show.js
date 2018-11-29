@@ -111,6 +111,12 @@ createMeal: function (e) {
     // }) 
   },
 
+  toHome: function () {
+    wx.navigateTo({
+      url: '/pages/index/index',
+    })
+  },
+
   recommendSearch: function () {
     const page = this;
     qqMap.search({
@@ -174,7 +180,7 @@ createMeal: function (e) {
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-
+    app.globalData.tempMeal = null;
   },
 
   /**
@@ -213,8 +219,9 @@ createMeal: function (e) {
     if (res.from === 'button') {
       console.log(res);
     } return {
-      title: this.data.meals.name,
-      path: `/pages/landing/landing?meal_id=${this.data.mealId}`
+      title: `${this.data.meals.name}! 一道吃吧!`,
+      path: `/pages/landing/landing?meal_id=${this.data.mealId}`,
+      imageUrl: this.data.meals.photo_url
     }
   },
 
