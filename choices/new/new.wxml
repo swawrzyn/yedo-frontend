@@ -4,45 +4,15 @@
   <image src="../../images/menu.png"></image>
   <image src="../../images/首页.png"></image>
 </view> -->
-<!-- 下拉筛选框 -->
-<!-- <view class="page"> -->
-<view class="page">
-</view>
-<view class="main">
-  <view class="nav">
+  <!-- <view class="nav">
     <view class="nav-son {{shownavindex == 1? 'active' : ''}}" bindtap="listqy" data-nav="1">
       <view class="title">
         <image src="../../images/menu.png"></image>
         <image src="../../images/首页.png"></image>
       </view>
     </view>
-  </view>
-
-  <!-- 地铁区域-》区域、地铁标签 -->
-  <!-- <view class="quyu {{qyopen ? 'slidown' : 'slidup'}} {{qyshow ? 'disappear':''}}">
-
-    <view class="qy quyu-left">
-      <view class="{{select1 == index ? 'current' : ''}}" wx:for="{{cityleft}}" bindtap="selectleft" data-city='{{index}}'>
-        {{index}}
-      </view>
-    </view>
-    <view class="qy quyu-center">
-      <view class="{{select2 == index ? 'current2' : ''}}" wx:for="{{citycenter}}" bindtap="selectcenter" data-city='{{index}}'>
-        {{index}}
-      </view>
-    </view>
-    <view class="qy quyu-right">
-      <view wx:for="{{cityright}}" class="{{select3 == index?'current3':''}}" bindtap='selectright' data-city="{{index}}">
-        <label>{{item}}</label>
-        <image src='/images/selectRight.png' style="{{select3 == index?'display:block':'display:none'}}"></image>
-      </view>
-    </view>
-    <view class='form-btn'>
-      <button class='btn-reset' bindtap='quyuEmpty'>重置</button>
-      <button class='btn-submit' bindtap='submitFilter'>确定</button>
-    </view>
   </view> -->
-<!-- </view> -->
+
   <view class="food-cover" style="background-image: url('{{cover_url}}')">
     <view class="home-logo">
       <view class="card">
@@ -63,40 +33,36 @@
       </view>
     </view>
   </view>
-  
-  <form bindsubmit="userInput" bindreset="formReset" class="form-fields">
-    <view class="label">
-      <text>What do you want to eat?</text>
-    </view>
-    <view class="text-fields">
-      <view class="section">
-        <picker bindchange="bindPickerChange1" value="{{index1}}" range="{{array1}}">
-          <view class="picker">
-              <input class="desc" placeholder-class="input-placeholder" name="first-choice" placeholder="American" value="{{array1[index1]}}" disabled='disabled'/>
-            <!-- <text class="desc">{{array[index]}}</text> -->
-          </view>
-        </picker>
+  <view class="form">
+    <form bindsubmit="userInput" bindreset="formReset" class="form-fields">
+      <view class="label">
+        <text>What do you want to eat?</text>
       </view>
-      <view class="section">
-        <picker bindchange="bindPickerChange2" value="{{index2}}" range="{{array1}}">
-          <view class="picker">
-              <input class="desc" placeholder-class="input-placeholder" name="second-choice" placeholder="Chinese" value="{{array1[index2]}}" disabled='disabled'/>
-            <!-- <text class="desc">{{array[index]}}</text> -->
-          </view>
-        </picker>
+      <view class="text-fields">
+        <view class="section">
+          <picker bindchange="bindPickerChange1" value="{{index1}}" range="{{array1}}">
+            <view class="picker">
+                <input class="desc" placeholder-class="input-placeholder" name="first-choice" placeholder="American" value="{{array1[index1]}}" disabled='disabled'/>
+              <!-- <text class="desc">{{array[index]}}</text> -->
+            </view>
+          </picker>
+        </view>
+        <view class="section">
+          <picker bindchange="bindPickerChange2" value="{{index2}}" range="{{array1}}">
+            <view class="picker">
+                <input class="desc" placeholder-class="input-placeholder" name="second-choice" placeholder="Chinese" value="{{array1[index2]}}" disabled='disabled'/>
+            </view>
+          </picker>
+        </view>
+        <view class="section">
+          <picker bindchange="bindPickerChange3" value="{{index3}}" range="{{array1}}">
+            <view class="picker">
+                <input class="desc" placeholder-class="input-placeholder" name="third-choice" placeholder="Japanese" value="{{array1[index3]}}" disabled='disabled'/>
+            </view>
+          </picker>
+        </view>
       </view>
-      <view class="section">
-        <picker bindchange="bindPickerChange3" value="{{index3}}" range="{{array1}}">
-          <view class="picker">
-              <input class="desc" placeholder-class="input-placeholder" name="third-choice" placeholder="Japanese" value="{{array1[index3]}}" disabled='disabled'/>
-            <!-- <text class="desc">{{array[index]}}</text> -->
-          </view>
-        </picker>
-      </view>
-    </view>
-    
-    <button class="button" hover-class='button-hover' open-type="getUserInfo" bindgetuserinfo="userInfoHandler">Let's Eat!</button>
-  </form>
-  
-  
-</view>
+      
+      <button class="button" hover-class='button-hover' open-type="getUserInfo" bindgetuserinfo="userInfoHandler">Let's Eat!</button>
+    </form>
+  </view>
