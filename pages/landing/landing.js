@@ -30,6 +30,7 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
+    const app = getApp();
     if (app.globalData.scene == 0) {
       app.globalData.scene = 1;
 
