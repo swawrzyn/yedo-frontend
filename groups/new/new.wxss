@@ -155,6 +155,24 @@ button {
   margin-bottom:30px;
 }
 
+.upload-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.upload-button text {
+}
+
+.upload-button image {
+  height: 50rpx;
+  width: 50rpx;
+  position: absolute;
+  right: 25rpx;
+  
+}
+
 .button-hover {
   background: black;
   color: white;

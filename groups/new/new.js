@@ -80,6 +80,45 @@ Page({
     });
   },
 
+  uploadImage: function(e) {
+    let MyFile = new wx.BaaS.File();
+    
+    let metaData = { categoryName: 'group_photos' };
+    let deny;
+    const page = this;
+    wx.chooseImage({
+      success: function (res) {
+        let fileParams = { filePath: res.tempFilePaths[0] };
+        page.setData({
+          photo_url: true 
+        })
+        wx.BaaS.wxCensorImage(res.tempFilePaths[0]).then(res => {
+          deny = res.risky;
+          console.log("riskyness: ", deny);
+        }, err => {
+          console.log(err);
+        })
+        if (deny) {
+          wx.showModal({
+            title: 'Error',
+            content: 'This content is inappropriate, please upload something else.',
+            showCancel: false,
+            confirmText: 'Ok'
+          });
+        } else {
+          MyFile.upload(fileParams, metaData).then(res => {
+            console.log("uploaded successfully");
+            page.setData({
+              photo_url: res.data.path + '!/fw/800'
+            })
+            console.log("photo url: ", page.data.photo_url);
+          }, err => {
+          })
+        }
+        }
+      })
+  },
+
   formSubmit: function(e) {
     let { value } = e.detail;
     value['inputDate'] = 0;
@@ -95,13 +134,27 @@ Page({
     console.log(value);
 
     if (!this.oValidator.checkData(value)) return
-
-    app.globalData.tempMeal = {
-      name: e.detail.value.name,
-      location: { coordinates: this.data.region_geo[e.detail.value.district], 
-                  type: "Point"},
-      meal_date: inputDate
+    if (this.data.photo_url) {
+      app.globalData.tempMeal = {
+        name: e.detail.value.name,
+        location: {
+          coordinates: this.data.region_geo[e.detail.value.district],
+          type: "Point"
+        },
+        meal_date: inputDate,
+        photo_url: this.data.photo_url
+      }
+    } else {
+      app.globalData.tempMeal = {
+        name: e.detail.value.name,
+        location: {
+          coordinates: this.data.region_geo[e.detail.value.district],
+          type: "Point"
+        },
+        meal_date: inputDate
+      }
     }
+    
 
     
 
