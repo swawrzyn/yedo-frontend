@@ -1,166 +1,254 @@
-/* groups/show/show.wxss */
-/* page {
-  background-color: yellow;
-} */
+page {
+  background: #fbe251;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
 .container {
-  width: 95vw;
-  margin: 10px auto;
-  padding: 5px 0px;
-  font-family: sans-serif;
-  box-shadow: 1px 4px 7px #c1c1c1;
+  display:flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.top-image {
+  height: 500rpx;
+  width: 100vw;
+  background-size: cover;
+  background-position: center;
+}
+
+.page-content {
+  height: 100%;
+  width: 100vw;
 }
 
 .group-card {
-  width: 100%;
-  margin: 0px;
-  align-content: center;
-  justify-content: center;
-}
-
-.meal-name {
-  text-align:center;
-}
-
-.details {
+  width: 95vw;
+  height: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0 auto;
+  margin-top: -200rpx;
+  background: rgba(250,250,250,0.9);
+  box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+}
+
+.top {
+  display: flex;
+  height: 200rpx;
+  width: 100%;
+}
+
+
+.group-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-around;
+  width: 80%;
+  height: 100%;
+  margin-left: 25rpx;
+}
+
+.group-left .group-name {
+  padding-top: 10rpx;
+  font-size: 42px;
+}
+
+.group-left .group-date {
+  font-size: 18px;
+  font-style: italic;
+  padding-bottom: 25rpx;
+}
+
+.group-right {
+  width: 20%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  background: transparent;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
 }
 
-.card-info {
-  text-align: center;
-  width: 95vw;
+.group-right .group-share {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 0.5px solid #e1e1e1 !important;
+  transition: all 0.2s ease;
+  border-top-right-radius: 8px;
+  background: transparent;
+  flex-direction: column;
 }
 
-.card-recommend {
-  text-align: center;
-  width: 95vw;
-  margin: 10px auto;
-  padding: 10px 0;
-  font-family: sans-serif;
-  box-shadow: 1px 4px 7px #c1c1c1;
+button {
+border: 0 !important;
+background: none !important;  
 }
 
-.recommend {
-  text-align: center;
-  width: 95vw;
-  margin: 10px auto;
-  padding: 10px 0;
-  font-family: sans-serif;
-  box-shadow: 1px 4px 7px #c1c1c1;
+button::after {
+  border: none;
 }
-.address {
+
+.group-right .group-members {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+  border-bottom-right-radius: 8px;
+}
+
+.group-right image {
+ width: 36rpx;
+ height: 36rpx;
+}
+
+.group-right-hover {
+  background: #d5d5d5;
+  transition: all 0.2s ease;
+}
+
+.button-selected {
+  background: green;
+}
+
+.user-line {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 25rpx;
+}
+
+.user-image {
+  height: 16px;
+  border-radius: 50%;
+  margin-right: 25rpx;
+}
+
+.user-name {
+  font-size: 16px;
+}
+
+.small-text {
+  margin-top: 5rpx;
   font-size: 12px;
 }
-.info {
+
+
+
+.rec-title {
+  width: 95vw;
+  height: 150rpx;
+  color: white;
+  margin: 0 auto;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  margin: 0 20px;
+  justify-content: center;
+  text-align: center;
+  background-size: cover;
+  background-position: center;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
 }
 
-.group-name {
-  font-size: 17px;
-  padding: 5px;
-  display: flex;
-  align-content: center;
-  justify-content: center;
-  font-weight: bolder;
+.rec-title .title {
+    font-size: 40px;
+    margin: 0;
+    padding: 0;
 }
-.group-image {
-  position: relative;
-  height: 200px;
-  width: 100%;
+
+.rec-title .recommend {
+  font-size: 16px;
   margin: 0;
   padding: 0;
-  background-size: cover;
-  background-position: center;
-  transition: all 1s ease;
 }
-.footer {
-  width: 70%;
-  padding: 0px 10px;
-  border-left: 1px solid #FFFF00;
+
+.restaurant-cards {
+  width: 95vw;
+  height: 100%;
+  margin: 0 auto;
 }
-.restaurant-name {
-  font-size: 14px;
-  font-weight: bold;
-}
-.restaurant-address {
-  font-size: 11px;
-}
-.rating {
-  color: #FFFF00;
-  font-size: 25px;
-  font-weight: bolder;
-  text-shadow: 0.5px 0.5px 0.25px #4a4a48;
-  padding: 0px;
-  background-color:
-}
-.group-list {
-padding: 10px 25px;
-}
-.user {
-height: 35px;
-padding: 6px 0px;
-display: flex;
-text-align: center;
-border-bottom: 0.25px solid #c1c1c1;
-}
-.user-avatar {
-  width: 35px;
-  height: 35px;
-  border-radius: 50%;
-  background-size: cover;
-  background-position: center;
-}
-.user-name {
-  text-align: center;
+
+.restaurant-card {
+  height: 150rpx;
+  width: 100%;
   display: flex;
-  padding: 5px 10px;
-}
-.response {
-  width: 30px;
-  height: 30px;
-  position: absolute;
-  right: 25px;
-  display: flex;
-}
-
-.organisor-avatar{
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-
-.organisor-info{
-  display:flex;
-  justify-content:flex-end;
-  margin:5px;
-  font-size:10px;
-  align-items: center;
-}
-
-.organisor-avatar{
-margin:0 5px;
-}
-
-.btn{
-  width: 50vw;
-  margin:0px 10px;
-}
-
-.nav-bar{
-  display:flex;
   justify-content: space-between;
-  margin: 10px
-}
-
-.weui-loadmore {
-  display: flex;
   align-items: center;
-  justify-content: center;
-  text-align: center
+  background: rgba(250,250,250,0.9);
+  border-radius: 5px;
+  margin: 25rpx auto;
 }
 
+.restaurant-details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 25rpx;
+}
+
+.restaurant-details .name {
+  font-size: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.restaurant-details .address {
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+}
+
+.card-buttons {
+  display: flex;
+  height: 100%;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.card-buttons image {
+  height: 50%;
+  width: 50%;
+}
+
+.card-buttons .telephone {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100rpx;
+  height: 100%;
+  border-right: 0.5px solid #e1e1e1;
+}
+
+.disabled {
+  opacity: 0.5;
+}
+
+.card-buttons .map {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100rpx;
+  height: 100%;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}

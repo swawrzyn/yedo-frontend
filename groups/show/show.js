@@ -19,6 +19,15 @@ Page({
     locations: [],
     meal_date: "",
     // isRefreshing: false,
+    imgUrls: [
+    'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
+    'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
+    'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
+    ],
+    indicatorDots: false,
+    autoplay: false,
+    interval: 5000,
+    duration: 1000,
   },
 
   goHome: function(e){
@@ -32,6 +41,7 @@ createMeal: function (e) {
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
+    this.popover = this.selectComponent('#popover');
     const page = this
     this.setData({
       mealId: options.id
@@ -39,6 +49,24 @@ createMeal: function (e) {
     const recompRec = (options.new === 'true');
     this.loadGroup(options.id, recompRec);
   },
+
+  popOver: function (e) {
+    // 获取按钮元素的坐标信息
+    var id = 'members' // 或者 e.target.id 获取点击元素的 ID 值
+    var popover;
+    var button = wx.createSelectorQuery().select('#' + id);
+    button.boundingClientRect(res => {
+      console.log(res);
+      popover = this;
+      // 调用自定义组件 popover 中的 onDisplay 方法
+      this.popover.onDisplay(res);
+
+    }).exec();
+    setTimeout(function(){
+      popover.popover.onHide();
+    }, 3000)
+  },
+  
 
   loadGroup: function(mealId, recalc) {
     const page = this;
@@ -91,6 +119,7 @@ createMeal: function (e) {
         latitude: page.data.meals.location.coordinates[1],
         longitude: page.data.meals.location.coordinates[0]
       },
+      address_format: 'short',
       page_size: 5,
       success: function (res) {
         page.setData({
@@ -102,6 +131,7 @@ createMeal: function (e) {
   },
 
   location: function (e) {
+    console.log(e);
     const page = this;
     wx.openLocation({
       latitude: page.data.locations[parseInt(e.currentTarget.id)].location.lat,
@@ -109,6 +139,13 @@ createMeal: function (e) {
       name: page.data.locations[parseInt(e.currentTarget.id)].title,
       address: page.data.locations[parseInt(e.currentTarget.id)].address,
       scale: 14
+    })
+  },
+
+  makeCall: function(e) {
+    const page = this;
+    wx.makePhoneCall({
+      phoneNumber: page.data.locations[parseInt(e.currentTarget.id)].tel,
     })
   },
   /**
@@ -228,5 +265,5 @@ createMeal: function (e) {
         })
       })
     })
-  }
+  },
 })

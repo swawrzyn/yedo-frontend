@@ -1,66 +1,61 @@
-<!--groups/show/show.wxml-->
-<view wx:if="{{!locations}}" class="weui-loadmore">
-  <view class="weui-loading"></view>
-  <view class="weui-loadmore__tips">Loading...</view>
-</view>
-<view class='container'>
-  <view class="group-card">
-    <view class="card">
-      <view class="meal-name">
-        <text>{{meals.name}}</text>
+<view class="container">
+
+  <view class="top-image" style="background-image: url('{{_userprofile.avatar}}')"></view>
+
+  <view class="page-content">
+
+
+    <view class="group-card">
+
+
+    <view class="top">
+      <view class="group-left">
+        <text class="group-name">{{meals.name}}</text>
+        <text class="group-date">{{meals.meal_date}}</text>
       </view>
-      <view class="details">
-        <view class="card-image">
-          <image src="{{_userprofile.avatar}}" class='organisor-avatar'/>
+      <view class="group-right">
+        <button class="group-share" open-type="share" hover-class='group-right-hover'>
+        <image src="../../images/share.svg" mode="aspectFill"></image>
+        </button>
+        <view class="group-members" id="members" hover-class='group-right-hover' bindtap='popOver' bind><image src="../../images/users.svg" mode="aspectFill"></image>
+        <text wx:if="{{group_users_count}}" class="small-text">{{group_users_count > 1 ? group_users_count + ' people' : group_users_count + ' person' }}</text>
+        <text class="small-text" wx:elif='{{!group_users_count}}'>Loading...</text>
         </view>
-        <view class="card-info">
-          <view>Organised by: {{_userprofile.nickname}}</view>
-          <view>{{meals.meal_date}}</view>
-        </view>
+        <popover id='popover'>
+          <block wx:for="{{group_users}}" wx:for-item="user">
+            <popover-item><view class="user-line"><image class="user-image" src="{{user.avatar}}"></image><text class="user-name">{{user.nickname}}</text></view></popover-item>
+          </block>
+        </popover>
       </view>
     </view>
-  </view>
-</view>
+      <view class="rec-title" style="background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1))">
+      <text class="title">{{recommendation}}</text>
+      <text class="recommend">yedo recommends</text>
+      </view>
+    </view>
     
-  <!-- <view class='group-card'>
-    <view class='group-name'>{{meals.name}}</view>
-    <view class='organisor-info'>
-    <view class='group-organisor'>Organised by: {{_userprofile.nickname}}</view>
-        <image src="{{_userprofile.avatar}}" class='organisor-avatar'/>
-    </view> -->
-<view class="card-recommend">
-  <text wx:if="{{recommendation}}"  class="recommendation">We recommend: {{recommendation}}</text>
-</view>
-<view class='recommend-list' wx:for="{{locations}}" wx:for-index="index" wx:for-item="location">
-  <view class='recommend' bindtap="location" id="{{index}}">
-    <view class="title">{{location.title}}</view>
-    <view class="address">{{location.address}}</view>
-    <view class="info">
-      <view class="tel">{{location.tel}}</view>
-      <view class="distance">{{location._distance}}m</view>
+    <view class="restaurant-cards">
+      <block wx:for="{{locations}}" wx:for-item="location" wx:for-index="index">
+        <view class="restaurant-card">
+          <view class="restaurant-details">
+          <text class="name">{{location.title}}</text>
+          <text class="address">{{location.address}}</text>
+          </view>
+          <view class="card-buttons">
+            <view wx:if="{{location.tel != ' '}}" class="telephone" bindtap="makeCall" id="{{index}}"><image src="../../images/phone.svg"></image></view>
+            <view class="map" bindtap="location" id="{{index}}"><image src="../../images/map.svg"></image></view>
+          </view>
+        </view>
+      </block>
     </view>
-  </view>  
-</view>
-    <!-- <view class="group-image" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.4) 50%), url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=67fb2e7b1fbe39b18b51146234ef38aa&auto=format&fit=crop&w=750&q=80');">
-    <text class='date'>20/12/2018</text>
-    </view> -->
-  <!-- <view class='footer'>
-    <view class='restaurant-name'>THE LIGHT</view>
-    <view class='restaurant-address'>No.14 Hanzhong Rd, Shanghai, China</view>
-    <view class='rating'>★★★★★</view>
-  </view> -->
-  
-<view class='group-list'>
-  <text class="group-list-title">We got {{group_users_count}} coming!</text>
-  <view wx:for="{{group_users}}" wx:for-item="user" class="user">
-    <view class='user-avatar' style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.4) 50%), url('{{user.avatar}}');"></view>
-    <view class='user-name'>{{user.nickname}}</view>
-    <view class='response' style="background-image: url('/images/green-check.svg')"></view>
+    
+   
+
+
   </view>
-</view>
 
 
-<view class="nav-bar">
-<button class="btn" bindtap="goHome">Home</button>
-<button open-type="share" class="btn">Share</button>
+
+
+
 </view>
