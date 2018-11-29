@@ -13,7 +13,7 @@
     </view>
   </view> -->
 
-  <view class="food-cover" style="background-image: url('{{photo_url}}')">
+  <view class="food-cover" style="background-image: url('{{meal.photo_url}}')">
     <view class="home-logo">
       <view class="card">
         <view class="card-image">

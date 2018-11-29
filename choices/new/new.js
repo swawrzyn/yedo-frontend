@@ -61,8 +61,7 @@ Page({
         page.setData({
           meal: res.data,
           mealId: res.data.id,
-          meal_date_string: meal_date_string,
-          photo_url: res.data.photo_url
+          meal_date_string: meal_date_string
         })
       });
     }
