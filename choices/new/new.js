@@ -67,16 +67,6 @@ Page({
       });
     }
 
-    if(!this.data.meal.photo_url) {
-      this.setData({
-        photo_url: 'https://cloud-minapp-22402.cloud.ifanrusercontent.com/1gSJoT23AbOTUZ6J.jpg!/fw/800'
-      })
-    } else {
-      this.setData({
-        photo_url: this.data.meal.photo_url
-      })
-    }
-
   },
 
   /**

@@ -151,7 +151,8 @@ Page({
           coordinates: this.data.region_geo[e.detail.value.district],
           type: "Point"
         },
-        meal_date: inputDate
+        meal_date: inputDate,
+        photo_url: 'https://cloud-minapp-22402.cloud.ifanrusercontent.com/1gSJoT23AbOTUZ6J.jpg!/fw/800'
       }
     }
     
