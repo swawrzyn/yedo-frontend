@@ -126,6 +126,21 @@ createMeal: function (e) {
           locations: res.data,
           // isRefreshing: true
         });
+        var mks = []
+        for (var i = 0; i < res.data.length; i++) {
+          mks.push({ // 获取返回结果，放到mks数组中
+            title: res.data[i].title,
+            id: res.data[i].id,
+            latitude: res.data[i].location.lat,
+            longitude: res.data[i].location.lng,
+            iconPath: "../../images/marker.png", //图标路径
+            width: 20,
+            height: 20
+          })
+        }
+        page.setData({ //设置markers属性，将搜索结果显示在地图中
+          markers: mks
+        })
       },
     });
   },

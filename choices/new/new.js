@@ -37,7 +37,7 @@ Page({
     array1_zh: ['美国菜', '中餐', '意大利菜', '日本菜', '墨西哥菜', '韩国菜'],
     index1: 0,
     index2: 1,
-    index3: 2
+    index3: 2,
     // objectArray: [
     //   {
     //     id: 0,
@@ -65,6 +65,8 @@ Page({
     //   }
     // ],
     // index: 0,
+    covers: ["../../images/food-cover/food1.jpg", "../../images/food-cover/food2.jpg", "../../images/food-cover/food3.jpg", "../../images/food-cover/food4.jpg", "../../images/food-cover/food5.jpg"],
+    cover_url: ""
   },
 
   /**
@@ -77,6 +79,10 @@ Page({
     // this.setData({
     //   citycenter: this.data.cityleft['地铁'],
     // })
+    let index = Math.round(Math.random() * (page.data.covers.length - 1));
+    this.setData({
+      cover_url: page.data.covers[index]
+    })
     if (app.globalData.tempMeal){
       this.setData({
         meal: app.globalData.tempMeal,
