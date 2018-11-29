@@ -31,6 +31,8 @@ Page({
    */
   onShow: function () {
     const app = getApp();
+
+    app.globalData.tempMeal = null;
     if (app.globalData.scene == 0) {
       app.globalData.scene = 1;
 
