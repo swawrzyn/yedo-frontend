@@ -13,7 +13,7 @@
 }
 
 .title{
-  margin-bottom:-12px;
+  margin-bottom:50rpx;
 }
 
 .title text {
@@ -170,7 +170,7 @@ button {
   width: 50rpx;
   position: absolute;
   right: 25rpx;
-  
+
 }
 
 .button-hover {
