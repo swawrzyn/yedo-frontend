@@ -12,18 +12,22 @@
   font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
+.title{
+  margin-bottom:-12px;
+}
+
 .title text {
   font-size: 36px;
   margin-top: 200rpx 0;
 }
 
 .hamburger{
-  height:800px;
+  height:1000px;
   width:120px;
 }
 
 .input {
-  margin-top:5px;
+  margin-top:-5px;
   width: 75%;
 }
 
@@ -148,6 +152,7 @@ button {
   box-shadow: 1px 4px 7px #c1c1c1;
   margin: 25rpx 0;
   border-radius: 5px;
+  margin-bottom:30px;
 }
 
 .button-hover {
