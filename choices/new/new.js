@@ -143,6 +143,7 @@ Page({
     let choices;
 
     if (app.globalData.tempMeal) {
+      console.log("globalData FOUND!");
       app.addMeal(this.data.meal).then(res => {
         page.setData({
           mealId: res.id
@@ -173,6 +174,7 @@ Page({
         });
       })
     } else {
+      console.log("globalData NOT FOUND!");
       choices = [
         {
           meal_category: this.data.array1_zh[this.data.index1],
@@ -191,6 +193,7 @@ Page({
         }
       ]
       ChoicesTable.createMany(choices).then(res => {
+        app.addMealFromChoices(page.data.meal);
         wx.redirectTo({
           url: `/groups/show/show?id=${this.data.mealId}&new=true`,
         })
