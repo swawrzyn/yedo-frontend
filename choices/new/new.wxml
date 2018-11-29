@@ -13,7 +13,7 @@
     </view>
   </view> -->
 
-  <view class="food-cover" style="background-image: url('{{cover_url}}')">
+  <view class="food-cover" style="background-image: url('{{photo_url}}')">
     <view class="home-logo">
       <view class="card">
         <view class="card-image">
@@ -24,10 +24,7 @@
             <text>{{meal.name}}</text>
           </view>
           <view>
-            <text>{{meal.location}}</text>
-          </view>
-          <view>
-            <text>{{meal_date}}</text>
+            <text>{{meal_date_string}}</text>
           </view>
         </view>
       </view>
