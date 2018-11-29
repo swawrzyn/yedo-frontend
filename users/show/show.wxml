@@ -13,4 +13,6 @@
         <image class="user-avatar" src="{{user_avatars[meal.created_by]}}"/> 
     </view>
   </block>
-  <button bindtap="toNewMeal" class="btn">organise your meal</button>
+  <view class="PlanButton">
+    <button bindtap="toNewMeal" class="btn">Plan a new meal!</button>
+  </view>

@@ -6,13 +6,13 @@ background-color: #FBE251;
 
 .meal-title{
   display:flex;
-  background-color: #1C1B1B;
-  height:250px;
-  color:#1C1B1B;
+  font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  background-color: #FBE251;
+  height:50px;
+  color:black;
   font-size:30px;
   align-items:top;
   justify-content:center;
-  background-image:url("https://cdn.dribbble.com/users/566817/screenshots/2141894/leap.gif");
   background-size:cover;
   background-repeat: no-repeat;
 }
@@ -51,9 +51,17 @@ border-radius:50%;
   
 }
 
+.PlanButton{
+  display:flex;
+  justify-content:center;
+}
 
 .btn{
   width:200px;
+  background-color:#1C1B1B;
+  color:white;
+  margin:10px;
+
 }
 
 .desc {
