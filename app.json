@@ -10,7 +10,7 @@
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#FFFF00",
+    "navigationBarBackgroundColor": "#FBE251",
     "navigationBarTitleText": "yedo!",
     "navigationBarTextStyle":"black",
     "enablePullDownRefresh": true

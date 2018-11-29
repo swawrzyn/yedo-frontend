@@ -6,6 +6,7 @@
     </view>
 
 <text class="title-cn">一道!</text>
+<image class="yedo" src="../../images/饭碗.png"/>
 
 
   <view class="frame2">
