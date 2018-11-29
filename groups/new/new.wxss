@@ -1,15 +1,15 @@
 @import '/template/calendar/index.wxss';
 
 .container {
-  background: #FFFF00;
+  background: #FBE251;
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-items: center;
   height: 100vh;
-  width: 100%;
+  width: 101vw;
   margin: 0;
   padding: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 }
 
 .title text {
@@ -17,18 +17,25 @@
   margin-top: 200rpx 0;
 }
 
+.hamburger{
+  height:800px;
+  width:120px;
+}
+
 .input {
+  margin-top:5px;
   width: 75%;
 }
 
 .input input {
   height: 80rpx;
   padding: 0 25rpx;
-  background: transparent;
+  background: rgba(250,250,250,0.9);
   color: black;
-  border: 1px solid black;
-  margin: 25rpx 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+  box-shadow: 1px 4px 7px #c1c1c1;
+  margin: 25rpx 0; 
+  border-radius:5px;
+
 }
 
 .input-placeholder {
@@ -41,18 +48,25 @@
 .district-select {
   height: 80rpx;
   padding: 0 25rpx;
-  border: 1px solid black;
+   background: rgba(250,250,250,0.9);
+  color: black;
+  box-shadow: 1px 4px 7px #c1c1c1;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 25rpx 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+   border-radius:5px;
 }
 
 .input .calendar-wrap {
   width: calc(100% - 2px);
   margin: auto 0;
-  height: 500rpx;
-  border: 1px solid black;
+  height: 570rpx;
+  background: rgba(250,250,250,0.9);
+  color: black;
+  box-shadow: 1px 4px 7px #c1c1c1;
+  border-radius:5px;
 }
 
 .pink-color {
@@ -129,10 +143,11 @@
 }
 
 button {
-  background: #FFFF00;
-  border: 1px solid black;
+  background: rgba(250,250,250,0.9);
+  color: black;
+  box-shadow: 1px 4px 7px #c1c1c1;
   margin: 25rpx 0;
-  border-radius: 0;
+  border-radius: 5px;
 }
 
 .button-hover {
