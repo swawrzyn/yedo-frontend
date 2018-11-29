@@ -84,8 +84,10 @@ Page({
       cover_url: page.data.covers[index]
     })
     if (app.globalData.tempMeal){
+      const meal_date_string = app.globalData.tempMeal.meal_date.substr(0, 10);
       this.setData({
         meal: app.globalData.tempMeal,
+        meal_date_string: meal_date_string
       })
     } else {
       const MealTable = new wx.BaaS.TableObject('meals');
@@ -94,9 +96,19 @@ Page({
         page.setData({
           meal: res.data,
           mealId: res.data.id,
-          meal_date: meal_date_string
+          meal_date_string: meal_date_string
         })
       });
+    }
+
+    if(!this.data.meal.photo_url) {
+      this.setData({
+        photo_url: 'https://cloud-minapp-22402.cloud.ifanrusercontent.com/1gSJoT23AbOTUZ6J.jpg!/fw/800'
+      })
+    } else {
+      this.setData({
+        photo_url: this.data.meal.photo_url
+      })
     }
   },
 
