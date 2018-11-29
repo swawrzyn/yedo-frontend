@@ -6,7 +6,21 @@ Page({
    * Page initial data
    */
   data: {
-    meals: []
+    meals: [],
+    show: 0,
+  },
+
+  toggleDelay: function (e) {
+    console.log(e);
+    var that = this;
+    that.setData({
+      toggleDelay: true
+    })
+    setTimeout(function () {
+      that.setData({
+        toggleDelay: false
+      })
+    }, 1000)
   },
 
   yourMeals:function(e){
@@ -19,29 +33,36 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    this.fetchUserMeals(this);
-    this.fetchUserDetails(this);
+ 
   },
 
   /**
    * Lifecycle function--Called when page is initially rendered
    */
   onReady: function () {
-
+    // this.fetchUserMeals(this);
+    // this.fetchUserDetails(this);
   },
 
   /**
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-
+    if (this.data.show === 0) {
+      this.fetchUserMeals(this);
+      this.fetchUserDetails(this);
+    }
   },
 
   /**
    * Lifecycle function--Called when page hide
    */
   onHide: function () {
-
+    // this.fetchUserMeals(this);
+    // this.fetchUserDetails(this);
+    this.setData({
+      show: 1,
+    })
   },
 
   /**

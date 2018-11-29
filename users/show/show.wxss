@@ -17,6 +17,8 @@ background-color: #FBE251;
   background-repeat: no-repeat;
 }
 
+
+
 .card {
 height:80px;
 background-size:cover !important;
@@ -31,7 +33,9 @@ flex-direction:row;
 justify-content:space-around;
 margin:10px 10px;
 border-radius:5px;
-
+animation-duration: 1s;
+animation-name: slideInUp;
+ visibility: visible;
 }
 
 
@@ -41,6 +45,22 @@ height:50px;
 border-radius:50%;
 }
 
+@keyframes slideInUp {
+  from {
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+    visibility: hidden;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+     visibility: visible;
+       animation: unset !important;
+    -webkit-transition: none !important;
+    transition: none !important;
+  }
+}
 
 .card-text{
   display:flex;
@@ -48,7 +68,6 @@ border-radius:50%;
   font-size: 15px;
   color:#1C1B1B;
   width:200px;
-  
 }
 
 .PlanButton{
