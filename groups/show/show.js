@@ -180,6 +180,7 @@ createMeal: function (e) {
    * Lifecycle function--Called when page show
    */
   onShow: function () {
+    const app = getApp();
     app.globalData.tempMeal = null;
   },
 
