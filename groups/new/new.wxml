@@ -5,6 +5,7 @@
     <text>what's your plan?</text>
   </view>
 
+  <image class="hamburger" src="https://media.giphy.com/media/MRXmyOzaps0Oi5cdWs/giphy.gif"/>
   <view class="input">
   <form bindsubmit="formSubmit" bindreset="formReset">
     <input name="name" placeholder-class="input-placeholder" placeholder="group name?" />

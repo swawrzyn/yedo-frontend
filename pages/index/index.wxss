@@ -4,7 +4,12 @@
   overflow:hidden;
 }
 
-.title-cn{
+.yedo{
+height:71px;
+width:70px;
+}
+
+.logo{
 position:absolute;
 left:0;
 top:0;

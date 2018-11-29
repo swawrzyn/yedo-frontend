@@ -101,6 +101,7 @@ app.globalData.meals.forEach(meal=>
 
   let MyUser = new wx.BaaS.User()
     MyUser.setQuery(query).find().then(res => {
+      console.log(res)
     return res.data.objects
   }
   ).then(res => {

@@ -5,7 +5,10 @@
     <view class="frame1">
     </view>
 
-<text class="title-cn">一道!</text>
+<view class="logo">
+  <text class="title-cn">一道!</text>
+  <image class="yedo" src="../../images/饭碗.png"/>
+</view>
 
 
   <view class="frame2">
