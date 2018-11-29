@@ -5,19 +5,11 @@
 }
 
 .yedo{
-position:absolute;
-right:0;
-top:0;
-font-size:100px;
-transform:rotate(-29.17deg);
-padding-top:62px;
-padding-right:64px;
 height:71px;
 width:70px;
-
 }
 
-.title-cn{
+.logo{
 position:absolute;
 left:0;
 top:0;
