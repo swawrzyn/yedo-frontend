@@ -13,13 +13,20 @@ App({
       wx.requestPayment)
 
     wx.BaaS.init('86e9cea993a138b9109a')
-
+    wx.BaaS.ErrorTracker.enable();
+    
     wx.BaaS.login(false).then(res => {
       wx.removeStorageSync('meals');
       this.fetchMeals();
     }, err => {
       // 登录失败
     })
+     // Turn on the bugout function
+  },
+
+  onError: function (res) {
+    // 当小程序产生错误时，会进行上报
+    wx.BaaS.ErrorTracker.track(res)
   },
 
   fetchMeals: function () {
