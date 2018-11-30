@@ -232,13 +232,14 @@ createMeal: function (e) {
     const ChoicesTable = new wx.BaaS.TableObject('choices');
     let choicesQuery = new wx.BaaS.Query();
     choicesQuery.compare('meal_id', '=', mealId)
-    ChoicesTable.setQuery(choicesQuery).find().then(res => {
+    ChoicesTable.setQuery(choicesQuery).limit(0).find().then(res => {
       res.data.objects.forEach((r) => {
         if (results[r.meal_category] === undefined) {
           results[r.meal_category] = 0;
         }
         results[r.meal_category] += r.rank;
       });
+      console.log(results);
       let max = 0;
       let maxKey = "";
       Object.keys(results).forEach((key) => {
@@ -271,7 +272,7 @@ createMeal: function (e) {
     
     const userArray = [];
     query.compare('meal_id', '=', page.data.mealId);
-    ChoicesTable.setQuery(query).find().then(res => {
+    ChoicesTable.setQuery(query).limit(0).find().then(res => {
       res.data.objects.forEach((choice) => {
         if (!userArray.includes(choice.created_by)) {
           userArray.push(choice.created_by);
