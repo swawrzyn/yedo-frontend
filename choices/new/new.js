@@ -24,8 +24,13 @@ Page({
       const meal_date_string = app.globalData.tempMeal.meal_date.substr(0, 10);
       this.setData({
         meal: app.globalData.tempMeal,
-        meal_date_string: meal_date_string
+        meal_date_string: meal_date_string,
       })
+      if (app.globalData.tempMeal.owner_location){
+        this.setData({
+          location: app.globalData.tempMeal.location
+        })
+      }
     } else {
       const MealTable = new wx.BaaS.TableObject('meals' + app.globalData.database);
       MealTable.get(options.group_id).then( res => {
@@ -107,12 +112,76 @@ Page({
     })
   },
 
+  findLocation: function (e) {
+    const page = this;
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.userLocation']) {
+          wx.authorize({
+            scope: 'scope.userLocation',
+            success() {
+              console.log('success');
+              wx.chooseLocation({
+                success: res => {
+                  this.setData({
+                    location: {
+                      coordinates: [res.latitude, res.longitude],
+                      type: "Point"
+                    }
+                  })
+                }
+              });
+            },
+            fail(err) {
+              page.setData({
+                noLoc: true
+              })
+              if (page.data.noLoc) {
+                wx.showModal({
+                  title: 'Location permissions',
+                  content: "yedo requires location permissions to operate. Please check 'Use My Location' on the following screen and click again.",
+                  success: res => {
+                    if (res.confirm) {
+                      wx.openSetting({
+                        success: (res) => {
+                          console.log('fail res: ', res);
+                        },
+                        fail: res => {
+                          console.log('errrr', res)
+                        }
+                      })
+                    }
+                  }
+                })
+
+              }
+            }
+          })
+        } else {
+          console.log('auth')
+          page.setData({
+            noLoc: false
+          })
+          wx.chooseLocation({
+            success: res => {
+              page.setData({
+                location: {
+                  coordinates: [res.latitude, res.longitude],
+                  type: "Point"
+                }
+              })
+            }
+          });
+        }
+      }
+    })
+  },
+
 
   addChoices: function() {
     const app = getApp();
     let ChoicesTable = new wx.BaaS.TableObject("choices" + app.globalData.database);
     const page = this;
-    let choices;
     if (app.globalData.tempMeal) {
       console.log("globalData FOUND!");
       app.addMeal(this.data.meal).then(res => {
@@ -124,9 +193,12 @@ Page({
         //setting choices to push to database
         const newchoice = ChoicesTable.create();
         newchoice.set({
-          meal_id: page.data.mealId,
-          category_array: [this.data.array1_zh[this.data.index1], this.data.array1_zh[this.data.index2], this.data.array1_zh[this.data.index3]]
-        //TODO: Add geojson object for user location.
+          meal_id: res,
+          category_array: [this.data.array1_zh[this.data.index1], this.data.array1_zh[this.data.index2], this.data.array1_zh[this.data.index3]],
+        user_location: {
+          coordinates: [1.11,2.22],
+          type: "Point"
+        }
         });
         newchoice.save().then(res => {
           wx.redirectTo({
@@ -139,8 +211,8 @@ Page({
       const newchoice = ChoicesTable.create();
       newchoice.set({
         meal_id: page.data.mealId,
-        category_array: [this.data.array1_zh[this.data.index1], this.data.array1_zh[this.data.index2], this.data.array1_zh[this.data.index3]]
-        //TODO: Add geojson object for user location.
+        category_array: [this.data.array1_zh[this.data.index1], this.data.array1_zh[this.data.index2], this.data.array1_zh[this.data.index3]],
+        user_location: page.data.location
       });
       newchoice.save().then(res => {
         wx.redirectTo({

@@ -83,10 +83,19 @@ App({
   addMeal: function (meal) {
     const app = getApp();
   // for concurrently adding a meal to the phone storage and db.
-  const MealsTable = new wx.BaaS.TableObject('meals' + database);
+  const MealsTable = new wx.BaaS.TableObject('meals' + this.globalData.database);
   let newMeal = MealsTable.create();
-  let createdMeal;
-  return newMeal.set(meal).save().then(res => {
+  let createdMeal = {
+    name: meal.name,
+    meal_date: meal.meal_date,
+    location: {
+      coordinates: meal.location.coordinates,
+      type: "Point"
+    },
+    photo_url: meal.photo_url
+  }
+  return newMeal.set(createdMeal).save().then(res => {
+    console.log("the response from the server: ", res)
     app.globalData.meals.push(res.data);
     wx.setStorage({
       key: 'meals',
@@ -106,8 +115,6 @@ App({
   },
 
   globalData: {
-
     database: ''
-
   }
 })
