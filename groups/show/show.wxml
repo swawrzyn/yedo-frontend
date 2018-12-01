@@ -1,6 +1,6 @@
 <view class="container">
 
-  <view class="top-image" style="background-image: url('{{meals.photo_url}}')">
+  <view class="top-image" style="background-image: url('{{meal.photo_url}}')">
   <image src="../../images/home.svg" class="home-button" bindtap='toHome' />
   </view>
 
@@ -12,8 +12,8 @@
 
     <view class="top">
       <view class="group-left">
-        <text class="group-name">{{meals.name}}</text>
-        <text class="group-date">{{meals.meal_date}}</text>
+        <text class="group-name">{{meal.name}}</text>
+        <text class="group-date">{{meal.meal_date}}</text>
       </view>
       <view class="group-right">
         <button class="group-share" open-type="share" hover-class='group-right-hover'>
@@ -24,7 +24,7 @@
         <text class="small-text" wx:elif='{{!group_users_count}}'>Loading...</text>
         </view>
         <popover id='popover'>
-          <block wx:for="{{group_users}}" wx:for-item="user">
+          <block wx:for="{{group_users}}" wx:for-item="user" wx:key="">
             <popover-item><view class="user-line"><image class="user-image" src="{{user.avatar}}"></image><text class="user-name">{{user.nickname}}</text></view></popover-item>
           </block>
         </popover>
@@ -37,14 +37,14 @@
     </view>
     
     <view class="restaurant-cards">
-      <block wx:for="{{locations}}" wx:for-item="location" wx:for-index="index">
+      <block wx:for="{{locations}}" wx:for-item="location" wx:for-index="index" wx:key="">
         <view class="restaurant-card">
           <view class="restaurant-details">
           <text class="name">{{location.title}}</text>
           <text class="address">{{location.address}}</text>
           </view>
           <view class="card-buttons">
-            <view wx:if="{{location.tel != ' '}}" class="telephone" bindtap="makeCall" id="{{index}}"><image src="../../images/phone.svg"></image></view>
+            <view wx:if="{{location.tel != ' '}}" class="telephone" bindtap="makeCall" id="{{index}}" wx:key=""><image src="../../images/phone.svg"></image></view>
             <view class="map" bindtap="location" id="{{index}}"><image src="../../images/map.svg"></image></view>
           </view>
         </view>

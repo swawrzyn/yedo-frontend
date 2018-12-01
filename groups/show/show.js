@@ -4,50 +4,38 @@ const QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
 const qqMap = new QQMapWX({
   key: keys.qqMapKey
 });
+
+const app = getApp();
 Page({
 
   /**
    * Page initial data
    */
   data: {
-
-    meals: [],
-    _userprofile:[],
+    meal: '',
     recommendation: '',
-    latitude: "",
-    longitude: "",
     locations: [],
     meal_date: "",
-    // isRefreshing: false,
-    imgUrls: [
-    'http://img02.tooopen.com/images/20150928/tooopen_sy_143912755726.jpg',
-    'http://img06.tooopen.com/images/20160818/tooopen_sy_175866434296.jpg',
-    'http://img06.tooopen.com/images/20160818/tooopen_sy_175833047715.jpg'
-    ],
-    indicatorDots: false,
-    autoplay: false,
-    interval: 5000,
-    duration: 1000,
   },
 
   goHome: function(e){
     wx.navigateTo({ url:'/pages/index/index'})
   },
 
-createMeal: function (e) {
+  createMeal: function (e) {
     wx.navigateTo({ url: '/groups/new/new' })
   },
-  /**
-   * Lifecycle function--Called when page load
-   */
+  
   onLoad: function (options) {
     this.popover = this.selectComponent('#popover');
-    const page = this
-    this.setData({
-      mealId: options.id
-    });
     const recompRec = (options.new === 'true');
-    this.loadGroup(options.id, recompRec);
+    this.setData({
+      mealId: options.id,
+      recomp: recompRec
+    });
+
+    //fetching all info on the current meal
+    this.fetchAllInfo(this.data.mealId);
   },
 
   popOver: function (e) {
@@ -56,7 +44,6 @@ createMeal: function (e) {
     var popover;
     var button = wx.createSelectorQuery().select('#' + id);
     button.boundingClientRect(res => {
-      console.log(res);
       popover = this;
       // 调用自定义组件 popover 中的 onDisplay 方法
       this.popover.onDisplay(res);
@@ -66,50 +53,6 @@ createMeal: function (e) {
       popover.popover.onHide();
     }, 3000)
   },
-  
-
-  loadGroup: function(mealId, recalc) {
-    const page = this;
-    const MealsTable = new wx.BaaS.TableObject('meals');
-    MealsTable.get(mealId).then(res => {
-      res.data.meal_date = res.data.meal_date.substr(0, 10);
-      page.setData({
-        meals: res.data
-      });
-      if (recalc) {
-        this.recomputeRecommendation(this, mealId);
-      } else {
-        page.setData({
-          recommendation: this.data.meals.recommended_category
-        });
-        page.recommendSearch();
-      }
-      const MyUser = new wx.BaaS.User()
-      MyUser.get(res.data.created_by).then(r => {
-        page.setData({
-          _userprofile: r.data
-        });
-      }, err => {
-        console.log(err);
-      })
-    }, err => {
-      console.log(err);
-    }).then(res => {
-      if (recalc) {
-        this.recomputeRecommendation(this, mealId);
-      } else {
-        this.setData({
-          recommendation: this.data.meals.recommended_category
-        });
-      }
-    })
-    this.findGroupUsers(this);
-    wx.stopPullDownRefresh()
-    wx.hideNavigationBarLoading(); 
-    // this.setData({
-    //   isRefreshing: false
-    // }) 
-  },
 
   toHome: function () {
     wx.navigateTo({
@@ -117,42 +60,44 @@ createMeal: function (e) {
     })
   },
 
-  recommendSearch: function () {
+  recommendSearch: function (meal, rec) {
+    let locations;
     const page = this;
     qqMap.search({
-      keyword: `${page.data.recommendation}`,
+      keyword: rec,
       location: {
-        latitude: page.data.meals.location.coordinates[1],
-        longitude: page.data.meals.location.coordinates[0]
+        latitude: meal.location.coordinates[1],
+        longitude: meal.location.coordinates[0]
       },
       address_format: 'short',
       page_size: 5,
       success: function (res) {
+        locations = res.data;
         page.setData({
-          locations: res.data,
+          locations: res.data
           // isRefreshing: true
         });
-        var mks = []
-        for (var i = 0; i < res.data.length; i++) {
-          mks.push({ // 获取返回结果，放到mks数组中
-            title: res.data[i].title,
-            id: res.data[i].id,
-            latitude: res.data[i].location.lat,
-            longitude: res.data[i].location.lng,
-            iconPath: "../../images/marker.png", //图标路径
-            width: 20,
-            height: 20
-          })
-        }
-        page.setData({ //设置markers属性，将搜索结果显示在地图中
-          markers: mks
-        })
+        // var mks = []
+        // for (var i = 0; i < res.data.length; i++) {
+        //   mks.push({ // 获取返回结果，放到mks数组中
+        //     title: res.data[i].title,
+        //     id: res.data[i].id,
+        //     latitude: res.data[i].location.lat,
+        //     longitude: res.data[i].location.lng,
+        //     iconPath: "../../images/marker.png", //图标路径
+        //     width: 20,
+        //     height: 20
+        //   })
+        // }
+        // page.setData({ //设置markers属性，将搜索结果显示在地图中
+        //   markers: mks
+        // })
       },
     });
+    return locations;
   },
 
   location: function (e) {
-    console.log(e);
     const page = this;
     wx.openLocation({
       latitude: page.data.locations[parseInt(e.currentTarget.id)].location.lat,
@@ -203,7 +148,7 @@ createMeal: function (e) {
    */
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading();
-    this.loadGroup(this.data.mealId, false);      
+    this.fetchAllInfo(this.data.mealId);      
   },
 
   /**
@@ -218,28 +163,28 @@ createMeal: function (e) {
    */
   onShareAppMessage: function (res) {
     if (res.from === 'button') {
-      console.log(res);
     } return {
-      title: `${this.data.meals.name}! 一道吃吧!`,
+      title: `${this.data.meal.name}! 一道吃吧!`,
       path: `/pages/landing/landing?meal_id=${this.data.mealId}`,
-      imageUrl: this.data.meals.photo_url
+      imageUrl: this.data.meal.photo_url
     }
   },
 
-  recomputeRecommendation: (page, mealId) => {
+  recomputeRecommendation: (page, choices) => {
     //setting results for default value of zero.
-    let results = {};
-    const ChoicesTable = new wx.BaaS.TableObject('choices');
-    let choicesQuery = new wx.BaaS.Query();
-    choicesQuery.compare('meal_id', '=', mealId)
-    ChoicesTable.setQuery(choicesQuery).limit(0).find().then(res => {
-      res.data.objects.forEach((r) => {
-        if (results[r.meal_category] === undefined) {
-          results[r.meal_category] = 0;
-        }
-        results[r.meal_category] += r.rank;
+    let results = {
+      '美国菜': 0,
+      '中餐': 0, 
+      '意大利菜': 0, 
+      '日本菜': 0, 
+      '墨西哥菜': 0, 
+      '韩国菜': 0
+    };
+    choices.forEach(choice => {
+      results[choice.category_array[0]] += 3
+      results[choice.category_array[1]] += 2
+      results[choice.category_array[2]] += 1
       });
-      console.log(results);
       let max = 0;
       let maxKey = "";
       Object.keys(results).forEach((key) => {
@@ -248,46 +193,93 @@ createMeal: function (e) {
           maxKey = key;
         }
       })
-        page.setData({
-          recommendation: maxKey
-        })
-        page.recommendSearch();
-        page.setRecommended(page, maxKey);
-    }, err => {
-    })
-    
+      return maxKey;
   },
 
-  setRecommended: function (page, recCat) {
-    const MealsTable = new wx.BaaS.TableObject('meals');
-    const MealRecord = MealsTable.getWithoutData(page.data.mealId);
+  setRecommended: function (page, meal, recCat) {
+    page.setData({
+      recommendation: recCat
+    })
+    const MealsTable = new wx.BaaS.TableObject('meals' + app.globalData.database);
+    const MealRecord = MealsTable.getWithoutData(meal.id);
     MealRecord.set({ recommended_category: recCat });
     MealRecord.update();
   },
 
-  findGroupUsers: function (page) {
-    let UserTable = new wx.BaaS.User();
-    const ChoicesTable = new wx.BaaS.TableObject('choices');
-    let query = new wx.BaaS.Query();
+  fetchMealInfo: function (mealId) {
+    //fetching meal info from the cloud
+    const page = this;
+    const MealsTable = new wx.BaaS.TableObject('meals' + app.globalData.database);
+    return MealsTable.get(mealId).then(res => {
+      page.setData({
+        meal: res.data
+      })
+      return res.data
+    });
     
-    const userArray = [];
-    query.compare('meal_id', '=', page.data.mealId);
-    ChoicesTable.setQuery(query).limit(0).find().then(res => {
-      res.data.objects.forEach((choice) => {
-        if (!userArray.includes(choice.created_by)) {
-          userArray.push(choice.created_by);
-        }
+  },
+
+  fetchChoicesInfo: function (mealId) {
+    //fetching choices attached to meal from the cloud
+    const page = this;
+    const ChoicesTable = new wx.BaaS.TableObject('choices' + app.globalData.database);
+    let choicesQuery = new wx.BaaS.Query();
+    choicesQuery.compare('meal_id', '=', mealId);
+    return ChoicesTable.setQuery(choicesQuery).limit(0).find().then(res => {
+      page.setData({
+        choices: res.data.objects
       });
-      return userArray;
-    }).then(res => {
-      let userQuery = new wx.BaaS.Query();
-      userQuery.in('id', res);
-      UserTable.setQuery(userQuery).find().then(res => {
-        page.setData({
-          group_users: res.data.objects,
-          group_users_count: res.data.objects.length
-        })
+      return res.data.objects;
+    })
+  },
+
+  fetchUserInfo: function (choices) {
+    //fetching all users attached to the choices attached to the meals... from the cloud
+    const Users = new wx.BaaS.User();
+    let usersQuery = new wx.BaaS.Query();
+    const page = this;
+    const userIds = choices.map(choice => {
+      return choice.created_by
+    })
+    usersQuery.in('id', userIds);
+    Users.setQuery(usersQuery).limit(0).find().then(res => {
+      page.setData({
+        users: res.data.objects,
+        group_users_count: res.data.objects.length
       })
     })
   },
+
+  fetchAllInfo: function (mealId) {
+    // putting it all together
+    const page = this;
+    // fetching meal
+    const meal = this.fetchMealInfo(mealId);
+    // fetching choices
+    let recommendation = this.fetchChoicesInfo(mealId).then(res => {
+      // since we have choices, we can get users now
+      this.fetchUserInfo(res);
+      // if we need to recompute the recommendation
+      if (page.data.recomp) {
+        return this.recomputeRecommendation(page, res); 
+      } else {
+        // if we don't need to recompute
+        return false;
+      }
+    })
+    // if recompute is required, we need to wait for the meal info and recommendation from algo
+    Promise.all([meal, recommendation]).then(results => {
+      // aka. if recompute is not necessary
+      if (results[1] === false) {
+        page.setData({
+          recommendation: results[0].recommended_category
+        })
+        page.recommendSearch(results[0], results[0].recommended_category);
+      } else {
+        // if recompute is necessary
+        page.setRecommended(page, results[0], results[1]);
+        page.recommendSearch(results[0], results[1]);
+      }
+    });
+  }
 })
