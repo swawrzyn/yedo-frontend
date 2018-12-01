@@ -92,10 +92,7 @@ Page({
                 success: res => {
                   this.setData({
                     owner_location: true,
-                    location: {
-                      coordinates: [parseFloat(res.latitude), parseFloat(res.longitude)],
-                      type: "Point"
-                    },
+                    meal_location: new wx.BaaS.GeoPoint(res.longitude, res.latitude),
                   })
                 }
               });
@@ -133,10 +130,7 @@ Page({
             success: res => {
               page.setData({
                 owner_location: true,
-                location: {
-                  coordinates: [parseFloat(res.latitude), parseFloat(res.longitude)],
-                  type: "Point"
-                },
+                meal_location: new wx.BaaS.GeoPoint(res.longitude, res.latitude),
               })
             }
           });
@@ -148,7 +142,7 @@ Page({
   useAllLocations: function(e) {
     this.setData({
       owner_location: false,
-      location: ''
+      meal_location: ''
     })
   },
 
@@ -210,7 +204,7 @@ Page({
     if (this.data.photo_url) {
       app.globalData.tempMeal = {
         name: e.detail.value.name,
-        location: this.data.location,
+        meal_location: this.data.meal_location,
         owner_location: this.data.owner_location,
         meal_date: inputDate,
         photo_url: this.data.photo_url
@@ -218,7 +212,7 @@ Page({
     } else {
       app.globalData.tempMeal = {
         name: e.detail.value.name,
-        location: this.data.location,
+        meal_location: this.data.meal_location,
         owner_location: this.data.owner_location, 
         meal_date: inputDate,
         photo_url: 'https://cloud-minapp-22402.cloud.ifanrusercontent.com/1gSJoT23AbOTUZ6J.jpg!/fw/800'

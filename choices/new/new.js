@@ -10,7 +10,8 @@ Page({
     array1_zh: ['美国菜', '中餐', '意大利菜', '日本菜', '墨西哥菜', '韩国菜'],
     index1: 0,
     index2: 1,
-    index3: 2
+    index3: 2,
+    user_location: ''
   },
 
   /**
@@ -26,11 +27,6 @@ Page({
         meal: app.globalData.tempMeal,
         meal_date_string: meal_date_string,
       })
-      if (app.globalData.tempMeal.owner_location){
-        this.setData({
-          location: app.globalData.tempMeal.location
-        })
-      }
     } else {
       const MealTable = new wx.BaaS.TableObject('meals' + app.globalData.database);
       MealTable.get(options.group_id).then( res => {
@@ -124,10 +120,7 @@ Page({
               wx.chooseLocation({
                 success: res => {
                   this.setData({
-                    location: {
-                      coordinates: [res.latitude, res.longitude],
-                      type: "Point"
-                    }
+                    user_location: new wx.BaaS.GeoPoint(res.longitude, res.latitude)
                   })
                 }
               });
@@ -165,10 +158,7 @@ Page({
           wx.chooseLocation({
             success: res => {
               page.setData({
-                location: {
-                  coordinates: [res.latitude, res.longitude],
-                  type: "Point"
-                }
+                user_location: new wx.BaaS.GeoPoint(res.longitude, res.latitude)
               })
             }
           });
@@ -182,6 +172,8 @@ Page({
     const app = getApp();
     let ChoicesTable = new wx.BaaS.TableObject("choices" + app.globalData.database);
     const page = this;
+    //checking if using owner or users location
+
     if (app.globalData.tempMeal) {
       console.log("globalData FOUND!");
       app.addMeal(this.data.meal).then(res => {
@@ -195,10 +187,7 @@ Page({
         newchoice.set({
           meal_id: res,
           category_array: [this.data.array1_zh[this.data.index1], this.data.array1_zh[this.data.index2], this.data.array1_zh[this.data.index3]],
-        user_location: {
-          coordinates: [1.11,2.22],
-          type: "Point"
-        }
+        user_location: this.data.user_location
         });
         newchoice.save().then(res => {
           wx.redirectTo({
@@ -212,7 +201,7 @@ Page({
       newchoice.set({
         meal_id: page.data.mealId,
         category_array: [this.data.array1_zh[this.data.index1], this.data.array1_zh[this.data.index2], this.data.array1_zh[this.data.index3]],
-        user_location: page.data.location
+        user_location: page.data.user_location
       });
       newchoice.save().then(res => {
         wx.redirectTo({

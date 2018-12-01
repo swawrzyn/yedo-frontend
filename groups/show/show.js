@@ -60,14 +60,14 @@ Page({
     })
   },
 
-  recommendSearch: function (meal, rec) {
+  recommendSearch: function (loc, rec) {
     let locations;
     const page = this;
     qqMap.search({
       keyword: rec,
       location: {
-        latitude: meal.location.coordinates[1],
-        longitude: meal.location.coordinates[0]
+        latitude: loc.coordinates[1],
+        longitude: loc.coordinates[0]
       },
       address_format: 'short',
       page_size: 5,
@@ -170,7 +170,7 @@ Page({
     }
   },
 
-  recomputeRecommendation: (page, choices) => {
+  recomputeRecommendation: (choices) => {
     //setting results for default value of zero.
     let results = {
       '美国菜': 0,
@@ -204,6 +204,54 @@ Page({
     const MealRecord = MealsTable.getWithoutData(meal.id);
     MealRecord.set({ recommended_category: recCat });
     MealRecord.update();
+  },
+
+  computeLoc: function (choices) {
+    // getting locs of all users
+    const userLocs = choices.map(choice => {
+      return choice.user_location
+    });
+    // computing
+    if (userLocs.length === 1) {
+      return userLocs[0];
+    }
+
+    let x = 0.0;
+    let y = 0.0;
+    let z = 0.0;
+
+    for (let userLoc of userLocs) {
+      let latitude = userLoc.latitude * Math.PI / 180;
+      let longitude = userLoc.longitude * Math.PI / 180;
+
+      x += Math.cos(latitude) * Math.cos(longitude);
+      y += Math.cos(latitude) * Math.sin(longitude);
+      z += Math.sin(latitude);
+    }
+
+    let total = userLocs.length;
+
+    x = x / total;
+    y = y / total;
+    z = z / total;
+
+    let centralLongitude = Math.atan2(y, x);
+    let centralSquareRoot = Math.sqrt(x * x + y * y);
+    let centralLatitude = Math.atan2(z, centralSquareRoot);
+
+    return new wx.BaaS.GeoPoint((centralLongitude * 180 / Math.PI), (centralLatitude * 180 / Math.PI));
+  },
+
+  setLoc: function (loc, mealId) {
+    const page = this;
+    const MealsTable = new wx.BaaS.TableObject('meals' + app.globalData.database);
+    let currentMeal = MealsTable.getWithoutData(mealId);
+    currentMeal.set('meal_location', loc);
+    currentMeal.update().then(res => {
+      page.setData({
+        meal: res.data
+      })
+    })
   },
 
   fetchMealInfo: function (mealId) {
@@ -256,29 +304,33 @@ Page({
     // fetching meal
     const meal = this.fetchMealInfo(mealId);
     // fetching choices
-    let recommendation = this.fetchChoicesInfo(mealId).then(res => {
+    const choices = this.fetchChoicesInfo(mealId).then(res => {
       // since we have choices, we can get users now
       this.fetchUserInfo(res);
-      // if we need to recompute the recommendation
-      if (page.data.recomp) {
-        return this.recomputeRecommendation(page, res); 
-      } else {
-        // if we don't need to recompute
-        return false;
-      }
+      return res;
     })
     // if recompute is required, we need to wait for the meal info and recommendation from algo
-    Promise.all([meal, recommendation]).then(results => {
-      // aka. if recompute is not necessary
-      if (results[1] === false) {
+    Promise.all([meal, choices]).then(results => {
+      console.log(results);
+      if (page.data.recomp) {
+        // if recompute is necessary
+        const recommendation = page.recomputeRecommendation(results[1]); 
+        const centreLoc = page.computeLoc(results[1]);
+
+        Promise.all([results[0], recommendation, centreLoc]).then(results => {
+          console.log('centreloc: ', results[2]);
+          page.setRecommended(page, results[0], results[1]);
+          page.setLoc(results[2], results[0].id);
+          page.recommendSearch(results[2], results[1]);
+        })
+        
+
+      } else {
+        // aka. if recompute is not necessary
         page.setData({
           recommendation: results[0].recommended_category
         })
-        page.recommendSearch(results[0], results[0].recommended_category);
-      } else {
-        // if recompute is necessary
-        page.setRecommended(page, results[0], results[1]);
-        page.recommendSearch(results[0], results[1]);
+        page.recommendSearch(results[0].meal_location, results[0].recommended_category);
       }
     });
   }

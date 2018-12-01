@@ -1,4 +1,4 @@
-const keys = require('/keys.js');
+  const keys = require('/keys.js');
 const QQMapWX = require('/libs/qqmap-wx-jssdk.js');
 const qqMap = new QQMapWX({
   key: keys.qqMapKey 
@@ -85,16 +85,7 @@ App({
   // for concurrently adding a meal to the phone storage and db.
   const MealsTable = new wx.BaaS.TableObject('meals' + this.globalData.database);
   let newMeal = MealsTable.create();
-  let createdMeal = {
-    name: meal.name,
-    meal_date: meal.meal_date,
-    location: {
-      coordinates: meal.location.coordinates,
-      type: "Point"
-    },
-    photo_url: meal.photo_url
-  }
-  return newMeal.set(createdMeal).save().then(res => {
+  return newMeal.set(meal).save().then(res => {
     console.log("the response from the server: ", res)
     app.globalData.meals.push(res.data);
     wx.setStorage({
@@ -102,7 +93,10 @@ App({
       data: app.globalData.meals
     });
     return res.data;
-  })
+  },
+    err => {
+     console.log('saving error: ', err)
+    })
   },
 
   addMealFromChoices: function(meal) {
