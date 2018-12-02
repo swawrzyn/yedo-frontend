@@ -6,5 +6,8 @@
     "backgroundColor": "#eeeeee",
     "backgroundTextStyle": "light",
     "enablePullDownRefresh": true
+  },
+  "usingComponents": {
+    "ec-canvas": "../../components/ec-canvas/ec-canvas"
   }
 }
