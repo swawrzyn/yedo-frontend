@@ -21,6 +21,7 @@ Page({
   onLoad: function (options) {
     this.fetchUserMeals(this);
     this.fetchUserDetails(this);
+    this.sortMeals();
   },
 
   /**
@@ -80,10 +81,10 @@ Page({
 
   fetchUserMeals: (page) => {
     const app = getApp();
-    app.globalData.meals.forEach((meal) => {
-    meal.meal_date = meal.meal_date.substr(0,10)
-    return meal.meal_date
-  })
+  //   app.globalData.meals.forEach((meal) => {
+  //   meal.meal_date = meal.meal_date.substr(0,10)
+  //   return meal.meal_date
+  // })
     page.setData({
       meals: app.globalData.meals
   })
@@ -112,6 +113,35 @@ app.globalData.meals.forEach(meal=>
     page.setData({
       user_avatars: user_avatars
     })
+  })
+},
+
+sortMeals: function () {
+  const page = this;
+
+
+  let currentMeals = [];
+  let oldMeals = [];
+  page.data.meals.forEach(meal => {
+    if (new Date(meal.meal_date) < Date.now()) {
+      oldMeals.push(meal);
+    } else {
+      currentMeals.push(meal);
+    }
+  })
+
+  currentMeals.sort((a, b) => {
+    return new Date(a.meal_date) - new Date(b.meal_date);
+  });
+
+  oldMeals.sort((a, b) => {
+    return new Date(b.meal_date) - new Date(a.meal_date);
+  });
+
+  page.setData({
+    meals: '',
+    currentMeals: currentMeals,
+    oldMeals: oldMeals
   })
 }
 })

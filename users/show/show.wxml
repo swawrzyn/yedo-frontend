@@ -1,10 +1,21 @@
 <!--users/show/show.wxml-->
 
   <view class="meal-title"> 
-    <text>Your Upcoming Meals</text>
+    <text>your upcoming meals</text>
   </view>
-
-  <block wx:for="{{meals}}" wx:for-item="meal">
+  <block wx:for="{{currentMeals}}" wx:for-item="meal">
+    <view bindtap="yourMeals" data-meal_id="{{meal.id}}" class="card">
+      <view class="card-text">
+        <view class="card-title">Meal: <text style="font-weight:bold;">{{meal.name}}</text></view>
+        <view class ="card-date">Date: <text style="font-weight:bold;">{{meal.meal_date}}</text></view>
+      </view>
+        <image class="user-avatar" src="{{user_avatars[meal.created_by]}}"/> 
+    </view>
+  </block>
+  <view class="old-meal-title">
+    <text>your past meals</text>
+  </view>
+  <block wx:for="{{oldMeals}}" wx:for-item="meal">
     <view bindtap="yourMeals" data-meal_id="{{meal.id}}" class="card">
       <view class="card-text">
         <view class="card-title">Meal: <text style="font-weight:bold;">{{meal.name}}</text></view>
