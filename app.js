@@ -10,7 +10,7 @@ App({
 
     //dev database stuff, REMOVE FOR PRODUCTION RELEASES
     this.globalData.database = '_dev';
-    //wx.removeStorageSync('meals');
+    wx.removeStorageSync('meals');
 
     wx.BaaS = requirePlugin('sdkPlugin')
     //让插件帮助完成登录、支付等功能
