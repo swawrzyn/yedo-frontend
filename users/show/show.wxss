@@ -32,10 +32,12 @@ align-items:center;
 flex-direction:row;
 justify-content:space-around;
 margin:10px 10px;
-border-radius:5px;
+border-radius:2px;
 animation-duration: 1s;
-animation-name: slideInUp;
- visibility: visible;
+-webkit-animation-name: fadeInDown;
+animation-name: fadeInDown;
+opacity:0;
+animation-fill-mode: forwards;
 }
 
 
@@ -45,22 +47,22 @@ height:50px;
 border-radius:50%;
 }
 
-@keyframes slideInUp {
+@keyframes fadeInDown {
   from {
-    -webkit-transform: translate3d(0, 100%, 0);
-    transform: translate3d(0, 100%, 0);
-    visibility: hidden;
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+    visibility:visible;
   }
 
   to {
+    opacity: 1;
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
-     visibility: visible;
-       animation: unset !important;
-    -webkit-transition: none !important;
-    transition: none !important;
+    visibility:visible;
   }
 }
+
 
 .card-text{
   display:flex;

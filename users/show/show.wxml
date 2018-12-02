@@ -4,8 +4,8 @@
     <text>Your Upcoming Meals</text>
   </view>
 
-  <block wx:for="{{meals}}" wx:for-item="meal" wx:for-index="index">
-    <view bindtap="yourMeals" data-meal_id="{{meal.id}}" class="card" style='animation-delay: {{(index+1)*0.1}}s;'>
+  <block wx:key="index" wx:for="{{meals}}" wx:for-item="meal" wx:for-index="index">
+    <view bindtap="yourMeals" data-meal_id="{{meal.id}}" class='card' style="animation-delay: {{(index+1)*0.1}}s">
       <view class="card-text">
         <view class="card-title">Meal: <text style="font-weight:bold;">{{meal.name}}</text></view>
         <view class ="card-date">Date: <text style="font-weight:bold;">{{meal.meal_date}}</text></view>
