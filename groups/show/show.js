@@ -63,6 +63,8 @@ Page({
   recommendSearch: function (loc, rec) {
     let locations;
     const page = this;
+    const app = getApp();
+    console.log('the loc that recommendsearch gets: ', loc);
     qqMap.search({
       keyword: rec,
       location: {
@@ -77,6 +79,7 @@ Page({
           locations: res.data
           // isRefreshing: true
         });
+        
         // var mks = []
         // for (var i = 0; i < res.data.length; i++) {
         //   mks.push({ // 获取返回结果，放到mks数组中
@@ -168,6 +171,27 @@ Page({
       path: `/pages/landing/landing?meal_id=${this.data.mealId}`,
       imageUrl: this.data.meal.photo_url
     }
+  },
+
+  tapLockSetRestaurant: function (e) {
+    const page = this;
+    const selectedRestaurant = page.data.locations[parseInt(e.currentTarget.id)];
+    wx.showModal({
+      title: 'lock it in!',
+      content: `this action will select ${selectedRestaurant.title} as the restuarant for this meal. Are you sure?`,
+      cancelText: 'no way!',
+      confirmText: "go!",
+      success(res) {
+        if (res.confirm) {
+          page.lockRestaurant(selectedRestaurant).then(res => {
+            page.setData({
+              selected_restaurant: res,
+              locked: true
+            })
+          });
+        }
+      }
+    })
   },
 
   recomputeRecommendation: (choices) => {
@@ -262,6 +286,16 @@ Page({
       page.setData({
         meal: res.data
       })
+      // checking if the owner is looking at the page
+      if (res.data.created_by === wx.BaaS.storage.get('uid')) {
+        page.setData({
+          owner: true
+        })
+      } else {
+        page.setData({
+          owner: false
+        })
+      }
       return res.data
     });
     
@@ -311,27 +345,60 @@ Page({
     })
     // if recompute is required, we need to wait for the meal info and recommendation from algo
     Promise.all([meal, choices]).then(results => {
-      console.log(results);
-      if (page.data.recomp) {
-        // if recompute is necessary
-        const recommendation = page.recomputeRecommendation(results[1]); 
-        const centreLoc = page.computeLoc(results[1]);
-
-        Promise.all([results[0], recommendation, centreLoc]).then(results => {
-          console.log('centreloc: ', results[2]);
-          page.setRecommended(page, results[0], results[1]);
-          page.setLoc(results[2], results[0].id);
-          page.recommendSearch(results[2], results[1]);
-        })
-        
-
-      } else {
-        // aka. if recompute is not necessary
+      // checking if meal is locked
+      if (results[0].locked) {
         page.setData({
+          locations: [results[0].selected_restaurant],
           recommendation: results[0].recommended_category
         })
-        page.recommendSearch(results[0].meal_location, results[0].recommended_category);
+      } else {
+        if (page.data.recomp) {
+          // if recompute is necessary
+          const recommendation = page.recomputeRecommendation(results[1]);
+          let centreLoc;
+          //checking if using owner location or all locations
+          if (results[0].owner_location) {
+            // hacky way of fixing this, making the single owner location a array so computeLoc can read.
+            centreLoc = results[0].meal_location;
+          } else {
+            centreLoc = page.computeLoc(results[1]);
+          }
+
+          Promise.all([results[0], recommendation, centreLoc]).then(results => {
+            console.log('centreloc: ', results[2]);
+            page.setRecommended(page, results[0], results[1]);
+            page.setLoc(results[2], results[0].id);
+            page.recommendSearch(results[2], results[1]);
+          })
+
+
+        } else {
+          // aka. if recompute is not necessary
+          page.setData({
+            recommendation: results[0].recommended_category
+          })
+          page.recommendSearch(results[0].meal_location, results[0].recommended_category);
+        }
       }
+    });
+  },
+
+  lockRestaurant: function (restaurant) {
+    // formatting the restaurant object for input into database
+    const page = this;
+    Object.defineProperty(restaurant, 'distance',
+      Object.getOwnPropertyDescriptor(restaurant, '_distance'));
+    delete restaurant['_distance'];
+    // updating the meals record
+    const MealsTable = new wx.BaaS.TableObject('meals' + app.globalData.database);
+    let currentMeal = MealsTable.getWithoutData(page.data.mealId);
+
+    currentMeal.set({
+      selected_restaurant: restaurant,
+      locked: true
+    });
+    return currentMeal.update().then(res => {
+      return res.data
     });
   }
 })
