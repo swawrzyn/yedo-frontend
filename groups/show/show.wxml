@@ -31,8 +31,15 @@
       </view>
     </view>
       <view class="rec-title" style="background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1))">
-      <text class="title">{{recommendation}}</text>
-      <text class="recommend">yedo recommends</text>
+      <view class="rec-left">
+        <text class="title">{{recommendation}}</text>
+        <text class="recommend">yedo recommends</text>
+      </view>
+      <view class="rec-right">
+        <view class="container">
+          <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec }}" bind:init="echartInit"></ec-canvas>
+        </view>
+      </view>
       </view>
     </view>
     <block wx:if="{{owner || meal.locked}}"> 
@@ -54,7 +61,7 @@
     <block wx:if="{{!owner && !meal.locked}}">
     <text>The owner is still deciding on a place to go, please come back later!</text>
     </block>
-
+   
 
   </view>
 

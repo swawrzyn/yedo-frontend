@@ -1,11 +1,39 @@
 // groups/show/show.js
 const keys = require('../../keys.js');
 const QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
+import * as echarts from '../../components/ec-canvas/echarts';
 const qqMap = new QQMapWX({
   key: keys.qqMapKey
 });
-
 const app = getApp();
+
+function initChart(canvas, width, height, chartdata) {
+  const chart = echarts.init(canvas, null, {
+    width: width,
+    height: height
+  });
+  canvas.setChart(chart);
+
+  var option = {
+    backgroundColor: "transparent",
+    color: ["#FFFFFF", "#888", "#666", "#444", "#222"],
+    series: [{
+      label: {
+        position: 'inside',
+        color: '#000000',
+        fontSize: 6
+      },
+      data: chartdata,
+      type: 'pie',
+      center: ['50%', '50%'],
+      radius: [0, '60%'],
+    }]
+  };
+
+  chart.setOption(option);
+  return chart;
+}
+
 Page({
 
   /**
@@ -16,6 +44,15 @@ Page({
     recommendation: '',
     locations: [],
     meal_date: "",
+    ec: {},
+  },
+
+  echartInit: function(e) {
+    const page = this;
+    // god damn chart loads too fast, gotta wait for the chartdata to load... gotta find  a better way
+    setTimeout(function() {
+      initChart(e.detail.canvas, e.detail.width, e.detail.height, page.data.pieData);
+    }, 2000);
   },
 
   goHome: function(e){
@@ -64,7 +101,6 @@ Page({
     let locations;
     const page = this;
     const app = getApp();
-    console.log('the loc that recommendsearch gets: ', loc);
     qqMap.search({
       keyword: rec,
       location: {
@@ -196,6 +232,7 @@ Page({
 
   recomputeRecommendation: (choices) => {
     //setting results for default value of zero.
+    const page = this;
     let results = {
       '美国菜': 0,
       '中餐': 0, 
@@ -217,16 +254,17 @@ Page({
           maxKey = key;
         }
       })
-      return maxKey;
+    return {
+      recommended_category: maxKey, votes: Object.values(results).sort((a, b) => {return b - a}) };
   },
 
   setRecommended: function (page, meal, recCat) {
     page.setData({
-      recommendation: recCat
+      recommendation: recCat.recommended_category
     })
     const MealsTable = new wx.BaaS.TableObject('meals' + app.globalData.database);
     const MealRecord = MealsTable.getWithoutData(meal.id);
-    MealRecord.set({ recommended_category: recCat });
+    MealRecord.set(recCat);
     MealRecord.update();
   },
 
@@ -315,6 +353,28 @@ Page({
     })
   },
 
+  setPieData: function (recCat, votes) {
+    // setting the pie chart data
+    const page = this;
+    let first = true;
+    let pieData = votes.map(vote => {
+      if (first) {
+        first = false;
+        return {
+          name: recCat,
+          value: vote,
+          label: {
+            show: true,
+          }
+        }
+      } else {
+        return {value: vote};
+      }
+    })
+    console.log('pieData: ', pieData);
+    return new Promise((res, reject) => {res(pieData)});
+  },
+
   fetchUserInfo: function (choices) {
     //fetching all users attached to the choices attached to the meals... from the cloud
     const Users = new wx.BaaS.User();
@@ -368,7 +428,12 @@ Page({
             console.log('centreloc: ', results[2]);
             page.setRecommended(page, results[0], results[1]);
             page.setLoc(results[2], results[0].id);
-            page.recommendSearch(results[2], results[1]);
+            page.setPieData(results[1].recommended_category, results[1].votes).then(res => {
+              page.setData({
+                pieData: res
+              })
+            });
+            page.recommendSearch(results[2], results[1].recommended_category);
           })
 
 
@@ -377,6 +442,12 @@ Page({
           page.setData({
             recommendation: results[0].recommended_category
           })
+          page.setPieData(results[0].recommended_category, results[0].votes).then(res => {
+            // hacky way of waiting for the chart canvas to init
+            page.setData({
+              pieData: res
+            })
+          });
           page.recommendSearch(results[0].meal_location, results[0].recommended_category);
         }
       }
