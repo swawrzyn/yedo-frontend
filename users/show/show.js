@@ -8,21 +8,11 @@ Page({
   data: {
     meals: [],
     show: 0,
+    loaded: false
   },
 
-  toggleDelay: function (e) {
-    console.log(e);
-    var that = this;
-    that.setData({
-      toggleDelay: true
-    })
-    setTimeout(function () {
-      that.setData({
-        toggleDelay: false
-      })
-    }, 1000)
-  },
 
+  
   yourMeals:function(e){
     console.log(e)
     wx.navigateTo({
@@ -33,7 +23,10 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
- 
+    setTimeout(function () {
+      this.fetchUserMeals(this);
+      this.fetchUserDetails(this);
+    }.bind(this), 0);
   },
 
   /**
@@ -48,21 +41,20 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-    if (this.data.show === 0) {
-      this.fetchUserMeals(this);
-      this.fetchUserDetails(this);
-    }
-  },
+    // setTimeout(function () {
+    //   this.fetchUserMeals(this);
+    //   this.fetchUserDetails(this);
+    // }.bind(this), 500);
+    },
 
   /**
    * Lifecycle function--Called when page hide
    */
   onHide: function () {
-    // this.fetchUserMeals(this);
-    // this.fetchUserDetails(this);
-    this.setData({
-      show: 1,
-    })
+    setTimeout(function () {
+      this.fetchUserMeals(this);
+      this.fetchUserDetails(this);
+    }.bind(this), 5000);
   },
 
   /**
@@ -102,12 +94,12 @@ Page({
   fetchUserMeals: (page) => {
     const app = getApp();
     app.globalData.meals.forEach((meal) => {
-    meal.meal_date = meal.meal_date.substr(0,10)
-    return meal.meal_date
-  })
-    page.setData({
-      meals: app.globalData.meals
-  })
+      meal.meal_date = meal.meal_date.substr(0, 10)
+      page.setData({
+        meals: app.globalData.meals
+      })
+      return meal.meal_date
+    })
 },
   
 fetchUserDetails: (page) => {
@@ -134,5 +126,4 @@ app.globalData.meals.forEach(meal=>
       user_avatars: user_avatars
     })
   })
-}
-})
+}})
