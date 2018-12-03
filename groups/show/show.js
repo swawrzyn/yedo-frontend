@@ -101,8 +101,10 @@ Page({
   },
 
   recommendSearch: function (loc, rec) {
+    console.log('recsearch loc: ', loc);
     let latitude;
     let longitude;
+
     if(loc.latitude) {
       latitude = loc.latitude;
       longitude = loc.longitude;
@@ -110,6 +112,7 @@ Page({
       latitude = loc.coordinates[1];
       longitude = loc.coordinates[0];
     }
+
     let locations;
     const page = this;
     const app = getApp();
@@ -388,7 +391,7 @@ Page({
       }
     })
     console.log('pieData: ', pieData);
-    return new Promise((res, reject) => {res(pieData)});
+    return new Promise((res, reject) => {res(pieData.slice(0,6))});
   },
 
   fetchUserInfo: function (choices) {
@@ -464,6 +467,7 @@ Page({
               pieData: res
             })
           });
+
           page.recommendSearch(results[0].meal_location, results[0].recommended_category);
         }
       }
@@ -485,6 +489,7 @@ Page({
       locked: true
     });
     return currentMeal.update().then(res => {
+      page.fetchAllInfo(res.data.id);
       return res.data
     });
   }
