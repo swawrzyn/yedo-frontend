@@ -35,7 +35,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 5,
 			"list": [
 				{
 					"id": -1,
@@ -65,13 +65,13 @@
 					"id": 4,
 					"name": "group show",
 					"pathName": "groups/show/show",
-					"query": "id=5c04af6b972d856d892b2a73"
+					"query": "id=5c04b626fac2e5670d2aaa3c"
 				},
 				{
 					"id": 5,
 					"name": "share landing",
 					"pathName": "pages/landing/landing",
-					"query": "meal_id=5bfcd35e94516c1e443ba84c"
+					"query": "meal_id=5c04c813ecf0fe0bf7279d10"
 				},
 				{
 					"id": 6,
