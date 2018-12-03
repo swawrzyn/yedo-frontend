@@ -14,7 +14,7 @@ Page({
 
   
   yourMeals:function(e){
-    console.log(e)
+    console.log("yourmeals",e)
     wx.navigateTo({
       url:`/groups/show/show?id=${e.currentTarget.dataset.meal_id}`
       })
