@@ -104,8 +104,8 @@ Page({
       latitude = loc.latitude;
       longitude = loc.longitude;
     } else {
-      loc.coordinates[1] = latitude;
-      loc.coordinates[0] = longitude;
+      latitude = loc.coordinates[1];
+      longitude = loc.coordinates[0];
     }
     let locations;
     const page = this;
