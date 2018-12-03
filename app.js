@@ -39,6 +39,7 @@ App({
     wx.getStorage({
       key: 'meals',
       success: function(res) {
+        console.log("what is this", res)
         self.globalData.meals = res.data
       },
       fail: function(res) {
@@ -59,6 +60,7 @@ App({
     choicesQuery.compare('created_by', '=', wx.BaaS.storage.get('uid'));
 
     ChoicesTable.setQuery(choicesQuery).limit(0).find().then(res => {
+      console.log(res.data.objects);
       res.data.objects.forEach((choice) => {
         if (!mealsArray.includes(choice.meal_id)){
           mealsArray.push(choice.meal_id)
