@@ -24,7 +24,7 @@
         <text class="small-text" wx:elif='{{!group_users_count}}'>Loading...</text>
         </view>
         <popover id='popover'>
-          <block wx:for="{{group_users}}" wx:for-item="user" wx:key="">
+          <block wx:for="{{users}}" wx:for-item="user" wx:key="">
             <popover-item><view class="user-line"><image class="user-image" src="{{user.avatar}}"></image><text class="user-name">{{user.nickname}}</text></view></popover-item>
           </block>
         </popover>
