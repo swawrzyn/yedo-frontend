@@ -18,7 +18,6 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    // setting the table as meals, it's tableid is 58396
 
   },
 
@@ -101,7 +100,7 @@ Page({
               page.setData({
                 noLoc: true
               })
-              if (this.data.noLoc) {
+              if (page.data.noLoc) {
                 wx.showModal({
                   title: 'Location permissions',
                   content: "yedo requires location permissions to operate. Please check 'Use My Location' on the following screen and click again.",

@@ -170,10 +170,28 @@ Page({
 
   addChoices: function() {
     const app = getApp();
-    let ChoicesTable = new wx.BaaS.TableObject("choices" + app.globalData.database);
+    
     const page = this;
     //checking if using owner or users location
+    if (!page.data.meal.owner_location) {
+      if (page.data.user_location) {
+        page.saveMealAndChoices();
+      } else {
+        wx.showToast({
+          title: 'select a location',
+        })
+      }
+    } else {
+      page.saveMealAndChoices();
+    }
+    
+  },
 
+  saveMealAndChoices: function () {
+    const app = getApp();
+    const page = this;
+    let ChoicesTable = new wx.BaaS.TableObject("choices" + app.globalData.database);
+   
     if (app.globalData.tempMeal) {
       console.log("globalData FOUND!");
       app.addMeal(this.data.meal).then(res => {
@@ -187,7 +205,7 @@ Page({
         newchoice.set({
           meal_id: res,
           category_array: [this.data.array1_zh[this.data.index1], this.data.array1_zh[this.data.index2], this.data.array1_zh[this.data.index3]],
-        user_location: this.data.user_location
+          user_location: this.data.user_location
         });
         newchoice.save().then(res => {
           wx.redirectTo({
