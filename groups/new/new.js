@@ -12,6 +12,7 @@ const app = getApp();
 
 Page({
   data: {
+    time: ''
   },
 
   /**
@@ -27,11 +28,6 @@ Page({
     this.setData({
       date: date,
       date_end: date_end
-    })
-    let time = new Date();
-    time = time.toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true, timeZone: 'Asia/Shanghai' })
-    this.setData({
-      time: time
     })
   },
 
@@ -214,18 +210,15 @@ Page({
 
   formSubmit: function(e) {
     let { value } = e.detail;
-    value['inputDate'] = 0;
-    const day = getSelectedDay()[0] || 0;
-    let inputDate;
+    value['time'] = this.data.time;
+    value['owner_location'] = this.data.owner_location
+    // if (day) {
+    //   inputDate = new Date(`${day.year}-${day.month}-${day.day}`);
+    //   inputDate = (inputDate.toISOString()).toString()
+    //   value['inputDate'] = 1;
+    //   value['owner_location'] = this.data.owner_location
+    // } 
 
-    if (day) {
-      inputDate = new Date(`${day.year}-${day.month}-${day.day}`);
-      inputDate = (inputDate.toISOString()).toString()
-      value['inputDate'] = 1;
-      value['owner_location'] = this.data.owner_location
-    } 
-
-    console.log(value);
 
     if (!this.oValidator.checkData(value)) return
     if (this.data.photo_url) {
@@ -275,8 +268,8 @@ Page({
         name: {
           required: true,
         },
-        inputDate: {
-          intGreater: 1 
+        time: {
+          required: true 
         },
         owner_location: {
           required: true
@@ -286,8 +279,8 @@ Page({
         name: {
           required: 'Please enter a group name',
         },
-        inputDate: {
-          intGreater: 'Please select a date'
+        time: {
+          required: 'Please select a time'
         },
         owner_location: {
           required: 'Please select a location type'
