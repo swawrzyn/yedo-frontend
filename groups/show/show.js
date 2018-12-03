@@ -221,22 +221,24 @@ Page({
   tapLockSetRestaurant: function (e) {
     const page = this;
     const selectedRestaurant = page.data.locations[parseInt(e.currentTarget.id)];
-    wx.showModal({
-      title: 'lock it in!',
-      content: `this action will select ${selectedRestaurant.title} as the restuarant for this meal. Are you sure?`,
-      cancelText: 'no way!',
-      confirmText: "go!",
-      success(res) {
-        if (res.confirm) {
-          page.lockRestaurant(selectedRestaurant).then(res => {
-            page.setData({
-              selected_restaurant: res,
-              locked: true
-            })
-          });
+    if (page.data.owner && !page.meal.locked) {
+      wx.showModal({
+        title: 'lock it in!',
+        content: `this action will select ${selectedRestaurant.title} as the restuarant for this meal. Are you sure?`,
+        cancelText: 'no way!',
+        confirmText: "go!",
+        success(res) {
+          if (res.confirm) {
+            page.lockRestaurant(selectedRestaurant).then(res => {
+              page.setData({
+                selected_restaurant: res,
+                locked: true
+              })
+            });
+          }
         }
-      }
-    })
+      })
+    }
   },
 
   recomputeRecommendation: (choices) => {

@@ -83,7 +83,7 @@ Page({
 
   checkUserMealStatus: function (page) {
     //checking if user has created any choices for given meal_id passed in parameters
-    const ChoicesTable = new wx.BaaS.TableObject('choices');
+    const ChoicesTable = new wx.BaaS.TableObject('choices' + app.globalData.database);
     let userQuery = new wx.BaaS.Query();
     let mealQuery = new wx.BaaS.Query();
     userQuery.compare('created_by', '=', wx.BaaS.storage.get('uid'));
