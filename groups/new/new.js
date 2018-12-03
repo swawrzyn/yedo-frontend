@@ -226,7 +226,7 @@ Page({
         name: e.detail.value.name,
         meal_location: this.data.meal_location,
         owner_location: this.data.owner_location,
-        meal_date: inputDate,
+        meal_date: this.date,
         photo_url: this.data.photo_url
       }
     } else {
@@ -234,12 +234,10 @@ Page({
         name: e.detail.value.name,
         meal_location: this.data.meal_location,
         owner_location: this.data.owner_location, 
-        meal_date: inputDate,
+        meal_date: this.date,
         photo_url: 'https://cloud-minapp-22402.cloud.ifanrusercontent.com/1gSJoT23AbOTUZ6J.jpg!/fw/800'
       }
     }
-    
-
     
 
     wx.navigateTo({

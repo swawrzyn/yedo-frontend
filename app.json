@@ -6,8 +6,7 @@
     "users/show/show",
     "groups/new/new",
     "groups/show/show",
-    "pages/landing/landing",
-    "pages/test/test"
+    "pages/landing/landing"
   ],
   "window":{
     "backgroundTextStyle":"light",
