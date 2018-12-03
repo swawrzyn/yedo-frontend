@@ -9,11 +9,11 @@
   <form bindsubmit="formSubmit" bindreset="formReset">
 
     <view class="image-upload">
-        <image class="uploadButton" src="../../images/upload2.png" ontap="uploadImage"/>
-        <text>Upload Group Image</text>
-        <image wx:if="{{photo_url === true}}" src="../../images/loading.gif" class="successImage" />
-        <image wx:elif="{{photo_url === false}}" src="" class="successImage"/>
-        <image wx:elif="{{photo_url}}" src="../../images/green-check.svg" class="successImage"/>
+        <image class="uploadButton" src="../../images/uploa.png" ontap="uploadImage"/>
+        <text>Upload Image</text>
+        <image wx:if="{{photo_url === true}}" src="../../images/loading.gif" />
+        <image wx:elif="{{photo_url === false}}" src="" />
+        <image wx:elif="{{photo_url}}" src="../../images/green-check.svg" />
       </view>
   
     <view class="groupTitle">
@@ -24,18 +24,18 @@
 
 <view class="section">
   <view class="section__title">Date*</view>
-  <picker mode="date" value="{{date}}" start="{{date}}" end="{{date_end}}" bindchange="bindDateChange" class="dateTime">
+  <picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange" class="dateTime">
     <view class="picker">
-    {{date}}
+    -{{date}}-
     </view>
   </picker>
 </view>
 
     <view class="section">
   <view class="section__title">Time*</view>
-  <picker mode="time" value="{{time}}" start="01:01" end="25:01" bindchange="bindTimeChange" class="dateTime">
+  <picker mode="time" value="{{time}}" start="09:01" end="21:01" bindchange="bindTimeChange" class="dateTime">
     <view class="picker">
-    {{time}}
+    -{{time}}-
     </view>
   </picker>
 </view>
@@ -43,12 +43,12 @@
     <view class="location-title">Location*</view>
     <view class='location-buttons'>
 <view class='ownlocation'>
-      <button class="own-location-button" bindtap="useOwnLocation"><image wx:if="{{owner_location}}" src="../../images/checked.png" /></button>
+      <button class="own-location-button" bindtap="useOwnLocation"><image wx:if="{{owner_location}}" src="../../images/green-check.svg" /></button>
       <text>use your location</text>   
 </view>
 
 <view class='friendlocation'>  
-      <button class="everyone-location-button" bindtap="useAllLocations"><image wx:if="{{owner_location === false}}" src="../../images/checked.png" /></button>
+      <button class="everyone-location-button" bindtap="useAllLocations"><image wx:if="{{owner_location === false}}" src="../../images/green-check.svg" /></button>
       <text>use everyone's location</text>
 </view>
     
@@ -60,12 +60,3 @@
     </form>
   </view> 
 </view>
-
-
-
-  <!-- </picker> -->
-    <!-- <view class="calendar-wrap">
-      <template is="calendar" data="{{...calendar}}" />
-    </view> -->
-
-
