@@ -59,7 +59,7 @@
           </picker>
         </view>
       </view>
-      
+      <button wx:if="{{!meal.owner_location}}" class="button" hover-class='button-hover' ontap="findLocation">choose your location</button>
       <button class="button" hover-class='button-hover' open-type="getUserInfo" bindgetuserinfo="userInfoHandler">Let's Eat!</button>
     </form>
   </view>

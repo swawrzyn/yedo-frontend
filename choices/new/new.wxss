@@ -78,7 +78,7 @@ page {
   margin-top: 20px;
   padding: 0 20px;
   background-color: rgba(250, 250, 250, 0.9);
-  width: 300rpx;
+  width: 500rpx;
 }
 
 .button-hover {
