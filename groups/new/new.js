@@ -19,7 +19,20 @@ Page({
    */
   onLoad: function (options) {
     // setting the table as meals, it's tableid is 58396
-
+    let date = new Date();
+    let date_end = new Date();
+    date_end.setFullYear(date.getFullYear() + 1);
+    date_end = date_end.toISOString().substr(0, 10);
+    date = date.toISOString().substr(0,10);
+    this.setData({
+      date: date,
+      date_end: date_end
+    })
+    let time = new Date();
+    time = time.toLocaleString('en-US', { hour: '2-digit', minute: '2-digit', hour12: true, timeZone: 'Asia/Shanghai' })
+    this.setData({
+      time: time
+    })
   },
 
   /**
@@ -183,6 +196,20 @@ Page({
         }
         }
       })
+  },
+
+
+  bindDateChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      date: e.detail.value
+    })
+  },
+  bindTimeChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      time: e.detail.value
+    })
   },
 
   formSubmit: function(e) {
