@@ -221,7 +221,7 @@ Page({
   tapLockSetRestaurant: function (e) {
     const page = this;
     const selectedRestaurant = page.data.locations[parseInt(e.currentTarget.id)];
-    if (page.data.owner && !page.meal.locked) {
+    if (page.data.owner && !page.data.meal.locked) {
       wx.showModal({
         title: 'lock it in!',
         content: `this action will select ${selectedRestaurant.title} as the restuarant for this meal. Are you sure?`,
