@@ -98,14 +98,23 @@ Page({
   },
 
   recommendSearch: function (loc, rec) {
+    let latitude;
+    let longitude;
+    if(loc.latitude) {
+      latitude = loc.latitude;
+      longitude = loc.longitude;
+    } else {
+      loc.coordinates[1] = latitude;
+      loc.coordinates[0] = longitude;
+    }
     let locations;
     const page = this;
     const app = getApp();
     qqMap.search({
       keyword: rec,
       location: {
-        latitude: loc.coordinates[1],
-        longitude: loc.coordinates[0]
+        latitude: latitude,
+        longitude: longitude
       },
       address_format: 'short',
       page_size: 5,
@@ -273,6 +282,7 @@ Page({
     const userLocs = choices.map(choice => {
       return choice.user_location
     });
+    console.log('user locations: ', userLocs);
     // computing
     if (userLocs.length === 1) {
       return userLocs[0];
@@ -283,8 +293,8 @@ Page({
     let z = 0.0;
 
     for (let userLoc of userLocs) {
-      let latitude = userLoc.latitude * Math.PI / 180;
-      let longitude = userLoc.longitude * Math.PI / 180;
+      let latitude = userLoc.coordinates[1] * Math.PI / 180;
+      let longitude = userLoc.coordinates[0] * Math.PI / 180;
 
       x += Math.cos(latitude) * Math.cos(longitude);
       y += Math.cos(latitude) * Math.sin(longitude);
@@ -300,7 +310,7 @@ Page({
     let centralLongitude = Math.atan2(y, x);
     let centralSquareRoot = Math.sqrt(x * x + y * y);
     let centralLatitude = Math.atan2(z, centralSquareRoot);
-
+    
     return new wx.BaaS.GeoPoint((centralLongitude * 180 / Math.PI), (centralLatitude * 180 / Math.PI));
   },
 
