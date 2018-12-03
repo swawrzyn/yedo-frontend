@@ -35,7 +35,7 @@
   <view class="section__title">Time*</view>
   <picker mode="time" value="{{time}}" start="01:01" end="25:01" bindchange="bindTimeChange" class="dateTime">
     <view class="picker">
-    {{time}}
+    -{{time}}
     </view>
   </picker>
 </view>
@@ -63,9 +63,6 @@
 
 
 
-  <!-- </picker> -->
-    <!-- <view class="calendar-wrap">
-      <template is="calendar" data="{{...calendar}}" />
-    </view> -->
+  
 
 

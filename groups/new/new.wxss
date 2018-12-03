@@ -86,7 +86,7 @@ margin-bottom:40px;
 }
 
 .dateTime{
-   height: 90rpx;
+  height: 90rpx;
   padding: 0 25rpx;
   background: rgba(250,250,250,0.8);
   color: black;
@@ -99,7 +99,10 @@ margin-bottom:40px;
 
 .picker{
   color:grey;
-
+  display: block;
+  /* padding-top: 12px; */
+  height: 100%;
+  padding: 10px;
 }
 
 .district-select {
@@ -139,8 +142,7 @@ margin-bottom:20px;
   height: 50rpx;
   width: 50rpx;
   position: absolute;
-  right: 25rpx;
-  top: 22rpx;
+
 }
 
 .location-buttons .everyone-location-button {
@@ -162,10 +164,9 @@ margin-bottom:20px;
 
 
 button {
-  background: rgba(250,250,250,0.9);
+ background: rgba(250,250,250,0.8);
   color: black;
-  box-shadow: 1px 4px 7px #c1c1c1;
-  border-radius: 5px;
+  border-radius: 4px;
   font-size:15px;
   word-wrap: normal;
   margin-bottom:10px;
