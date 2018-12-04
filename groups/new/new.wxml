@@ -49,12 +49,12 @@
     <view class="location-title">Location*</view>
     <view class='location-buttons'>
 <view class='ownlocation'>
-      <button class="own-location-button" bindtap="useOwnLocation"><image wx:if="{{owner_location}}" src="../../images/checked.png" /></button>
+      <button class="own-location-button" bindtap="useOwnLocation"><image wx:if="{{owner_location}}" src="../../images/map.svg" /></button>
       <text>use your location</text>   
 </view>
 
 <view class='alllocation'>  
-      <button class="everyone-location-button" bindtap="useAllLocations"><image wx:if="{{owner_location === false}}" src="../../images/checked.png" /></button>
+      <button class="everyone-location-button" bindtap="useAllLocations"><image wx:if="{{owner_location === false}}" src="../../images/map.svg" /></button>
       <text>use everyone's location</text>
 </view>
     
