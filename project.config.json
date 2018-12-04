@@ -36,6 +36,7 @@
 		},
 		"miniprogram": {
 			"current": 4,
+			"current": 3,
 			"list": [
 				{
 					"id": -1,
@@ -59,7 +60,7 @@
 					"id": 3,
 					"name": "new choice",
 					"pathName": "choices/new/new",
-					"query": "group_id=5bfccf5485052f1daf766dc0"
+					"query": "group_id=5c04fe186f336e0b3588a85e"
 				},
 				{
 					"id": 4,
