@@ -35,7 +35,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 5,
+			"current": 4,
 			"list": [
 				{
 					"id": -1,
@@ -65,7 +65,7 @@
 					"id": 4,
 					"name": "group show",
 					"pathName": "groups/show/show",
-					"query": "id=5c04b626fac2e5670d2aaa3c"
+					"query": "id=5c04fe186f336e0b3588a85e"
 				},
 				{
 					"id": 5,

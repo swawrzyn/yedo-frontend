@@ -48,6 +48,7 @@ Page({
     locations: [],
     meal_date: "",
     ec: {},
+    direction: "horizontal",
   },
 
   echartInit: function(e) {
@@ -123,13 +124,16 @@ Page({
         longitude: longitude
       },
       address_format: 'short',
-      page_size: 5,
+      page_size: 20,
       success: function (res) {
         locations = res.data;
         page.setData({
-          locations: res.data
+          locations: res.data,
+          locationsplice: res.data.splice(0, 5),
           // isRefreshing: true
+          i: 5,
         });
+
         
         // var mks = []
         // for (var i = 0; i < res.data.length; i++) {
@@ -227,7 +231,7 @@ Page({
 
   tapLockSetRestaurant: function (e) {
     const page = this;
-    const selectedRestaurant = page.data.locations[parseInt(e.currentTarget.id)];
+    const selectedRestaurant = page.data.locationsplice[parseInt(e.currentTarget.id)];
     if (page.data.owner && !page.data.meal.locked) {
       wx.showModal({
         title: 'lock it in!',
@@ -239,13 +243,26 @@ Page({
             page.lockRestaurant(selectedRestaurant).then(res => {
               page.setData({
                 selected_restaurant: res,
-                locked: true
+                locked: true,
+                direction: 'none',
               })
             });
           }
         }
       })
     }
+  },
+
+  deleteRestaurant: function (e) {
+    const page = this;
+    delete page.data.locationsplice[parseInt(e.currentTarget.id)];
+    page.data.locationsplice.push(page.data.locations[page.data.i]);
+    console.log(page.data.locationsplice)
+    let i = page.data.i
+    page.setData({
+      locationsplice: page.data.locationsplice,
+      i: i += 1,
+    }) 
   },
 
   recomputeRecommendation: (choices) => {
@@ -340,6 +357,7 @@ Page({
     const page = this;
     const MealsTable = new wx.BaaS.TableObject('meals' + app.globalData.database);
     return MealsTable.get(mealId).then(res => {
+      res.data.meal_date = res.data.meal_date.substr(0, 10)
       page.setData({
         meal: res.data
       })
