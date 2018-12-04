@@ -8,22 +8,25 @@
   <view class="input">
   <form bindsubmit="formSubmit" bindreset="formReset">
 
+<view class="topcard">
     <view class="image-upload">
         <image class="uploadButton" src="../../images/upload2.png" ontap="uploadImage"/>
         <text>Upload Group Image</text>
         <image wx:if="{{photo_url === true}}" src="../../images/loading.gif" class="successImage" />
         <image wx:elif="{{photo_url === false}}" src="" class="successImage"/>
-        <image wx:elif="{{photo_url}}" src="../../images/green-check.svg" class="successImage"/>
+        <image wx:elif="{{photo_url}}" src="{{photo_url}}" class="successImage1"/>
       </view>
   
+  <view class="cardBanner">
     <view class="groupTitle">
-      <text>Group Name*</text>
+      <text>Title*:</text>
         <input name="name" placeholder-class="input-placeholder" placeholder="" class="groupname"/>
     </view>
 
 
+<view class="dateCard">
 <view class="section">
-  <view class="section__title">Date*</view>
+  <view class="section__title">Date*:</view>
   <picker mode="date" value="{{date}}" start="{{date}}" end="{{date_end}}" bindchange="bindDateChange" class="dateTime">
     <view class="picker">
     {{date}}
@@ -32,12 +35,15 @@
 </view>
 
     <view class="section">
-  <view class="section__title">Time*</view>
+  <view class="section__title">Time*:</view>
   <picker mode="time" value="{{time}}" start="01:01" end="25:01" bindchange="bindTimeChange" class="dateTime">
     <view class="picker">
-    .{{time}}
+    {{time}}-
     </view>
   </picker>
+</view>
+</view>
+</view>
 </view>
 
     <view class="location-title">Location*</view>
@@ -47,7 +53,7 @@
       <text>use your location</text>   
 </view>
 
-<view class='friendlocation'>  
+<view class='ownlocation'>  
       <button class="everyone-location-button" bindtap="useAllLocations"><image wx:if="{{owner_location === false}}" src="../../images/checked.png" /></button>
       <text>use everyone's location</text>
 </view>
