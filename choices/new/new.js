@@ -1,50 +1,87 @@
-// choices/new/new.js
-var cityData = require('../../utils/city.js'); 
 Page({
-
-  /**
-   * Page initial data
-   */
   data: {
-    // content: [],
-    // px: ['最新发布', '推荐排序', '租金由低到高', '租金由高到低', '面积由小到大', '面积由大到小'], //排序列表内容
-    // qyopen: false, //点击地铁区域筛选滑动弹窗显示效果，默认不显示
-    // qyshow: true, //用户点击闭关区域的弹窗设置，默认不显示
-    // nzopen: false, //价格筛选弹窗
-    // pxopen: false, //排序筛选弹窗
-    // nzshow: true,
-    // pxshow: true,
-    // isfull: false,
-    // cityleft: cityData.getCity(), //获取地铁区域的下拉框筛选项内容
-    // citycenter: {}, //选择地铁区域左边筛选框后的显示的中间内容部分
-    // cityright: {}, //选择地铁区域的中间内容部分后显示的右边内容
-    // select1: '地铁', //地铁区域选中后的第二个子菜单，默认显示地铁下的子菜单
-    // select2: '', //地铁区域选择部分的中间
-    // select3: '', //地铁区域选择部分的右边
-    // shownavindex: '',
-    // // 价格筛选框设置
-    // leftMin: 0,
-    // leftMax: 10000, //左边滑块最大值
-    // rightMin: 0, //右边滑块的最小值
-    // rightMax: 10000, //右边滑块最大值
-    // leftValue: 1000, //左边滑块默认值
-    // rightValue: 6000, //右边滑块默认值
-    // leftPer: '50', //左边滑块可滑动长度：百分比
-    // rightPer: '50', //右边滑块可滑动长度
+    user_location: '',
+    hidden: true,
+    boxclass: "box",
+      one: {
+        outer: 'box one',
+        inner: 'box-content hidden',
+        number: 0,
+        bindtap: 'testHidden'
+      },
+      two: {
+        outer: 'box two',
+        inner: 'box-content hidden',
+        number: 0,
+        bindtap: 'testHidden'
+      },
+      three: {
+        outer: 'box three',
+        inner: 'box-content hidden',
+        number: 0,
+        bindtap: 'testHidden'
+      },
+      four: {
+        outer: 'box four',
+        inner: 'box-content hidden',
+        number: 0,
+        bindtap: 'testHidden'
+      },
+      five: {
+        outer: 'box five',
+        inner: 'box-content hidden',
+        number: 0,
+        bindtap: 'testHidden'
+      },
+      six: {
+        outer: 'box six',
+        inner: 'box-content hidden',
+        number: 0,
+        bindtap: 'testHidden'
+      },
+      seven: {
+        outer: 'box seven',
+        inner: 'box-content hidden',
+        number: 0,
+        bindtap: 'testHidden'
+      },
+      eight: {
+        outer: 'box eight',
+        inner: 'box-content hidden',
+        number: 0,
+        bindtap: 'testHidden'
+      },
+      nine: {
+        outer: 'box nine',
+        inner: 'box-content hidden',
+        number: 0,
+        bindtap: 'testHidden'
+      },
 
-    // pxIndex: 0, //排序内容下拉框，默认第一个
-    array1: ['American', 'Chinese', 'Italian', 'Japanese','Mexican','Korean'],
-    array1_zh: ['美国菜', '中餐', '意大利菜', '日本菜', '墨西哥菜', '韩国菜'],
-    index1: 0,
-    index2: 1,
-    index3: 2
+    
+    items: [
+      [['苏浙菜', false], ['上海本帮菜', false], ['浙菜', false], ['淮扬菜', false], ['苏帮菜', false], ['南京菜', false], ['无锡菜', false], ['温州菜', false], ['衢州菜', false]],
+      [['日本料理', false], ['寿司', false], ['日式烧烤', false], ['日式快餐', false], ['日式面条', false], ['日式铁板烧', false], ['日式自助', false], ['日式火锅', false]],
+      [['火锅', false], ['川菜', false], ['湘菜', false], ['新疆菜', false], ['云南菜', false], ['东北菜', false], ['西北菜', false], ['台湾菜', false], ['江西菜', false]],
+      [['烧烤', false], ['海鲜', false], ['小龙虾', false], ['蟹宴', false], ['小吃快餐', false]],
+      [['咖啡厅', false], ['面包甜点', false], ['下午茶', false], ['Brunch', false]],
+      [['比萨', false], ['牛排', false], ['意大利菜', false], ['轻食沙拉', false], ['法国菜', false], ['西班牙菜', false], ['拉美烧烤', false], ['中东菜', false], ['西餐自助', false]],
+      [['泰国菜', false], ['南洋中菜', false], ['新加坡菜', false], ['越南菜', false], ['印度菜', false]],
+      [['韩国泡菜饼', false], ['韩国五花肉', false], ['石锅拌饭', false], ['韩国烤肉', false], ['韩国炒年糕', false]],
+      [['粤菜馆', false], ['茶餐厅', false], ['潮汕菜', false], ['燕翅鲍', false]]
+    ],
+
+    items_index: ['本帮江浙菜', '日本菜', '中式', '小吃夜宵', '饮品甜点', '西式', '东南亚菜', '韩国料理', '粤菜'],
+    items_number: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+    choices: []
+
+
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    console.log(options);
     const app = getApp();
     const page = this;
     
@@ -52,10 +89,10 @@ Page({
       const meal_date_string = app.globalData.tempMeal.meal_date.substr(0, 10);
       this.setData({
         meal: app.globalData.tempMeal,
-        meal_date_string: meal_date_string
+        meal_date_string: meal_date_string,
       })
     } else {
-      const MealTable = new wx.BaaS.TableObject('meals');
+      const MealTable = new wx.BaaS.TableObject('meals' + app.globalData.database);
       MealTable.get(options.group_id).then( res => {
         const meal_date_string = res.data.meal_date.substr(0, 10);
         page.setData({
@@ -67,6 +104,107 @@ Page({
     }
 
   },
+
+  makeHidden: function (e) {
+    console.log('make hidden')
+    let boxArray = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
+
+    boxArray.forEach(box => {
+      let param = { };
+      let string1, string2, string3, string4;
+        string1 = `${box}.outer`;
+        param[string1] = `box ${box}`
+        string2 = `${box}.inner`; 
+        param[string2] = 'box-content hidden';
+        string3 = `${box}.title`
+        param[string3] = ''
+        string4 = `${box}.bindtap`
+        param[string4] = 'testHidden'
+        this.setData(param);
+    })
+  },
+
+ 
+  testHidden: function (e) {
+    console.log('test hidden', e)
+
+    this.showBox(e.currentTarget.id);
+  },
+
+  pickItem: function (e) {
+    const page = this;
+    console.log(e.target.dataset);
+
+    if (this.data.items[e.target.dataset.parentindex][e.target.dataset.index][1]){
+      let params = {};
+      params[`items[${e.target.dataset.parentindex}][${e.target.dataset.index}][1]`] = false;
+      this.setData(params);
+      const newArray = []
+      this.data.choices.forEach(choice => {
+        if (choice != (e.target.dataset.parent + e.target.dataset.item)) {
+          newArray.push(choice);
+        }
+      });
+      params = {}
+      params[`items_number[${e.target.dataset.parentindex}]`] = this.data.items_number[e.target.dataset.parentindex] - 1
+      this.setData(params);
+      this.setData({
+        choices: newArray
+      })
+      
+    } else {
+      if (this.data.choices.length < 3) {
+        let params = {
+          choices: this.data.choices.concat([e.target.dataset.item])
+        }
+        params[`items[${e.target.dataset.parentindex}][${e.target.dataset.index}][1]`] = true;
+        params[`items_number[${e.target.dataset.parentindex}]`] = this.data.items_number[e.target.dataset.parentindex] + 1
+        this.setData(params);
+        this.setData(params);
+      } else {
+        wx.showToast({
+          title: 'wrong!'
+        })
+      }
+    }
+
+    //this.makeHidden();
+
+  },
+
+  showBox: function(boxId) {
+    
+    let string1, string2, string3, string4;
+      let param = { };
+
+      string1 = `${boxId}.outer`;
+        param[string1] = `box large ${boxId}`
+        string2 = `${boxId}.inner`; 
+        param[string2] = 'box-content';
+        string3 = `${boxId}.title`
+        param[string3] = 'hidden'
+        string4 = `${boxId}.bindtap`
+        param[string4] = ''
+        this.setData(param);
+
+    // boxArray.forEach(box => {
+      
+
+    //   if (box === boxId) {
+        
+    //   } else {
+    //     string1 = `${box}.outer`;
+    //     param[string1] = `box ${box}`
+    //     string2 = `${box}.inner`; 
+    //     param[string2] = 'box-content hidden';
+    //     string3 = `${box}.title`
+    //     param[string3] = 'hidden'
+
+    //     this.setData(param);
+    //   }
+    // })
+  },
+
 
   /**
    * Lifecycle function--Called when page is initially rendered
@@ -135,13 +273,90 @@ Page({
     })
   },
 
+  findLocation: function (e) {
+    const page = this;
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.userLocation']) {
+          wx.authorize({
+            scope: 'scope.userLocation',
+            success() {
+              console.log('success');
+              wx.chooseLocation({
+                success: res => {
+                  this.setData({
+                    user_location: new wx.BaaS.GeoPoint(res.longitude, res.latitude)
+                  })
+                }
+              });
+            },
+            fail(err) {
+              page.setData({
+                noLoc: true
+              })
+              if (page.data.noLoc) {
+                wx.showModal({
+                  title: 'Location permissions',
+                  content: "yedo requires location permissions to operate. Please check 'Use My Location' on the following screen and click again.",
+                  success: res => {
+                    if (res.confirm) {
+                      wx.openSetting({
+                        success: (res) => {
+                          console.log('fail res: ', res);
+                        },
+                        fail: res => {
+                          console.log('errrr', res)
+                        }
+                      })
+                    }
+                  }
+                })
+
+              }
+            }
+          })
+        } else {
+          console.log('auth')
+          page.setData({
+            noLoc: false
+          })
+          wx.chooseLocation({
+            success: res => {
+              page.setData({
+                user_location: new wx.BaaS.GeoPoint(res.longitude, res.latitude)
+              })
+            }
+          });
+        }
+      }
+    })
+  },
+
 
   addChoices: function() {
-    let ChoicesTable = new wx.BaaS.TableObject("choices");
+    const app = getApp();
+    
+    const page = this;
+    //checking if using owner or users location
+    if (!page.data.meal.owner_location) {
+      if (page.data.user_location) {
+        page.saveMealAndChoices();
+      } else {
+        wx.showToast({
+          title: 'select a location',
+        })
+      }
+    } else {
+      page.saveMealAndChoices();
+    }
+    
+  },
+
+  saveMealAndChoices: function () {
     const app = getApp();
     const page = this;
-    let choices;
-
+    let ChoicesTable = new wx.BaaS.TableObject("choices" + app.globalData.database);
+   
     if (app.globalData.tempMeal) {
       console.log("globalData FOUND!");
       app.addMeal(this.data.meal).then(res => {
@@ -150,24 +365,14 @@ Page({
         });
         return res.id
       }).then(res => {
-        choices = [
-          {
-            meal_category: this.data.array1_zh[this.data.index1],
-            rank: 3,
-            meal_id: res,
-          },
-          {
-            meal_category: this.data.array1_zh[this.data.index2],
-            rank: 2,
-            meal_id: res,
-          },
-          {
-            meal_category: this.data.array1_zh[this.data.index3],
-            rank: 1,
-            meal_id: res,
-          }
-        ]
-        ChoicesTable.createMany(choices).then(res => {
+        //setting choices to push to database
+        const newchoice = ChoicesTable.create();
+        newchoice.set({
+          meal_id: res,
+          category_array: this.data.choices,
+          user_location: this.data.user_location
+        });
+        newchoice.save().then(res => {
           wx.redirectTo({
             url: `/groups/show/show?id=${page.data.mealId}&new=true`,
           })
@@ -175,33 +380,20 @@ Page({
       })
     } else {
       console.log("globalData NOT FOUND!");
-      choices = [
-        {
-          meal_category: this.data.array1_zh[this.data.index1],
-          rank: 3,
-          meal_id: page.data.mealId,
-        },
-        {
-          meal_category: this.data.array1_zh[this.data.index2],
-          rank: 2,
-          meal_id: page.data.mealId,
-        },
-        {
-          meal_category: this.data.array1_zh[this.data.index3],
-          rank: 1,
-          meal_id: page.data.mealId,
-        }
-      ]
-      ChoicesTable.createMany(choices).then(res => {
-        app.addMealFromChoices(page.data.meal);
+      const newchoice = ChoicesTable.create();
+      newchoice.set({
+        meal_id: page.data.mealId,
+        category_array: [this.data.array1_zh[this.data.index1], this.data.array1_zh[this.data.index2], this.data.array1_zh[this.data.index3]],
+        user_location: page.data.user_location
+      });
+      newchoice.save().then(res => {
         wx.redirectTo({
-          url: `/groups/show/show?id=${this.data.mealId}&new=true`,
+          url: `/groups/show/show?id=${page.data.mealId}&new=true`,
         })
       });
     }
-
-    
   },
+
   userInfoHandler(data) {
     console.log(data);
     wx.BaaS.handleUserInfo(data).then(res => {
@@ -209,169 +401,4 @@ Page({
     }, res => {
     })
   }
-   // 地铁区域列表下拉框是否隐藏
-  // listqy: function (e) {
-  //   if (this.data.qyopen) {
-  //     this.setData({
-  //       qyopen: false,
-  //       nzopen: false,
-  //       pxopen: false,
-  //       nzshow: true,
-  //       pxshow: true,
-  //       qyshow: false,
-  //       isfull: false,
-  //       shownavindex: 0
-  //     })
-  //   } else {
-  //     this.setData({
-  //       qyopen: true,
-  //       pxopen: false,
-  //       nzopen: false,
-  //       nzshow: true,
-  //       pxshow: true,
-  //       qyshow: false,
-  //       isfull: true,
-  //       shownavindex: e.currentTarget.dataset.nav
-  //     })
-  //   }
-
-  // },
-  // 价格下拉框是否隐藏
-  // list: function (e) {
-  //   if (this.data.nzopen) {
-  //     this.setData({
-  //       nzopen: false,
-  //       pxopen: false,
-  //       qyopen: false,
-  //       nzshow: false,
-  //       pxshow: true,
-  //       qyshow: true,
-  //       isfull: false,
-  //       shownavindex: 0
-  //     })
-  //   } else {
-  //     this.setData({
-  //       content: this.data.nv,
-  //       nzopen: true,
-  //       pxopen: false,
-  //       qyopen: false,
-  //       nzshow: false,
-  //       pxshow: true,
-  //       qyshow: true,
-  //       isfull: true,
-  //       shownavindex: e.currentTarget.dataset.nav
-  //     })
-  //   }
-  // },
-  // 排序下拉框是否隐藏
-  // listpx: function (e) {
-  //   if (this.data.pxopen) {
-  //     this.setData({
-  //       nzopen: false,
-  //       pxopen: false,
-  //       qyopen: false,
-  //       nzshow: true,
-  //       pxshow: false,
-  //       qyshow: true,
-  //       isfull: false,
-  //       shownavindex: 0
-  //     })
-  //   } else {
-  //     this.setData({
-  //       content: this.data.px,
-  //       nzopen: false,
-  //       pxopen: true,
-  //       qyopen: false,
-  //       nzshow: true,
-  //       pxshow: false,
-  //       qyshow: true,
-  //       isfull: true,
-  //       shownavindex: e.currentTarget.dataset.nav
-  //     })
-  //   }
-  //   console.log(e.target)
-  // },
-  // 地铁区域第一栏选择内容
-  // selectleft: function (e) {
-  //   console.log('用户选中左边菜单栏的索引值是：' + e.target.dataset.city);
-  //   this.setData({
-  //     cityright: {},
-  //     citycenter: this.data.cityleft[e.currentTarget.dataset.city],
-  //     select1: e.target.dataset.city,
-  //     select2: ''
-  //   });
-  // },
-  // 地铁区域中间栏选择的内容
-  // selectcenter: function (e) {
-  //   console.log('选中地铁线下的地铁站' + e.target.dataset.city);
-  //   this.setData({
-  //     cityright: this.data.citycenter[e.currentTarget.dataset.city],
-  //     select2: e.target.dataset.city
-  //   });
-  // },
-  // 地铁区域左边栏选择的内容
-  // selectright: function (e) {
-  //   // console.log(e._relatedInfo.anchorRelatedText)
-  //   console.log('选中地铁线下的地铁站' + e.currentTarget.dataset.city);
-  //   this.setData({
-  //     select3: e._relatedInfo.anchorRelatedText
-  //   });
-  // },
-  // 点击灰色背景隐藏所有的筛选内容
-  // hidebg: function (e) {
-  //   this.setData({
-  //     qyopen: false,
-  //     nzopen: false,
-  //     pxopen: false,
-  //     nzshow: true,
-  //     pxshow: true,
-  //     qyshow: true,
-  //     isfull: false,
-  //     shownavindex: 0,
-  //   })
-  // },
-  // 地铁区域清空筛选项
-  // quyuEmpty: function () {
-  //   this.setData({
-  //     select1: '',
-  //     select2: '',
-  //     select3: ''
-  //   })
-  // },
-  // 地铁区域选择筛选项后，点击提交
-  // submitFilter: function () {
-  //   console.log('选择的一级选项是：' + this.data.select1);
-  //   console.log('选择的二级选项是：' + this.data.select2);
-  //   console.log('选择的三级选项是：' + this.data.select3);
-  //   // 隐藏地铁区域下拉框
-  //   this.setData({
-  //     value1: this.data.select1,
-  //     value2: this.data.select2,
-  //     value3: this.data.select3,
-  //     qyopen: false,
-  //     nzopen: false,
-  //     pxopen: false,
-  //     nzshow: true,
-  //     pxshow: true,
-  //     qyshow: false,
-  //     isfull: false,
-  //     shownavindex: 0
-  //   })
-  // },
-  // 排序内容下拉框筛选
-  // selectPX: function (e) {
-  //   console.log('排序内容下拉框筛选的内容是' + e.currentTarget.dataset.index);
-  //   this.setData({
-  //     pxIndex: e.currentTarget.dataset.index,
-  //     nzopen: false,
-  //     pxopen: false,
-  //     qyopen: false,
-  //     nzshow: true,
-  //     pxshow: false,
-  //     qyshow: true,
-  //     isfull: false,
-  //     shownavindex: 0
-  //   });
-  //   console.log('当前' + this.data.pxIndex);
-  // },
 })

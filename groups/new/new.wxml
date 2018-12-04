@@ -7,16 +7,20 @@
   <view class="input">
   <form bindsubmit="formSubmit" bindreset="formReset">
     <input name="name" placeholder-class="input-placeholder" placeholder="group name?" />
-    <picker bindchange="bindPickerChange" name="district" value="-1" range="{{region_en}}">
-    <view class="picker">
+    <!-- <picker bindchange="bindPickerChange" name="district" value="-1" range="{{region_en}}"> -->
+    <!-- <view class="picker">
       <view class="district-select">
         <text wx:if="{{region_index}}">{{region_en[region_index]}}</text>
         <text style="opacity: 0.5;" wx:if="{{!region_index}}">district?</text>
         <text style="arrow" wx:if="{{region_index}}">▾</text>
         <text style="arrow" style="opacity: 0.5;" wx:if="{{!region_index}}">▾</text>
       </view>
+    </view> -->
+    <view class='location-buttons'>
+      <button class="own-location-button" bindtap="useOwnLocation"><text>use your location</text><image wx:if="{{owner_location}}" src="../../images/green-check.svg" /></button>
+      <button class="everyone-location-button" bindtap="useAllLocations"><text>use everyone's location</text><image wx:if="{{owner_location === false}}" src="../../images/green-check.svg" /></button>
     </view>
-  </picker>
+  <!-- </picker> -->
     <view class="calendar-wrap">
       <template is="calendar" data="{{...calendar}}" />
     </view>

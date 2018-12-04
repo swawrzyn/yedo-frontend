@@ -63,6 +63,44 @@
    border-radius:5px;
 }
 
+.location-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+}
+
+.location-buttons .own-location-button {
+  margin-bottom: 5rpx;
+  position: relative;
+}
+
+.own-location-button image {
+  height: 50rpx;
+  width: 50rpx;
+  position: absolute;
+  right: 25rpx;
+  top: 22rpx;
+}
+
+.location-buttons .everyone-location-button {
+  position: relative;
+}
+
+.everyone-location-button image {
+  height: 50rpx;
+  width: 50rpx;
+  position: absolute;
+  right: 25rpx;
+  top: 22rpx;
+}
+
+.location-buttons button {
+  width: 100%;
+}
+
 .input .calendar-wrap {
   width: calc(100% - 2px);
   margin: auto 0;

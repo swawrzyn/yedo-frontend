@@ -35,7 +35,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 4,
+			"current": 3,
 			"list": [
 				{
 					"id": -1,
@@ -59,25 +59,25 @@
 					"id": 3,
 					"name": "new choice",
 					"pathName": "choices/new/new",
-					"query": "group_id=5bfccf5485052f1daf766dc0"
+					"query": "group_id=5c04fe186f336e0b3588a85e"
 				},
 				{
 					"id": 4,
 					"name": "group show",
 					"pathName": "groups/show/show",
-					"query": "id=5c01049e7b9e3c2686319301&new=true"
+					"query": "id=5c04b626fac2e5670d2aaa3c"
 				},
 				{
 					"id": 5,
 					"name": "share landing",
 					"pathName": "pages/landing/landing",
-					"query": "meal_id=5bfcd35e94516c1e443ba84c"
+					"query": "meal_id=5c04c813ecf0fe0bf7279d10"
 				},
 				{
 					"id": 6,
 					"name": "show group",
 					"pathName": "groups/show/show",
-					"query": "id=5bfcf17bac716719f2859e0d&new=true"
+					"query": "id=5c0375b2fac2e53ad02aa914&new=true"
 				}
 			]
 		}
