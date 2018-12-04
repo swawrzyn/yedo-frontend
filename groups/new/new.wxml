@@ -53,7 +53,7 @@
       <text>use your location</text>   
 </view>
 
-<view class='ownlocation'>  
+<view class='alllocation'>  
       <button class="everyone-location-button" bindtap="useAllLocations"><image wx:if="{{owner_location === false}}" src="../../images/checked.png" /></button>
       <text>use everyone's location</text>
 </view>

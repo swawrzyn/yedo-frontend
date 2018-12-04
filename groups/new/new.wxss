@@ -174,7 +174,6 @@ flex-direction: column;
   border: 1px black solid;
   width:40px;
   height:40px;
-
 }
 
 
@@ -245,13 +244,21 @@ margin:0px 10px;
 }
 
 .location-title{
-  font-size:15px;
-  margin-top:40px;
+  font-size:20px;
+  margin-top:25px;
 }
 
 .ownlocation{
 display:flex;
 align-items:center;
-font-size:15px;
+font-size:18px;
 margin:20px 60px;
 }
+
+.alllocation{
+display:flex;
+align-items:center;
+font-size:18px;
+margin:20px 60px;
+}
+
