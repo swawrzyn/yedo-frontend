@@ -48,7 +48,6 @@ Page({
     locations: [],
     meal_date: "",
     ec: {},
-    direction: "horizontal",
   },
 
   echartInit: function(e) {
@@ -510,5 +509,15 @@ Page({
       page.fetchAllInfo(res.data.id);
       return res.data
     });
+  },
+  
+  formSubmit: function(e) {
+    console.log(e.detail);
+    const MealsTable = new wx.BaaS.TableObject('meals' + app.globalData.database);
+    let meal = MealsTable.getWithoutData(this.data.mealId);
+    meal.set('message_sent', true);
+    meal.update().then((res) => {
+      wx.BaaS.wxReportTicket(e.detail.formId)
+    })
   }
 })

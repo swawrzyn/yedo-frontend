@@ -156,7 +156,9 @@
     <block wx:if="{{!owner && !meal.locked}}">
     <text>The owner is still deciding on a place to go, please come back later!</text>
     </block>
-   
+    <form wx:if="{{meal.locked}}" report-submit bindsubmit="formSubmit">
+      <button formType="submit" type="primary">message</button>
+    </form>
 
   </view> -->
 
