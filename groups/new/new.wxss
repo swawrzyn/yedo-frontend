@@ -236,7 +236,7 @@ margin:0px 10px;
 
 .submitButton{
   background-color:black;
-  color:rgba(250,250,250,0.9);
+  color:rgb(250,250,250);
 }
 
 .input-button{
