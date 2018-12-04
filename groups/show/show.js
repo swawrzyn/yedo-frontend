@@ -4,18 +4,6 @@ import * as echarts from '../../components/ec-canvas/echarts';
 // for convert for share text
 var Base64 = { _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", encode: function (e) { var t = ""; var n, r, i, s, o, u, a; var f = 0; e = Base64._utf8_encode(e); while (f < e.length) { n = e.charCodeAt(f++); r = e.charCodeAt(f++); i = e.charCodeAt(f++); s = n >> 2; o = (n & 3) << 4 | r >> 4; u = (r & 15) << 2 | i >> 6; a = i & 63; if (isNaN(r)) { u = a = 64 } else if (isNaN(i)) { a = 64 } t = t + this._keyStr.charAt(s) + this._keyStr.charAt(o) + this._keyStr.charAt(u) + this._keyStr.charAt(a) } return t }, decode: function (e) { var t = ""; var n, r, i; var s, o, u, a; var f = 0; e = e.replace(/[^A-Za-z0-9\+\/\=]/g, ""); while (f < e.length) { s = this._keyStr.indexOf(e.charAt(f++)); o = this._keyStr.indexOf(e.charAt(f++)); u = this._keyStr.indexOf(e.charAt(f++)); a = this._keyStr.indexOf(e.charAt(f++)); n = s << 2 | o >> 4; r = (o & 15) << 4 | u >> 2; i = (u & 3) << 6 | a; t = t + String.fromCharCode(n); if (u != 64) { t = t + String.fromCharCode(r) } if (a != 64) { t = t + String.fromCharCode(i) } } t = Base64._utf8_decode(t); return t }, _utf8_encode: function (e) { e = e.replace(/\r\n/g, "\n"); var t = ""; for (var n = 0; n < e.length; n++) { var r = e.charCodeAt(n); if (r < 128) { t += String.fromCharCode(r) } else if (r > 127 && r < 2048) { t += String.fromCharCode(r >> 6 | 192); t += String.fromCharCode(r & 63 | 128) } else { t += String.fromCharCode(r >> 12 | 224); t += String.fromCharCode(r >> 6 & 63 | 128); t += String.fromCharCode(r & 63 | 128) } } return t }, _utf8_decode: function (e) { var t = ""; var n = 0; var r = c1 = c2 = 0; while (n < e.length) { r = e.charCodeAt(n); if (r < 128) { t += String.fromCharCode(r); n++ } else if (r > 191 && r < 224) { c2 = e.charCodeAt(n + 1); t += String.fromCharCode((r & 31) << 6 | c2 & 63); n += 2 } else { c2 = e.charCodeAt(n + 1); c3 = e.charCodeAt(n + 2); t += String.fromCharCode((r & 15) << 12 | (c2 & 63) << 6 | c3 & 63); n += 3 } } return t } }
 
-// const meal_cat = {
-//   ['苏浙菜', '上海本帮菜', '浙菜', '淮扬菜', '苏帮菜', '南京菜', '无锡菜', '温州菜', '衢州菜'],
-//   ['日本料理', '寿司', '日式烧烤', '日式快餐', '日式面条', '日式铁板烧', '日式自助', '日式火锅'],
-//   ['火锅', '川菜', '湘菜', '新疆菜', '云南菜', '东北菜', '西北菜', '台湾菜', '江西菜'],
-//   ['烧烤', '海鲜', '小龙虾', '蟹宴', '小吃快餐'],
-//   ['咖啡厅', '面包甜点', '下午茶', 'Brunch'],
-//   ['比萨', '牛排', '意大利菜', '轻食沙拉', '法国菜', '西班牙菜', '拉美烧烤', '中东菜', '西餐自助'],
-//   ['泰国菜', '南洋中菜', '新加坡菜', '越南菜', '印度菜'],
-//   ['韩国泡菜饼', '韩国五花肉', '石锅拌饭', '韩国烤肉', '韩国炒年糕'],
-//   ['粤菜馆', '茶餐厅', '潮汕菜', '燕翅鲍']
-// }
-
 const meal_cat = {
   '本帮江浙菜': ['苏浙菜', '上海本帮菜', '浙菜', '淮扬菜', '苏帮菜', '南京菜', '无锡菜', '温州菜', '衢州菜'],
   '日本菜': ['日本料理', '寿司', '日式烧烤', '日式快餐', '日式面条', '日式铁板烧', '日式自助', '日式火锅'],
@@ -147,14 +135,15 @@ Page({
         longitude: longitude
       },
       address_format: 'short',
-      page_size: 5,
+      page_size: 20,
       success: function (res) {
         locations = res.data;
         page.setData({
-          locations: res.data
+          locations: res.data,
+          locationsplice: res.data.splice(0, 5),
           // isRefreshing: true
+          i: 5,
         });
-
         // var mks = []
         // for (var i = 0; i < res.data.length; i++) {
         //   mks.push({ // 获取返回结果，放到mks数组中
@@ -251,7 +240,7 @@ Page({
 
   tapLockSetRestaurant: function (e) {
     const page = this;
-    const selectedRestaurant = page.data.locations[parseInt(e.currentTarget.id)];
+    const selectedRestaurant = page.data.locationsplice[parseInt(e.currentTarget.id)];
     if (page.data.owner && !page.data.meal.locked) {
       wx.showModal({
         title: 'lock it in!',
@@ -263,7 +252,8 @@ Page({
             page.lockRestaurant(selectedRestaurant).then(res => {
               page.setData({
                 selected_restaurant: res,
-                locked: true
+                locked: true,
+                direction: 'none',
               })
             });
           }
@@ -272,34 +262,19 @@ Page({
     }
   },
 
-  recomputeRecommendation: (choices) => {
-    //setting results for default value of zero.
-    // const page = this;
-    // let results = {
-    //   '美国菜': 0,
-    //   '中餐': 0, 
-    //   '意大利菜': 0, 
-    //   '日本菜': 0, 
-    //   '墨西哥菜': 0, 
-    //   '韩国菜': 0
-    // };
-    // choices.forEach(choice => {
-    //   results[choice.category_array[0]] += 3
-    //   results[choice.category_array[1]] += 2
-    //   results[choice.category_array[2]] += 1
-    //   });
-    //   let max = 0;
-    //   let maxKey = "";
-    //   Object.keys(results).forEach((key) => {
-    //     if (results[key] > max) {
-    //       max = results[key];
-    //       maxKey = key;
-    //     }
-    //   })
-    // return 
-    // let choices = [{category_array: ['川菜', '日式快餐', '石锅拌饭']},
-    // {category_array: ['意大利菜', '燕翅鲍', '蟹宴']}]
+  deleteRestaurant: function (e) {
+    const page = this;
+    delete page.data.locationsplice[parseInt(e.currentTarget.id)];
+    page.data.locationsplice.push(page.data.locations[page.data.i]);
+    console.log(page.data.locationsplice)
+    let i = page.data.i
+    page.setData({
+      locationsplice: page.data.locationsplice,
+      i: i += 1,
+    }) 
+  },
 
+  recomputeRecommendation: (choices) => {
     let choicesArray = {};
     // adding up all choices
 
@@ -436,6 +411,7 @@ Page({
     const page = this;
     const MealsTable = new wx.BaaS.TableObject('meals' + app.globalData.database);
     return MealsTable.get(mealId).then(res => {
+      res.data.meal_date = res.data.meal_date.substr(0, 10)
       page.setData({
         meal: res.data
       })
@@ -588,5 +564,15 @@ Page({
       page.fetchAllInfo(res.data.id);
       return res.data
     });
+  },
+  
+  formSubmit: function(e) {
+    console.log(e.detail);
+    const MealsTable = new wx.BaaS.TableObject('meals' + app.globalData.database);
+    let meal = MealsTable.getWithoutData(this.data.mealId);
+    meal.set('message_sent', true);
+    meal.update().then((res) => {
+      wx.BaaS.wxReportTicket(e.detail.formId)
+    })
   }
 })
