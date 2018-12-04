@@ -235,8 +235,15 @@ margin:0px 10px;
 }/* pages/test/test.wxss */
 
 .submitButton{
-  background-color:black;
-  color:rgb(250,250,250);
+   background: #FBE251;
+  color: black;
+  box-shadow: 1px 1px 1px 1.5px grey;
+}
+
+.submitButton:active {
+  top: 2px;
+  -webkit-box-shadow: 0.5px 0.5px 0.5px 1px grey ;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px grey ;
 }
 
 .input-button{
