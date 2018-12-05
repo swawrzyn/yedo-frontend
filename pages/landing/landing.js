@@ -94,6 +94,7 @@ Page({
 
   checkUserMealStatus: function () {
     const page = this;
+    const app = getApp();
     //checking if user has created any choices for given meal_id passed in parameters
     const ChoicesTable = new wx.BaaS.TableObject('choices' + app.globalData.database);
     let userQuery = new wx.BaaS.Query();

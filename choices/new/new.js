@@ -385,7 +385,7 @@ Page({
       const newchoice = ChoicesTable.create();
       newchoice.set({
         meal_id: page.data.mealId,
-        category_array: [this.data.array1_zh[this.data.index1], this.data.array1_zh[this.data.index2], this.data.array1_zh[this.data.index3]],
+        category_array: this.data.choices,
         user_location: page.data.user_location
       });
       newchoice.save().then(res => {
