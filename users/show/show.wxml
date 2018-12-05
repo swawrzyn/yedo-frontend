@@ -4,7 +4,7 @@
     <text>Your Upcoming Meals</text>
   </view>
 
-  <block wx:for="{{meals}}" wx:for-item="meal">
+  <block wx:for="{{meals}}" wx:for-item="meal" style='animation-delay: {{(index+1)*0.1}}s;'>
   <view class='meal-card' style="background-image: linear-gradient(-200deg, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.5) 50%), url('{{meal.photo_url}}')">
     <view bindtap="yourMeals" data-meal_id="{{meal.id}}" class="card">
       <view class="card-text">
