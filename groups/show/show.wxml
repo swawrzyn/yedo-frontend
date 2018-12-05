@@ -81,7 +81,7 @@
   </block>
   <block wx:if="{{!owner && !meal.locked}}">
     <view class="waiting">
-      <image src='../../images/hourglass2.gif'></image>
+      <image src='../../images/waiting.gif'></image>
       <text>决定中</text>
     </view>
   </block>
