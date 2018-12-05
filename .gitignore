@@ -1,3 +1,6 @@
 project.config.json
 keys.js
 node_modules
+.vscode
+typings
+jsconfig.json

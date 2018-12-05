@@ -70,7 +70,7 @@ App({
     }).then(res => {
       const mealsQuery = new wx.BaaS.Query();
       mealsQuery.in('id', res);
-      MealsTable.setQuery(mealsQuery).find().then(res => {
+      MealsTable.setQuery(mealsQuery).limit(0).find().then(res => {
         wx.setStorage({
           key: 'meals',
           data: res.data.objects,

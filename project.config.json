@@ -59,19 +59,19 @@
 					"id": 3,
 					"name": "new choice",
 					"pathName": "choices/new/new",
-					"query": "group_id=5bfccf5485052f1daf766dc0"
+					"query": "group_id=5c04fe186f336e0b3588a85e"
 				},
 				{
 					"id": 4,
 					"name": "group show",
 					"pathName": "groups/show/show",
-					"query": "id=5c0368a0972d8534b82b2b76&new=true"
+					"query": "id=5c069e56b953052a1cd0ccf2&new=true"
 				},
 				{
 					"id": 5,
 					"name": "share landing",
 					"pathName": "pages/landing/landing",
-					"query": "meal_id=5bfcd35e94516c1e443ba84c"
+					"query": "meal_id=5c04c813ecf0fe0bf7279d10"
 				},
 				{
 					"id": 6,

@@ -1,12 +1,6 @@
 {
-  "window": {
-    "navigationBarBackgroundColor": "#ffffff",
-    "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "Mini Prorgam",
-    "backgroundColor": "#eeeeee",
-    "backgroundTextStyle": "light",
-    "enablePullDownRefresh": true
-  },
+    "navigationStyle": "custom",
+
   "usingComponents": {
     "ec-canvas": "../../components/ec-canvas/ec-canvas"
   }
