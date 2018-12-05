@@ -77,6 +77,8 @@ margin-right:-48px;
   /* text-transform: lowercase; */
   height: 100rpx;
   width: 400rpx;
+  font-size: 48rpx;
+  line-height: 100rpx;
 }
 
 .button-hover {

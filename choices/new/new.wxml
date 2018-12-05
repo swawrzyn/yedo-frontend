@@ -1,14 +1,19 @@
-  <view class="top-container">
-    <text class="title">What do you want to eat? (3 choices)</text>
+
+  <view class="loading" wx:if="{{!meal}}">
+      <image src='../../images/loading.gif'></image>
+  <text>加载中</text>
   </view>
 
-  <view class="container">
+  <view wx:if="{{meal}}" class="top-container">
+    <text class="title">你想吃什么?</text><image class="home-button" bindtap="toHome" src="../../images/home-black.svg" />
+  </view>
+  <view wx:if="{{meal}}" class="container">
     <!-- group card -->
     <view class="group-card shadow" style="background-image: url('{{meal.photo_url}}')">
       <view class="card-details">
         <view class="left">
           <text class="name">{{meal.name}}</text>
-          <text class="date">{{meal_date_string}}</text>
+          <text class="date">{{meal_date}} {{meal_time}}</text>
         </view>
         <view class="right">
 
@@ -17,160 +22,31 @@
     </view>
 
     <!-- choices card -->
-    <view class="choices-card">
-      <view class="selection-grid">
-        <view class="background-container {{one.outer === 'box large one' ? '' : 'hidden'}} one">
-            <view class="box-background {{one.outer === 'box large one' ? 'embiggen' : 'hidden'}} one"></view>
+    <view class="picker-box">
+      <picker mode="multiSelector" bindchange="bindMultiPickerChange1" bindcolumnchange="bindMultiPickerColumnChange1" value="{{multiIndex1}}" range="{{multiArray1}}">
+        <view class="picker {{multiIndex1 === '' ? '' : 'selected' }}">
+          <text class="content">{{multiIndex1 === '' ? '第一道选择' : multiArray1[1][multiIndex1[1]]}}</text>
+          <text class="arrow">▼</text>
         </view>
-        <view id="one" class="{{one.outer}}" bindtap="{{one.bindtap}}">
-            <text class="badge {{one.outer === 'box large one' ? 'hidden' : '' }}">{{items_number[0] > 0 ? items_number[0] : ''}}</text>
-          <text class="{{one.title}}">本帮江浙菜</text>
-          <view class="{{one.inner}}" bindtap="">
-            <image src="../../images/close.svg" class="exit" bindtap="makeHidden"></image>
-            <view class="grid-container">
-              <block wx:for="{{items[0]}}" wx:item="item" wx:index="index">
-                <view class="category {{item[1] ? 'selected' : ''}}" bindtap="pickItem" data-parentindex="0" data-index="{{index}}" data-parent="本帮江浙菜" data-item="{{item[0]}}">
-                  {{item[0]}}
-                </view>
-              </block>
-            </view>
-          </view>
-
+      </picker>
+      <picker mode="multiSelector" bindchange="bindMultiPickerChange2" bindcolumnchange="bindMultiPickerColumnChange2" value="{{multiIndex2}}" range="{{multiArray2}}">
+        <view class="picker {{multiIndex2 === '' ? '' : 'selected' }}">
+          <text class="content">{{multiIndex2 === '' ? '第二道选择' : multiArray2[1][multiIndex2[1]]}}</text>
+          <text class="arrow">▼</text>
         </view>
-        <view class="background-container {{two.outer === 'box large two' ? '' : 'hidden'}} two">
-        <view class="box-background {{two.outer === 'box large two' ? 'embiggen' : 'hidden'}} two"></view>
+      </picker>
+      <picker mode="multiSelector" bindchange="bindMultiPickerChange3" bindcolumnchange="bindMultiPickerColumnChange3" value="{{multiIndex3}}" range="{{multiArray3}}">
+        <view class="picker {{multiIndex3 === '' ? '' : 'selected' }}">
+        <text class="content">{{multiIndex3 === '' ? '第三道选择' : multiArray3[1][multiIndex3[1]]}}</text>
+        <text class="arrow">▼</text>
         </view>
-        <view id="two" class="{{two.outer}}" bindtap="{{two.bindtap}}">
-            <text class="badge {{two.outer === 'box large two' ? 'hidden' : '' }}">{{items_number[1] > 0 ? items_number[1] : ''}}</text>
-            <text class="{{two.title}}">日本菜</text>
-            <view class="{{two.inner}}">
-              <image src="../../images/close.svg" class="exit" bindtap="makeHidden"></image>
-              <view class="grid-container">
-                  <block wx:for="{{items[1]}}" wx:item="item" wx:index="index">
-                    <view class="category {{item[1] ? 'selected' : ''}}" bindtap="pickItem" data-parentindex="1" data-index="{{index}}" data-parent="日本菜" data-item="{{item[0]}}">
-                      {{item[0]}}
-                    </view>
-                  </block>
-                </view>
-            </view>
-          </view>
-          <view class="background-container {{three.outer === 'box large three' ? '' : 'hidden'}} three"></view>
-        <view class="box-background {{three.outer === 'box large three' ? 'embiggen' : ''}} three"></view>
-          <view id="three" class="{{three.outer}}" bindtap="{{three.bindtap}}">
-              <text class="badge {{three.outer === 'box large three' ? 'hidden' : '' }}">{{items_number[2] > 0 ? items_number[2] : ''}}</text>
-              <text class="{{three.title}}">中式</text>
-              <view class="{{three.inner}}">
-                <image src="../../images/close.svg" class="exit" bindtap="makeHidden"></image>
-                <view class="grid-container">
-                    <block wx:for="{{items[2]}}" wx:item="item" wx:index="index">
-                      <view class="category {{item[1] ? 'selected' : ''}}" bindtap="pickItem" data-parentindex="2" data-index="{{index}}" data-parent="本帮江浙菜" data-item="{{item[0]}}">
-                        {{item[0]}}
-                      </view>
-                    </block>
-                  </view>
-              </view>
-            </view>
-            <view class="background-container {{four.outer === 'box large four' ? '' : 'hidden'}} four">
-            <view class="box-background {{four.outer === 'box large four' ? 'embiggen' : ''}} four"></view>
-          </view>
-          <view id="four" class="{{four.outer}}" bindtap="{{four.bindtap}}">
-              <text class="badge {{four.outer === 'box large four' ? 'hidden' : '' }}">{{items_number[3] > 0 ? items_number[3] : ''}}</text>
-              <text class="{{four.title}}">小吃夜宵</text>
-            <view class="{{four.inner}}">
-                <image src="../../images/close.svg" class="exit" bindtap="makeHidden"></image>
-                <view class="grid-container">
-                    <block wx:for="{{items[3]}}" wx:item="item" wx:index="index">
-                      <view class="category {{item[1] ? 'selected' : ''}}" bindtap="pickItem" data-parentindex="3" data-index="{{index}}" data-parent="本帮江浙菜" data-item="{{item[0]}}">
-                        {{item[0]}}
-                      </view>
-                    </block>
-                  </view>
-              </view>
-        </view>
-        <view class="background-container {{five.outer === 'box large five' ? '' : 'hidden'}} five"></view>
-        <view class="box-background {{five.outer === 'box large five' ? 'embiggen' : ''}} five"></view>
-        <view id="five" class="{{five.outer}}" bindtap="{{five.bindtap}}">
-            <text class="badge {{five.outer === 'box large five' ? 'hidden' : '' }}">{{items_number[4] > 0 ? items_number[4] : ''}}</text>
-            <text class="{{five.title}}">饮品甜点</text>
-            <view class="{{five.inner}}">
-                <image src="../../images/close.svg" class="exit" bindtap="makeHidden"></image>
-                <view class="grid-container">
-                    <block wx:for="{{items[4]}}" wx:item="item" wx:index="index">
-                      <view class="category {{item[1] ? 'selected' : ''}}" bindtap="pickItem" data-parentindex="4" data-index="{{index}}" data-parent="本帮江浙菜" data-item="{{item[0]}}">
-                        {{item[0]}}
-                      </view>
-                    </block>
-                  </view>
-              </view>
-        </view>
-        <view class="background-container {{six.outer === 'box large six' ? '' : 'hidden'}} six"></view>
-        <view class="box-background {{six.outer === 'box large six' ? 'embiggen' : ''}} six"></view>
-        <view id="six" class="{{six.outer}}" bindtap="{{six.bindtap}}">
-            <text class="badge {{six.outer === 'box large six' ? 'hidden' : '' }}">{{items_number[5] > 0 ? items_number[5] : ''}}</text>
-            <text class="{{six.title}}">西式</text>
-            <view class="{{six.inner}}">
-                <image src="../../images/close.svg" class="exit" bindtap="makeHidden"></image>
-                <view class="grid-container">
-                    <block wx:for="{{items[5]}}" wx:item="item" wx:index="index">
-                      <view class="category {{item[1] ? 'selected' : ''}}" bindtap="pickItem" data-parentindex="5" data-index="{{index}}" data-parent="本帮江浙菜" data-item="{{item[0]}}">
-                        {{item[0]}}
-                      </view>
-                    </block>
-                  </view>
-              </view>
-        </view>
-        <view class="background-container {{seven.outer === 'box large seven' ? '' : 'hidden'}} seven"></view>
-        <view class="box-background {{seven.outer === 'box large seven' ? 'embiggen' : ''}} seven"></view>
-        <view id="seven" class="{{seven.outer}}" bindtap="{{seven.bindtap}}">
-            <text class="badge {{seven.outer === 'box large seven' ? 'hidden' : '' }}">{{items_number[6] > 0 ? items_number[6] : ''}}</text>
-            <text class="{{seven.title}}">东南亚菜</text>
-            <view class="{{seven.inner}}">
-                <image src="../../images/close.svg" class="exit" bindtap="makeHidden"></image>
-                <view class="grid-container">
-                    <block wx:for="{{items[6]}}" wx:item="item" wx:index="index">
-                      <view class="category {{item[1] ? 'selected' : ''}}" bindtap="pickItem" data-parentindex="6" data-index="{{index}}" data-parent="本帮江浙菜" data-item="{{item[0]}}">
-                        {{item[0]}}
-                      </view>
-                    </block>
-                  </view>
-              </view>
-        </view>
-        <view class="background-container {{eight.outer === 'box large eight' ? '' : 'hidden'}} eight"></view>
-        <view class="box-background {{eight.outer === 'box large eight' ? 'embiggen' : ''}} eight"></view>
-        <view id="eight" class="{{eight.outer}}" bindtap="{{eight.bindtap}}">
-            <text class="badge {{eight.outer === 'box large eight' ? 'hidden' : '' }}">{{items_number[7] > 0 ? items_number[7] : ''}}</text>
-            <text class="{{eight.title}}">韩国料理</text>
-            <view class="{{eight.inner}}">
-                <image src="../../images/close.svg" class="exit" bindtap="makeHidden"></image>
-                <view class="grid-container">
-                    <block wx:for="{{items[7]}}" wx:item="item" wx:index="index">
-                      <view class="category {{item[1] ? 'selected' : ''}}" bindtap="pickItem" data-parentindex="7" data-index="{{index}}" data-parent="本帮江浙菜" data-item="{{item[0]}}">
-                        {{item[0]}}
-                      </view>
-                    </block>
-                  </view>
-              </view>
-        </view>
-        <view class="background-container {{nine.outer === 'box large nine' ? '' : 'hidden'}} nine"></view>
-        <view class="box-background {{nine.outer === 'box large nine' ? 'embiggen' : ''}} nine"></view>
-        <view id="nine" class="{{nine.outer}}" bindtap="{{nine.bindtap}}">
-            <text class="badge {{nine.outer === 'box large nine' ? 'hidden' : '' }}">{{items_number[8] > 0 ? items_number[8] : ''}}</text>
-            <text class="{{nine.title}}">粤菜</text>
-            <view class="{{nine.inner}}">
-                <image src="../../images/close.svg" class="exit" bindtap="makeHidden"></image>
-                <view class="grid-container">
-                    <block wx:for="{{items[8]}}" wx:item="item" wx:index="index">
-                      <view class="category {{item[1] ? 'selected' : ''}}" bindtap="pickItem" data-parentindex="8" data-index="{{index}}" data-parent="本帮江浙菜" data-item="{{item[0]}}">
-                        {{item[0]}}
-                      </view>
-                    </block>
-                  </view>
-              </view>
-        </view>
-      </view>
+      </picker>
     </view>
-    <button wx:if="{{!meal.owner_location}}" class="button" hover-class='button-hover' ontap="findLocation">choose your location</button>
-      <button class="button" disabled="{{choices.length < 3}}" hover-class='button-hover' open-type="getUserInfo" bindgetuserinfo="userInfoHandler">Let's Eat!</button>
+    <view class="button-box">
+        <button wx:if="{{!meal.owner_location}}" class="button" hover-class='button-hover' ontap="findLocation">你的位置<image wx:if="{{user_location != ''}}"class="green-check" src="../../images/green-check.svg"></image></button>
+        <button class="button bold" hover-class='button-hover' open-type="getUserInfo" bindgetuserinfo="userInfoHandler">一道吃吧!</button>
+    </view>
+   
   </view>
   
   

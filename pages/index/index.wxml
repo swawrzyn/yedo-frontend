@@ -18,10 +18,8 @@
   </view>
 
  <view class="buttons-container">
-   <button class="button" hover-class='button-hover' id="newmeal" open-type="getUserInfo" bindgetuserinfo="userInfoHandler">Plan a new meal!</button>
-    <button class="button" hover-class='button-hover' id="userpanel" open-type="getUserInfo" bindgetuserinfo="userInfoHandler">
-    <image wx:if="{{photo_url === true}}" src="../../images/loading.gif" />
-    Your meals!</button>
+  <button class="button" hover-class='button-hover' id="newmeal" open-type="getUserInfo" bindgetuserinfo="userInfoHandler">开始吃吧!</button>
+  <button class="button" hover-class='button-hover' id="userpanel" open-type="getUserInfo" bindgetuserinfo="userInfoHandler">你的饭局!</button>
 </view>
 
 

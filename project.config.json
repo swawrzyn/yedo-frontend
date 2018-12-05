@@ -35,7 +35,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 7,
+			"current": 5,
 			"list": [
 				{
 					"id": -1,
@@ -59,7 +59,7 @@
 					"id": 3,
 					"name": "new choice",
 					"pathName": "choices/new/new",
-					"query": "group_id=5c04fe186f336e0b3588a85e"
+					"query": "group_id=5c0759e61cc55d141e3552a7"
 				},
 				{
 					"id": 4,
@@ -71,7 +71,7 @@
 					"id": 5,
 					"name": "share landing",
 					"pathName": "pages/landing/landing",
-					"query": "meal_id=5c04c813ecf0fe0bf7279d10"
+					"query": "meal_id=5c077e01095dee3717d05159"
 				},
 				{
 					"id": 6,
