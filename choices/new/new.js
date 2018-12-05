@@ -390,6 +390,8 @@ Page({
       })
     } else {
       console.log("globalData NOT FOUND!");
+      const app = getApp();
+      app.addMealFromChoices(this.data.meal);
       const newchoice = ChoicesTable.create();
       newchoice.set({
         meal_id: page.data.mealId,

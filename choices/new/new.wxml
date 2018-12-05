@@ -5,7 +5,7 @@
   </view>
 
   <view wx:if="{{meal}}" class="top-container">
-    <text class="title">你想吃什么?</text><image class="home-button" bindtap="toHome" src="../../images/home-black.svg" />
+    <text class="title">你想吃什么?</text><image class="home-button" bindtap="toHome" src="../../images/home-interface.svg" />
   </view>
   <view wx:if="{{meal}}" class="container">
     <!-- group card -->
