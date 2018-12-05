@@ -1,12 +1,13 @@
 <!--users/show/show.wxml-->
 
   <view class="meal-title">
-    <text>Your Upcoming Meals</text>
+    <text>即将到来</text>
   </view>
 
-  <block wx:for="{{meals}}" wx:for-item="meal" style='animation-delay: {{(index+1)*0.1}}s;'>
-  <view class='meal-card' style="background-image: linear-gradient(-200deg, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.5) 50%), url('{{meal.photo_url}}')">
-    <view bindtap="yourMeals" data-meal_id="{{meal.id}}" class="card">
+  <block wx:for="{{meals}}" wx:for-item="meal">
+  <view bindtap="yourMeals" data-meal_id="{{meal.id}}"class='meal-card' style="animation-delay: {{(index+1)*0.1}}s;background-image: linear-gradient(-200deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{meal.photo_url}}');"
+>
+    <view class="card">
       <view class="card-text">
         <view class="card-title"><text style="font-weight:bold;">{{meal.name}}</text></view>
         <view class ="card-date">Date: <text>{{meal.meal_date}}</text></view>
@@ -18,5 +19,5 @@
   </block>
 
   <view class="PlanButton">
-    <button bindtap="toNewMeal" class="btn">Plan a new meal!</button>
+    <button bindtap="toNewMeal" class="button" hover-class='button-hover'>計劃一頓新餐!</button>
   </view>

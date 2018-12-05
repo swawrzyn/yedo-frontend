@@ -3,11 +3,13 @@
 page{
 background-color: #FBE251;
 align-items: center;
+justify-content: center;
+flex-direction: column;
 }
 .meal-card {
   height: 240rpx;
-  width: 95vw;
-  box-shadow:2px 2px 8px grey;
+  width: 90vw;
+  box-shadow:1px 3px 8px rgba(0, 0, 0, 0.6);
   background-size:cover !important;
   background-position:center;
   position:relative;
@@ -15,14 +17,14 @@ align-items: center;
   align-items:center;
   flex-direction:row;
   justify-content:space-around;
-  margin:15px 10px;
+  margin: 15px auto;
   border-radius:5px;
-  animation-duration: 0.5s;
+   animation-duration: 1s;
 -webkit-animation-name: fadeInDown;
 animation-name: fadeInDown;
 opacity:0;
 animation-fill-mode: forwards;
-}
+  }
 .meal-image {
   height: 100%;
   width: 100%;
@@ -31,18 +33,17 @@ animation-fill-mode: forwards;
   display: flex;
   justify-content: center;
 }
-
 .meal-title{
   display:flex;
   font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
   background-color: #FBE251;
-  height:50px;
+  height: 125rpx;
+  width: 90vw;
   color:black;
-  font-size:30px;
-  align-items:top;
-  justify-content:center;
-  background-size:cover;
-  background-repeat: no-repeat;
+  font-size: 55rpx;
+  font-weight: bold;
+  align-content: center;
+  margin: 0px auto;
 }
 
 
@@ -57,10 +58,12 @@ background-color:rgba(250,250,250,0.8);
 position:relative;
 display:flex;
 align-items:center;
-flex-direction:row;
+flex-direction: row;
 justify-content:space-around;
 padding: 10px;
 margin-top: 45px;
+/* margin:10px 10px; */
+/* border-radius:5px; */
 }
 
 
@@ -100,8 +103,7 @@ border-radius:50%;
 }
 
 .card-date {
-    font-size: 12px;
-    font-weight: lighter;
+    font-weight: bolder;
     text-decoration: none;
 }
 
@@ -110,12 +112,21 @@ border-radius:50%;
   justify-content:center;
 }
 
-.btn{
+.button{
   width:200px;
-  background-color:#1C1B1B;
+  background-color:black;
+  box-shadow: 1px 1px 1px 1.5px grey;
   color:white;
   margin:10px;
-
+}
+.button-hover {
+  background: black;
+  color: white;
+}
+.button:active {
+  top: 2px;
+  -webkit-box-shadow: 0.5px 0.5px 0.5px 1px grey ;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px grey ;
 }
 
 .desc {
@@ -125,7 +136,7 @@ border-radius:50%;
   font-size: 14px;
 }
 
-@keyframes fadeInDown {
+  @keyframes fadeInDown {
   from {
     opacity: 0;
     -webkit-transform: translate3d(0, -100%, 0);
@@ -140,5 +151,3 @@ border-radius:50%;
     visibility:visible;
   }
 }
-
-
