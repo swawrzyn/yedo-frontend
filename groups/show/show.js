@@ -1,8 +1,5 @@
 const keys = require('../../keys.js');
 const QQMapWX = require('../../libs/qqmap-wx-jssdk.js');
-import * as echarts from '../../components/ec-canvas/echarts';
-// for convert for share text
-var Base64 = { _keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=", encode: function (e) { var t = ""; var n, r, i, s, o, u, a; var f = 0; e = Base64._utf8_encode(e); while (f < e.length) { n = e.charCodeAt(f++); r = e.charCodeAt(f++); i = e.charCodeAt(f++); s = n >> 2; o = (n & 3) << 4 | r >> 4; u = (r & 15) << 2 | i >> 6; a = i & 63; if (isNaN(r)) { u = a = 64 } else if (isNaN(i)) { a = 64 } t = t + this._keyStr.charAt(s) + this._keyStr.charAt(o) + this._keyStr.charAt(u) + this._keyStr.charAt(a) } return t }, decode: function (e) { var t = ""; var n, r, i; var s, o, u, a; var f = 0; e = e.replace(/[^A-Za-z0-9\+\/\=]/g, ""); while (f < e.length) { s = this._keyStr.indexOf(e.charAt(f++)); o = this._keyStr.indexOf(e.charAt(f++)); u = this._keyStr.indexOf(e.charAt(f++)); a = this._keyStr.indexOf(e.charAt(f++)); n = s << 2 | o >> 4; r = (o & 15) << 4 | u >> 2; i = (u & 3) << 6 | a; t = t + String.fromCharCode(n); if (u != 64) { t = t + String.fromCharCode(r) } if (a != 64) { t = t + String.fromCharCode(i) } } t = Base64._utf8_decode(t); return t }, _utf8_encode: function (e) { e = e.replace(/\r\n/g, "\n"); var t = ""; for (var n = 0; n < e.length; n++) { var r = e.charCodeAt(n); if (r < 128) { t += String.fromCharCode(r) } else if (r > 127 && r < 2048) { t += String.fromCharCode(r >> 6 | 192); t += String.fromCharCode(r & 63 | 128) } else { t += String.fromCharCode(r >> 12 | 224); t += String.fromCharCode(r >> 6 & 63 | 128); t += String.fromCharCode(r & 63 | 128) } } return t }, _utf8_decode: function (e) { var t = ""; var n = 0; var r = c1 = c2 = 0; while (n < e.length) { r = e.charCodeAt(n); if (r < 128) { t += String.fromCharCode(r); n++ } else if (r > 191 && r < 224) { c2 = e.charCodeAt(n + 1); t += String.fromCharCode((r & 31) << 6 | c2 & 63); n += 2 } else { c2 = e.charCodeAt(n + 1); c3 = e.charCodeAt(n + 2); t += String.fromCharCode((r & 15) << 12 | (c2 & 63) << 6 | c3 & 63); n += 3 } } return t } }
 
 const meal_cat = {
   '本帮江浙菜': ['苏浙菜', '上海本帮菜', '浙菜', '淮扬菜', '苏帮菜', '南京菜', '无锡菜', '温州菜', '衢州菜'],
@@ -22,38 +19,8 @@ const qqMap = new QQMapWX({
 });
 const app = getApp();
 
-function initChart(canvas, width, height, chartdata) {
-  const chart = echarts.init(canvas, null, {
-    width: width,
-    height: height
-  });
-  canvas.setChart(chart);
-
-  var option = {
-    backgroundColor: "transparent",
-    color: ["#FFFFFF", "#888", "#666", "#444", "#222"],
-    series: [{
-      label: {
-        position: 'inside',
-        color: '#000000',
-        fontSize: 6
-      },
-      data: chartdata,
-      type: 'pie',
-      center: ['50%', '50%'],
-      radius: [0, '60%'],
-    }]
-  };
-
-  chart.setOption(option);
-  return chart;
-}
 
 Page({
-
-  /**
-   * Page initial data
-   */
   data: {
     meal: '',
     recommendation: '',
@@ -62,14 +29,6 @@ Page({
     ec: {},
     markers: [],
     hidden: true,
-  },
-
-  echartInit: function (e) {
-    const page = this;
-    // god damn chart loads too fast, gotta wait for the chartdata to load... gotta find  a better way
-    setTimeout(function () {
-      initChart(e.detail.canvas, e.detail.width, e.detail.height, page.data.pieData);
-    }, 2000);
   },
 
   goHome: function (e) {
@@ -232,9 +191,9 @@ Page({
     let encodedText = Base64.encode(this.data.meal.name + '!')
     if (res.from === 'button') {
     } return {
-      title: `一道吃吧!`,
+      title: `${this.data.meal.name} | ${this.data.meal_date} @ ${this.data.meal_time}`,
       path: `/pages/landing/landing?meal_id=${this.data.mealId}`,
-      imageUrl: `${this.data.meal.photo_url}/watermark/url/MWdUaVc5RTFyRkxMakc0Si5wbmc=/percent/100/align/center/repeat/true/opacity/50/watermark/text/${encodedText}/color/ffffff/size/120/align/center`
+      imageUrl: `${this.data.meal.photo_url}/watermark/url/MWdUaVc5RTFyRkxMakc0Si5wbmc=/percent/100/align/center/repeat/true/opacity/40/watermark/text/5LiA6YGT5ZCD5ZCnIQ==/font/simhei/color/ffffff/size/128/align/center`
     }
   },
 
