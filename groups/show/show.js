@@ -192,6 +192,7 @@ Page({
   onShow: function () {
     const app = getApp();
     app.globalData.tempMeal = null;
+    wx.hideLoading();
   },
 
   /**

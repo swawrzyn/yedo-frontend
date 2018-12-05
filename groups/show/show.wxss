@@ -27,8 +27,8 @@ page {
 
 .waiting image {
   margin-top: 20rpx;
-  height: 100rpx;
-  width: 100rpx;
+  height: 300rpx;
+  width: 300rpx;
 }
 
 .card {
