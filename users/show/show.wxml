@@ -1,7 +1,7 @@
 <!--users/show/show.wxml-->
 
   <view class="meal-title">
-    <text>即将到来</text>
+    <text>饭局清单</text>
   </view>
 
   <block wx:for="{{meals}}" wx:for-item="meal">
@@ -19,5 +19,5 @@
   </block>
 
   <view class="PlanButton">
-    <button bindtap="toNewMeal" class="button" hover-class='button-hover'>計劃一頓新餐!</button>
+    <button bindtap="toNewMeal" class="button" hover-class='button-hover'>开始吃吧!</button>
   </view>
