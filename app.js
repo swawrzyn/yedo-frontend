@@ -95,6 +95,9 @@ App({
     });
     return res.data;
   },
+  err => {
+    console.log('add meal error:', err);
+  },
     err => {
      console.log('saving error: ', err)
     })

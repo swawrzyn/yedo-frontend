@@ -84,9 +84,10 @@ Page({
   onLoad: function (options) {
     const app = getApp();
     const page = this;
+    console.log(app.globalData.tempMeal);
     
     if (app.globalData.tempMeal){
-      const meal_date_string = app.globalData.tempMeal.meal_date.substr(0, 10);
+      let meal_date_string = app.globalData.tempMeal.meal_date;
       this.setData({
         meal: app.globalData.tempMeal,
         meal_date_string: meal_date_string,
@@ -360,6 +361,7 @@ Page({
     if (app.globalData.tempMeal) {
       console.log("globalData FOUND!");
       app.addMeal(this.data.meal).then(res => {
+        console.log('add meal result: ', res);
         page.setData({
           mealId: res.id
         });

@@ -19,11 +19,11 @@
     <view class="group-content">
       <text class="group-name">{{meal.name}}</text>
       <text class="group-date">{{meal.meal_date}}</text>
-      <view class="rec-right">
+      <!-- <view class="rec-right">
         <view class="container">
           <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec }}" bind:init="echartInit"></ec-canvas>
         </view>
-      </view>
+      </view> -->
       <view class="group-members" id="members" hover-class='group-right-hover' bindtap='popOver' bind>
         <image src="../../images/users.svg" mode="aspectFill"></image>
         <text wx:if="{{group_users_count}}" class="small-text">{{group_users_count > 1 ? group_users_count + ' people' : group_users_count + ' person' }}</text>

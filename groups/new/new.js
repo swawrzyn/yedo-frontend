@@ -218,14 +218,18 @@ Page({
     //   value['owner_location'] = this.data.owner_location
     // } 
 
-
+    this.data.time
+    this.data.date
+    let date_time = new Date(`${this.data.date} ${this.data.time}`);
+    date_time = date_time.toISOString();
     if (!this.oValidator.checkData(value)) return
+
     if (this.data.photo_url) {
       app.globalData.tempMeal = {
         name: e.detail.value.name,
         meal_location: this.data.meal_location,
         owner_location: this.data.owner_location,
-        meal_date: this.date,
+        meal_date: date_time,
         photo_url: this.data.photo_url
       }
     } else {
@@ -233,7 +237,7 @@ Page({
         name: e.detail.value.name,
         meal_location: this.data.meal_location,
         owner_location: this.data.owner_location, 
-        meal_date: this.date,
+        meal_date: date_time,
         photo_url: 'https://cloud-minapp-22402.cloud.ifanrusercontent.com/1gSJoT23AbOTUZ6J.jpg!/fw/800'
       }
     }
