@@ -60,14 +60,7 @@ Page({
     locations: [],
     meal_date: "",
     ec: {},
-    marker: [{
-      iconPath: "../../images/maker.png",
-      id: 0,
-      latitude: 0,
-      longitude: 0,
-      width: 50,
-      height: 50
-    }],
+    markers: [],
   },
 
   echartInit: function (e) {
@@ -243,22 +236,9 @@ Page({
         success(res) {
           if (res.confirm) {
             page.lockRestaurant(selectedRestaurant).then(res => {
-              let markers = [];
-              markers.push({
-                title: res.title,
-                // id: res.data[i].id,
-                latitude: res.location.lat,
-                longitude: res.location.lng,
-                iconPath: "/images/marker.png", //图标路径
-                width: 50,
-                height: 50
-              })
-              // page.data.marker.latitude = res.location.lat;
-              // page.data.marker.longitude = res.location.lng;
               page.setData({
                 selected_restaurant: res,
                 locked: true,
-                marker: marker,
               })
             });
           }
@@ -506,9 +486,20 @@ Page({
     Promise.all([meal, choices]).then(results => {
       // checking if meal is locked
       if (results[0].locked) {
+        let markers = [];
+        markers.push({
+          title: results[0].selected_restaurant.title,
+          // id: res.data[i].id,
+          latitude: results[0].selected_restaurant.location.lat,
+          longitude: results[0].selected_restaurant.location.lng,
+          iconPath: "../../images/maker.png", //图标路径
+          width: 50,
+          height: 50
+        })
         page.setData({
           locations: [results[0].selected_restaurant],
-          recommendation: results[0].recommended_category
+          recommendation: results[0].recommended_category,
+          markers: markers
         })
       } else {
         if (page.data.recomp) {
