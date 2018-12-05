@@ -114,6 +114,8 @@ width: 50rpx;
   border-radius: 8rpx;
   font-size: 48rpx;
   color: rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 1px 1px 1px 1.5px grey;
+  box-shadow: 1px 1px 1px 1.5px grey;
 }
 
 .picker.selected {
