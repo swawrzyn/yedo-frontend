@@ -1,11 +1,6 @@
-@import '/template/calendar/index.wxss';
- 
-
 page{
   /* overflow:hidden; */
 }
-
-
 
 .container {
   background:linear-gradient(to bottom, #FBE251 0%,#FBE251 40%,#FBE251 40%,white 40%,white 100%);
