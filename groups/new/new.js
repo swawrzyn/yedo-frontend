@@ -15,7 +15,7 @@ Page({
     time: '',
     uploading: false
   },
-
+  
   /**
    * Lifecycle function--Called when page load
    */

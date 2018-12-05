@@ -2,7 +2,7 @@
 
 <view class="container">
   <view class="title">
-    <text>What's your plan?</text>
+    <text>有啥安排？</text>
   </view>
   
   <view class="input">
@@ -12,7 +12,6 @@
     <view class="image-upload">
         <view wx:if="{{!uploading}}" class="uploadbutton-box">
           <image class="uploadButton" src="../../images/upload2.png" ontap="uploadImage"/>
-          <text>Upload Group Image</text>
         </view>
         <image wx:if="{{photo_url === true}}" src="../../images/loading.gif" class="successImage" />
         <image wx:elif="{{photo_url === false}}" src="" class="successImage"/>
@@ -22,31 +21,28 @@
   <view class="cardBanner">
     <view class="groupTitle">
       <text>Title*:</text>
-        <input name="name" placeholder-class="input-placeholder" placeholder="" class="groupname"/>
+        <input name="name" placeholder-class="input-placeholder" placeholder="My Dinner" class="groupname"/>
     </view>
-
-
-<view class="dateCard">
-<view class="section">
-  <view class="section__title">Date*:</view>
-  <picker mode="date" value="{{date}}" start="{{date}}" end="{{date_end}}" bindchange="bindDateChange" class="dateTime">
-    <view class="picker">
-    {{date}}
-    </view>
-  </picker>
+</view>
 </view>
 
-    <view class="section">
-  <view class="section__title">Time*:</view>
-  <picker mode="time" value="{{time}}" start="01:01" end="25:01" bindchange="bindTimeChange" class="dateTime">
-    <view class="picker">
-    {{time}}-
-    </view>
-  </picker>
-</view>
-</view>
-</view>
-</view>
+  <view class="section">
+    <view class="section__title">Date*:</view>
+    <picker mode="date" value="{{date}}" start="{{date}}" end="{{date_end}}" bindchange="bindDateChange" class="dateTime">
+      <view class="picker">
+      {{date}}
+      </view>
+    </picker>
+  </view>
+
+  <view class="section">
+    <view class="section__title">Time*:</view>
+    <picker mode="time" value="{{time}}" start="01:01" end="25:01" bindchange="bindTimeChange" class="dateTime">
+      <view class="picker">
+      {{time}}-
+      </view>
+    </picker>
+  </view>
 
     <view class="location-title">Location*</view>
     <view class='location-buttons'>

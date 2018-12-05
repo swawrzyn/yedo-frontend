@@ -40,17 +40,16 @@ box-shadow:1px 0px 20px 1px rgba(0, 0, 0, 0.2);
   width:100%;
   margin-bottom:28px;
   background-color:rgba(250,250,250,0.8);
+  display:flex;
+  height:60px;
 }
 
 .dateCard{
-  display:flex;
- padding: 0 10px;
 }
 
 .uploadButton{
-  height:70px;
-  width:70px;
-  margin-bottom:12px;
+  height:30px;
+  width:30px;
 }
 
 
@@ -66,6 +65,8 @@ width: 100%;
 height: 100%;
 justify-content:center;
 /* top:15px; */
+background-image:url("https://cloud-minapp-22402.cloud.ifanrusercontent.com/1gSJoT23AbOTUZ6J.jpg");
+background-size: cover;
 }
 
 .uploadbutton-box {
@@ -74,6 +75,11 @@ justify-content:center;
   flex-direction: column;
   justify-content: center;
   padding-bottom: 100rpx;
+  background-color:rgba(250,250,250,0.8);
+  border-radius: 8px;
+  padding: 10px;
+height:31px;
+margin-bottom:75px;
 }
 
 .successImage{
@@ -90,11 +96,23 @@ position:absolute;
 border-radius:2%;
 }
 
+.defaultimage{
+  height:100%;
+width:100%;
+position:absolute;
+border-radius:2%;
+}
+
 .groupTitle{
   font-size:15px;
   display:flex;
   align-items:center;
   padding: 0 10px;
+  width:100%;
+}
+
+.groupname{
+  width:100%;
 }
 
 .title{
@@ -130,6 +148,7 @@ border-radius:2%;
   font-size:15px;
   display:flex;
   align-items:center;
+  padding: 0px 10px;
 }
 
 .dateTime{
@@ -140,8 +159,7 @@ border-radius:2%;
   border-radius:5px;
   font-size:15px;
   text-align:center;
-  width:193rpx;
-
+  width:100%;
 }
 
 .picker{
@@ -170,8 +188,8 @@ box-shadow:0px 0px 10px 1px rgba(0, 0, 0, 0.2);
   justify-content: space-around;
   align-items: start;
   font-size:12px;
-  margin-top:15px;
-margin-bottom:20px;
+  margin-top:5px;
+margin-bottom:5px;
 flex-direction: column;
 
 }
@@ -179,8 +197,8 @@ flex-direction: column;
 .location-buttons .own-location-button {
   position: relative;
   border: 1px black solid;
-  width:40px;
-  height:40px;
+  width:35px;
+  height:35px;
 }
 
 
@@ -194,8 +212,8 @@ flex-direction: column;
 .location-buttons .everyone-location-button {
   position: relative;
 border: 1px black solid;
-  width:40px;
-  height:40px;
+  width:35px;
+  height:35px;
 }
 
 .everyone-location-button image {
@@ -254,25 +272,26 @@ margin:0px 10px;
 }
 
 .input-button{
-  margin:25px 50px;
+  margin:15px 50px;
 }
 
 .location-title{
-  font-size:20px;
-  margin-top:25px;
+  font-size:15px;
+  padding: 0px 10px;
+  margin-top:15px;
 }
 
 .ownlocation{
 display:flex;
 align-items:center;
-font-size:18px;
+font-size:15px;
 margin:20px 60px;
 }
 
 .alllocation{
 display:flex;
 align-items:center;
-font-size:18px;
+font-size:15px;
 margin:20px 60px;
 }
 
