@@ -277,6 +277,9 @@ Page({
   recomputeRecommendation: (choices) => {
     let choicesArray = {};
     // adding up all choices
+    if (choices.length === 1) {
+      return { recommended_category: choices[0].recommended_category[0], votes: [3, 2, 1] };
+    }
 
     choices.forEach(choice_array => {
       choice_array.category_array.forEach(choice => {
