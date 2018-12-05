@@ -241,6 +241,12 @@ Page({
 
   },
 
+  toHome: function () {
+    wx.redirectTo({
+      url: '/pages/index/index'
+    })
+  },
+
   bindPickerChange1: function (e) {
     console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
@@ -357,7 +363,9 @@ Page({
     const app = getApp();
     const page = this;
     let ChoicesTable = new wx.BaaS.TableObject("choices" + app.globalData.database);
-   
+    wx.showLoading({
+      title: '加载中'
+    })
     if (app.globalData.tempMeal) {
       console.log("globalData FOUND!");
       app.addMeal(this.data.meal).then(res => {

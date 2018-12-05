@@ -1,1 +1,4 @@
-<view class="container"></view>
+<view class="loading" wx:if="{{!meal}}">
+        <image src='../../images/loading.gif'></image>
+    <text>加载中</text>
+    </view>
