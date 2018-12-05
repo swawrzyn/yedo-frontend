@@ -1,5 +1,3 @@
-<!--users/show/show.wxml-->
-
   <view class="meal-title">
     <text>饭局清单</text>
   </view>
