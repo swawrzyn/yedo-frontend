@@ -3,6 +3,10 @@
   background-color: rgba(255, 255, 255, 0.9);
   /* box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1); */
   border-radius: 8rpx;
+  z-index:3;
+  top:130rpx !important;
+  left:340rpx !important;
+  width:50% !important;
 }
 /* 实现三角形 */
 .popover-view::before {

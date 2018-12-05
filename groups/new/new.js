@@ -1,10 +1,5 @@
-import initCalendar from '../../template/calendar/index';
-import { getSelectedDay } from '../../template/calendar/index';
 const WeValidator = require('../../libs/we-validator');
-const conf = {
-  disablePastDay: true,
-  defaultDay: false,
-};
+
 let meals = new wx.BaaS.TableObject('meals');
 let currentUser = new wx.BaaS.User();
 currentUser = currentUser.get(wx.BaaS.storage.get('uid')); 
@@ -15,7 +10,7 @@ Page({
     time: '',
     uploading: false
   },
-
+  
   /**
    * Lifecycle function--Called when page load
    */
@@ -43,7 +38,6 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-    initCalendar(conf);
   },
 
   /**

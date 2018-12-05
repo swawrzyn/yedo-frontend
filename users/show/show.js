@@ -10,7 +10,16 @@ Page({
     show: 0,
     loaded: false
   },
-
+  
+  onPullDownRefresh: function () {
+    wx.showLoading({
+      title: '加载中',
+    });
+    wx.showNavigationBarLoading();
+    console.log("pulled down!");
+    this.fetchUserMeals(this);
+    this.fetchUserDetails(this);
+    },
 
   
   yourMeals:function(e){

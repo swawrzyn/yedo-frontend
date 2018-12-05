@@ -2,6 +2,8 @@
     "navigationStyle": "custom",
 
   "usingComponents": {
-    "ec-canvas": "../../components/ec-canvas/ec-canvas"
+    "ec-canvas": "../../components/ec-canvas/ec-canvas",
+    "popover": "/components/popover",
+    "popover-item": "/components/popover-item"
   }
 }

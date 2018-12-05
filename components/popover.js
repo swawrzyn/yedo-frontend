@@ -14,9 +14,9 @@ Component({
     // 当前显隐状态
     visible: false,
     // popover 宽
-    pw: 200,
+    pw: 100,
     // popover 高
-    ph: 100,
+    ph: 120,
     // popover 距左距离
     px: 0,
     // popover 距上距离
@@ -28,7 +28,7 @@ Component({
   },
 
   methods: {
-    onDisplay: function(e) {
+    onDisplay: function (e) {
       let self = this;
 
       if (self.last && self.last === e.id) {
@@ -81,13 +81,13 @@ Component({
       // 记录上一次点击的元素
       self.last = e.id;
     },
-    onHide: function() {
+    onHide: function () {
       this.setData({
         visible: false
       });
     },
     // 获取所有子元素
-    getItems: function() {
+    getItems: function () {
       return this.getRelationNodes('./popover-item');
     },
     // 获取所有子元素的总高度

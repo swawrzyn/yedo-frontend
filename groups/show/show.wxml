@@ -1,32 +1,35 @@
-<view class="top-bar">
+<view class="loading" wx:if="{{hidden}}">
+  <image src='../../images/loading.gif'></image>
+  <text>加载中</text>
+</view>
+<view class="top-bar" wx:if="{{loading}}">
   <view class="group-left">
     <view class="rec-left">
-      <text class="recommend">recommends</text>
-      <text class="title">{{recommendation}}</text>
+      <text class="recommend">一道推荐: {{recommendation}}</text>
     </view>
   </view>
   <view class="group-right">
     <button class="home" bindtap='toHome'>
-      <image src="../../images/home-black.svg" class="home-button" />
+      <image src="../../images/home-interface.svg" class="home-button" />
     </button>
     <button class="group-share" open-type="share" hover-class='group-right-hover'>
       <image src="../../images/share.svg" mode="aspectFill" open-type="share" ></image>
     </button>
   </view>
 </view>
-<view class="card" style="background-image: url('{{meal.photo_url}}')">
+<view class="card" style="background-image: url('{{meal.photo_url}}')" wx:if="{{loading}}">
   <view class="info">
     <view class="group-content">
       <text class="group-name">{{meal.name}}</text>
-      <text class="group-date">{{meal.meal_date}}</text>
+      <text class="group-date">{{meal_date}} {{meal_time}}</text>
       <!-- <view class="rec-right">
         <view class="container">
           <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec }}" bind:init="echartInit"></ec-canvas>
         </view>
       </view> -->
-      <view class="group-members" id="members" hover-class='group-right-hover' bindtap='popOver' bind>
+      <view class="group-members" id="members" hover-class='group-right-hover' bindtap='popOver'>
         <image src="../../images/users.svg" mode="aspectFill"></image>
-        <text wx:if="{{group_users_count}}" class="small-text">{{group_users_count > 1 ? group_users_count + ' people' : group_users_count + ' person' }}</text>
+        <text wx:if="{{group_users_count}}" class="small-text">{{group_users_count > 1 ? group_users_count + ' 人' : group_users_count + ' 人' }}</text>
         <text class="small-text" wx:elif='{{!group_users_count}}'>Loading...</text>
       </view>
       <popover id='popover'>
@@ -37,20 +40,19 @@
     </view>
   </view>
 </view>
-<view class="main">
+<view class="main" wx:if="{{loading}}">
   <block wx:if="{{meal.selected_restaurant}}"> 
     <view class="restaurant-cards">
-      <view class="restaurant-card" style="margin-bottom: 0; border-radius: 5rpx 5rpx 0 0;">
+      <view class="restaurant-card" style="height:120rpx; margin-bottom: 0; border-radius: 5rpx 5rpx 0 0;">
         <view class="restaurant-details">
         <text class="name">{{meal.selected_restaurant.title}}</text>
         <text class="address">{{meal.selected_restaurant.address}}</text>
         </view>
         <view class="card-buttons">
           <view wx:if="{{meal.selected_restaurant.tel != ' '}}" class="telephone" bindtap="makeCall" id="{{index}}" wx:key=""><image src="../../images/phone.svg"></image></view>
-          <view class="map" bindtap="location" id="{{index}}"><image src="../../images/map.svg"></image></view>
         </view>
       </view>
-      <map id="myMap" markers="{{markers}}" style="width:90vw;height:500rpx;" longitude="{{meal.selected_restaurant.location.lng}}" latitude="{{meal.selected_restaurant.location.lat}}" scale='14'></map>
+      <map id="myMap" markers="{{markers}}" bindtap="selectedlocation" style="width: 89.5vw; height:400rpx; border-radius: 0 0 5rpx 5rpx; border: 2rpx solid rgb(200,200,200);" longitude="{{meal.selected_restaurant.location.lng}}" latitude="{{meal.selected_restaurant.location.lat}}" scale='16' enable-zoom="{{false}}" enable-scroll="{{false}}"></map>
     </view>
   </block>
   <block wx:elif="{{owner || meal.locked}}"> 
@@ -78,83 +80,9 @@
     </view>
   </block>
   <block wx:if="{{!owner && !meal.locked}}">
-    <text>The owner is still deciding on a place to go, please come back later!</text>
+    <view class="waiting">
+      <image src='../../images/waiting.gif'></image>
+      <text>决定中</text>
+    </view>
   </block>
 </view>
-
-
-
-<!-- <view class="container">
-
-  <view class="top-image" style="background-image: url('{{meal.photo_url}}')">
-  <image src="../../images/home.svg" class="home-button" bindtap='toHome' />
-  </view>
-
-  <view class="page-content">
-
-
-    <view class="group-card">
-
-
-    <!-- <view class="top">
-      <view class="group-left">
-        <text class="group-name">{{meal.name}}</text>
-        <text class="group-date">{{meal.meal_date}}</text>
-      </view>
-      <view class="group-right">
-        <button class="group-share" open-type="share" hover-class='group-right-hover'>
-        <image src="../../images/share.svg" mode="aspectFill"></image>
-        </button>
-        <view class="group-members" id="members" hover-class='group-right-hover' bindtap='popOver' bind><image src="../../images/users.svg" mode="aspectFill"></image>
-        <text wx:if="{{group_users_count}}" class="small-text">{{group_users_count > 1 ? group_users_count + ' people' : group_users_count + ' person' }}</text>
-        <text class="small-text" wx:elif='{{!group_users_count}}'>Loading...</text>
-        </view>
-        <popover id='popover'>
-          <block wx:for="{{users}}" wx:for-item="user" wx:key="">
-            <popover-item><view class="user-line"><image class="user-image" src="{{user.avatar}}"></image><text class="user-name">{{user.nickname}}</text></view></popover-item>
-          </block>
-        </popover>
-      </view>
-    </view>
-      <view class="rec-title" style="background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1))">
-      <view class="rec-left">
-        <text class="title">{{recommendation}}</text>
-        <text class="recommend">yedo recommends</text>
-      </view>
-      <view class="rec-right">
-        <view class="container">
-          <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec }}" bind:init="echartInit"></ec-canvas>
-        </view>
-      </view>
-      </view>
-    </view> -->
-    <!-- <block wx:if="{{owner || meal.locked}}"> 
-      <view class="restaurant-cards">
-        <block wx:for="{{locations}}" wx:for-item="location" wx:for-index="index" wx:key="">
-          <view class="restaurant-card" bindlongpress='tapLockSetRestaurant' id="{{index}}">
-            <view class="restaurant-details">
-            <text class="name">{{location.title}}</text>
-            <text class="address">{{location.address}}</text>
-            </view>
-            <view class="card-buttons">
-              <view wx:if="{{location.tel != ' '}}" class="telephone" bindtap="makeCall" id="{{index}}" wx:key=""><image src="../../images/phone.svg"></image></view>
-              <view class="map" bindtap="location" id="{{index}}"><image src="../../images/map.svg"></image></view>
-            </view>
-          </view>
-        </block>
-      </view>
-    </block>
-    <block wx:if="{{!owner && !meal.locked}}">
-    <text>The owner is still deciding on a place to go, please come back later!</text>
-    </block>
-    <form wx:if="{{meal.locked}}" report-submit bindsubmit="formSubmit">
-      <button formType="submit" type="primary">message</button>
-    </form>
-
-  </view> -->
-
-
-
-
-
-<!-- </view> -->
