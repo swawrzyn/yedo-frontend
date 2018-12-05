@@ -12,6 +12,7 @@
     <view class="image-upload">
         <view wx:if="{{!uploading}}" class="uploadbutton-box">
           <image class="uploadButton" src="../../images/upload2.png" ontap="uploadImage"/>
+          <text>上传</text>
         </view>
         <image wx:if="{{photo_url === true}}" src="../../images/loading.gif" class="successImage" />
         <image wx:elif="{{photo_url === false}}" src="" class="successImage"/>
@@ -20,15 +21,15 @@
   
   <view class="cardBanner">
     <view class="groupTitle">
-      <text>Title*:</text>
-        <input name="name" placeholder-class="input-placeholder" placeholder="My Dinner" class="groupname"/>
+      <text style='width:20%;'>名称*:</text>
+        <input name="name" placeholder-class="input-placeholder" placeholder="我的晚餐" class="groupname"/>
     </view>
 </view>
 </view>
 
 <view class="form">
   <view class="section">
-    <view class="section__title">Date*:</view>
+    <view class="section__title" style='width:20%;'>日期*:</view>
     <picker mode="date" value="{{date}}" start="{{date}}" end="{{date_end}}" bindchange="bindDateChange" class="dateTime">
       <view class="picker">
       {{date}}
@@ -37,7 +38,7 @@
   </view>
 
   <view class="section">
-    <view class="section__title">Time*:</view>
+    <view class="section__title" style='width:30%;'>时间 *：</view>
     <picker mode="time" value="{{time}}" start="01:01" end="25:01" bindchange="bindTimeChange" class="dateTime">
       <view class="picker">
       {{time}}-
@@ -45,23 +46,23 @@
     </picker>
   </view>
 
-    <view class="location-title">Location*</view>
+    <view class="location-title">位置 *</view>
     <view class='location-buttons'>
 <view class='ownlocation'>
       <button class="own-location-button" bindtap="useOwnLocation"><image wx:if="{{owner_location}}" src="../../images/map.svg" /></button>
-      <text>use your location</text>   
+      <text>你的位置</text>   
 </view>
 
 <view class='alllocation'>  
       <button class="everyone-location-button" bindtap="useAllLocations"><image wx:if="{{owner_location === false}}" src="../../images/map.svg" /></button>
-      <text>use everyone's location</text>
+      <text>每个人的位置</text>
 </view>
     
     </view>
     </view>
 
     <view class="input-button">
-      <button formType="submit" hover-class="button-hover" class="submitButton">SUBMIT</button>
+      <button formType="submit" hover-class="button-hover" class="submitButton">开始</button>
     </view>
     </form>
   </view> 

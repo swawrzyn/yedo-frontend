@@ -212,6 +212,10 @@ button::after {
   font-size: 12px;
 }
 
+.groupTitle {
+  width: 20%;
+}
+
 .rec-title {
   width: 95vw;
   height: 175rpx;
