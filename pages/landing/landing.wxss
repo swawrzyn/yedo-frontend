@@ -1,5 +1,17 @@
-.container {
-  height: 100vh;
-  width: 100vw;
-  background: #FBE251;
+page {
+  background: linear-gradient(to bottom, #FBE251 0%,#FBE251 40%,#FBE251 40%,white 40%,white 100%);
+}
+
+.loading {
+margin-top: 20%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+}
+
+.loading image {
+margin-top: 20rpx;
+height: 50rpx;
+width: 50rpx;
 }

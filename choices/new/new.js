@@ -1,258 +1,250 @@
 Page({
   data: {
     user_location: '',
-    hidden: true,
-    boxclass: "box",
-      one: {
-        outer: 'box one',
-        inner: 'box-content hidden',
-        number: 0,
-        bindtap: 'testHidden'
-      },
-      two: {
-        outer: 'box two',
-        inner: 'box-content hidden',
-        number: 0,
-        bindtap: 'testHidden'
-      },
-      three: {
-        outer: 'box three',
-        inner: 'box-content hidden',
-        number: 0,
-        bindtap: 'testHidden'
-      },
-      four: {
-        outer: 'box four',
-        inner: 'box-content hidden',
-        number: 0,
-        bindtap: 'testHidden'
-      },
-      five: {
-        outer: 'box five',
-        inner: 'box-content hidden',
-        number: 0,
-        bindtap: 'testHidden'
-      },
-      six: {
-        outer: 'box six',
-        inner: 'box-content hidden',
-        number: 0,
-        bindtap: 'testHidden'
-      },
-      seven: {
-        outer: 'box seven',
-        inner: 'box-content hidden',
-        number: 0,
-        bindtap: 'testHidden'
-      },
-      eight: {
-        outer: 'box eight',
-        inner: 'box-content hidden',
-        number: 0,
-        bindtap: 'testHidden'
-      },
-      nine: {
-        outer: 'box nine',
-        inner: 'box-content hidden',
-        number: 0,
-        bindtap: 'testHidden'
-      },
 
-    
-    items: [
-      [['苏浙菜', false], ['上海本帮菜', false], ['浙菜', false], ['淮扬菜', false], ['苏帮菜', false], ['南京菜', false], ['无锡菜', false], ['温州菜', false], ['衢州菜', false]],
-      [['日本料理', false], ['寿司', false], ['日式烧烤', false], ['日式快餐', false], ['日式面条', false], ['日式铁板烧', false], ['日式自助', false], ['日式火锅', false]],
-      [['火锅', false], ['川菜', false], ['湘菜', false], ['新疆菜', false], ['云南菜', false], ['东北菜', false], ['西北菜', false], ['台湾菜', false], ['江西菜', false]],
-      [['烧烤', false], ['海鲜', false], ['小龙虾', false], ['蟹宴', false], ['小吃快餐', false]],
-      [['咖啡厅', false], ['面包甜点', false], ['下午茶', false], ['Brunch', false]],
-      [['比萨', false], ['牛排', false], ['意大利菜', false], ['轻食沙拉', false], ['法国菜', false], ['西班牙菜', false], ['拉美烧烤', false], ['中东菜', false], ['西餐自助', false]],
-      [['泰国菜', false], ['南洋中菜', false], ['新加坡菜', false], ['越南菜', false], ['印度菜', false]],
-      [['韩国泡菜饼', false], ['韩国五花肉', false], ['石锅拌饭', false], ['韩国烤肉', false], ['韩国炒年糕', false]],
-      [['粤菜馆', false], ['茶餐厅', false], ['潮汕菜', false], ['燕翅鲍', false]]
-    ],
-
-    items_index: ['本帮江浙菜', '日本菜', '中式', '小吃夜宵', '饮品甜点', '西式', '东南亚菜', '韩国料理', '粤菜'],
-    items_number: [0, 0, 0, 0, 0, 0, 0, 0, 0],
-    choices: []
-
-
+    multiArray1: [['本帮江浙菜', '日本菜', '中式', '小吃夜宵', '饮品甜点', '西式', '东南亚菜', '韩国料理', '粤菜'],
+                 ['苏浙菜', '上海本帮菜', '浙菜', '淮扬菜', '苏帮菜', '南京菜', '无锡菜', '温州菜', '衢州菜']], 
+    multiArray2: [['本帮江浙菜', '日本菜', '中式', '小吃夜宵', '饮品甜点', '西式', '东南亚菜', '韩国料理', '粤菜'],
+                 ['苏浙菜', '上海本帮菜', '浙菜', '淮扬菜', '苏帮菜', '南京菜', '无锡菜', '温州菜', '衢州菜']], 
+    multiArray3: [['本帮江浙菜', '日本菜', '中式', '小吃夜宵', '饮品甜点', '西式', '东南亚菜', '韩国料理', '粤菜'],
+                 ['苏浙菜', '上海本帮菜', '浙菜', '淮扬菜', '苏帮菜', '南京菜', '无锡菜', '温州菜', '衢州菜']], 
+    multiIndex1: '',
+    multiIndex2: '',
+    multiIndex3: '',
   },
 
   /**
    * Lifecycle function--Called when page load
    */
+
+  bindMultiPickerChange1: function (e) {
+    this.setData({
+      multiIndex1: e.detail.value
+    })
+  },
+  bindMultiPickerChange2: function (e) {
+    this.setData({
+      multiIndex2: e.detail.value
+    })
+  },
+  bindMultiPickerChange3: function (e) {
+    this.setData({
+      multiIndex3: e.detail.value
+    })
+  },
+  bindMultiPickerColumnChange1: function (e) {
+
+    if (this.data.multiIndex1 === '') {
+      this.setData({
+        multiIndex1: [0, 0]
+      })
+    }
+    var data = {
+      multiArray1: this.data.multiArray1,
+      multiIndex1: this.data.multiIndex1
+    };
+    data.multiIndex1[e.detail.column] = e.detail.value;
+    switch (e.detail.column) {
+      case 0:
+        switch (data.multiIndex1[0]) {
+          case 0:
+            data.multiArray1[1] = ['苏浙菜', '上海本帮菜', '浙菜', '淮扬菜', '苏帮菜', '南京菜', '无锡菜', '温州菜', '衢州菜'];
+            break;
+          case 1:
+            data.multiArray1[1] = ['日本料理', '寿司', '日式烧烤', '日式快餐', '日式面条', '日式铁板烧', '日式自助', '日式火锅'];
+            break;
+          case 2:
+            data.multiArray1[1] = ['火锅', '川菜', '湘菜', '新疆菜', '云南菜', '东北菜', '西北菜', '台湾菜', '江西菜'];
+            break;
+          case 3:
+            data.multiArray1[1] = ['烧烤', '海鲜', '小龙虾', '蟹宴', '小吃快餐'];
+            break;
+          case 4:
+            data.multiArray1[1] = ['咖啡厅', '面包甜点', '下午茶', 'Brunch'];
+            break;
+          case 5:
+            data.multiArray1[1] = ['比萨', '牛排', '意大利菜', '轻食沙拉', '法国菜', '西班牙菜', '拉美烧烤', '中东菜', '西餐自助'];
+            break;
+          case 6:
+            data.multiArray1[1] = ['泰国菜', '南洋中菜', '新加坡菜', '越南菜', '印度菜'];
+            break;
+          case 7:
+            data.multiArray1[1] = ['韩国泡菜饼', '韩国五花肉', '石锅拌饭', '韩国烤肉', '韩国炒年糕'];
+            break;
+          case 8:
+            data.multiArray1[1] =  ['粤菜馆', '茶餐厅', '潮汕菜', '燕翅鲍'];
+            break;
+        }
+        data.multiIndex1[1] = 0;
+        break;
+
+    }
+    this.setData(data);
+  },
+
+  bindMultiPickerColumnChange2: function (e) {
+
+    if (this.data.multiIndex2 === '') {
+      this.setData({
+        multiIndex2: [0, 0]
+      })
+    }
+
+    var data = {
+      multiArray2: this.data.multiArray2,
+      multiIndex2: this.data.multiIndex2
+    };
+    data.multiIndex2[e.detail.column] = e.detail.value;
+    switch (e.detail.column) {
+      case 0:
+        switch (data.multiIndex2[0]) {
+          case 0:
+            data.multiArray2[1] = ['苏浙菜', '上海本帮菜', '浙菜', '淮扬菜', '苏帮菜', '南京菜', '无锡菜', '温州菜', '衢州菜'];
+            break;
+          case 1:
+            data.multiArray2[1] = ['日本料理', '寿司', '日式烧烤', '日式快餐', '日式面条', '日式铁板烧', '日式自助', '日式火锅'];
+            break;
+          case 2:
+            data.multiArray2[1] = ['火锅', '川菜', '湘菜', '新疆菜', '云南菜', '东北菜', '西北菜', '台湾菜', '江西菜'];
+            break;
+          case 3:
+            data.multiArray2[1] = ['烧烤', '海鲜', '小龙虾', '蟹宴', '小吃快餐'];
+            break;
+          case 4:
+            data.multiArray2[1] = ['咖啡厅', '面包甜点', '下午茶', 'Brunch'];
+            break;
+          case 5:
+            data.multiArray2[1] = ['比萨', '牛排', '意大利菜', '轻食沙拉', '法国菜', '西班牙菜', '拉美烧烤', '中东菜', '西餐自助'];
+            break;
+          case 6:
+            data.multiArray2[1] = ['泰国菜', '南洋中菜', '新加坡菜', '越南菜', '印度菜'];
+            break;
+          case 7:
+            data.multiArray2[1] = ['韩国泡菜饼', '韩国五花肉', '石锅拌饭', '韩国烤肉', '韩国炒年糕'];
+            break;
+          case 8:
+            data.multiArray2[1] =  ['粤菜馆', '茶餐厅', '潮汕菜', '燕翅鲍'];
+            break;
+        }
+        data.multiIndex2[1] = 0;
+        break;
+
+    }
+    this.setData(data);
+  },
+
+  bindMultiPickerColumnChange3: function (e) {
+    if (this.data.multiIndex3 === '') {
+      this.setData({
+        multiIndex3: [0, 0]
+      })
+    }
+
+    var data = {
+      multiArray3: this.data.multiArray3,
+      multiIndex3: this.data.multiIndex3
+    };
+    data.multiIndex3[e.detail.column] = e.detail.value;
+    switch (e.detail.column) {
+      case 0:
+        switch (data.multiIndex3[0]) {
+          case 0:
+            data.multiArray3[1] = ['苏浙菜', '上海本帮菜', '浙菜', '淮扬菜', '苏帮菜', '南京菜', '无锡菜', '温州菜', '衢州菜'];
+            break;
+          case 1:
+            data.multiArray3[1] = ['日本料理', '寿司', '日式烧烤', '日式快餐', '日式面条', '日式铁板烧', '日式自助', '日式火锅'];
+            break;
+          case 2:
+            data.multiArray3[1] = ['火锅', '川菜', '湘菜', '新疆菜', '云南菜', '东北菜', '西北菜', '台湾菜', '江西菜'];
+            break;
+          case 3:
+            data.multiArray3[1] = ['烧烤', '海鲜', '小龙虾', '蟹宴', '小吃快餐'];
+            break;
+          case 4:
+            data.multiArray3[1] = ['咖啡厅', '面包甜点', '下午茶', 'Brunch'];
+            break;
+          case 5:
+            data.multiArray3[1] = ['比萨', '牛排', '意大利菜', '轻食沙拉', '法国菜', '西班牙菜', '拉美烧烤', '中东菜', '西餐自助'];
+            break;
+          case 6:
+            data.multiArray3[1] = ['泰国菜', '南洋中菜', '新加坡菜', '越南菜', '印度菜'];
+            break;
+          case 7:
+            data.multiArray3[1] = ['韩国泡菜饼', '韩国五花肉', '石锅拌饭', '韩国烤肉', '韩国炒年糕'];
+            break;
+          case 8:
+            data.multiArray3[1] =  ['粤菜馆', '茶餐厅', '潮汕菜', '燕翅鲍'];
+            break;
+        }
+        data.multiIndex3[1] = 0;
+        break;
+
+    }
+    this.setData(data);
+  },
+
   onLoad: function (options) {
     const app = getApp();
     const page = this;
     console.log(app.globalData.tempMeal);
     
     if (app.globalData.tempMeal){
-      let meal_date_string = app.globalData.tempMeal.meal_date;
+      const mealDateObj = new Date(app.globalData.tempMeal.meal_date);
+      const meal_date = mealDateObj.toLocaleDateString('zh-hans');
+      const meal_time = mealDateObj.toLocaleTimeString('zh-hans', { hour12: false, hour: '2-digit', minute:'2-digit'});
       this.setData({
         meal: app.globalData.tempMeal,
-        meal_date_string: meal_date_string,
+        meal_date: meal_date,
+        meal_time: meal_time
       })
     } else {
       const MealTable = new wx.BaaS.TableObject('meals' + app.globalData.database);
       MealTable.get(options.group_id).then( res => {
-        const meal_date_string = res.data.meal_date.substr(0, 10);
+        const mealDateObj = new Date(res.data.meal_date);
+        const meal_date = mealDateObj.toLocaleDateString('zh-hans');
+        const meal_time = mealDateObj.toLocaleTimeString('zh-hans', { hour12: false, hour: '2-digit', minute:'2-digit'});
         page.setData({
           meal: res.data,
           mealId: res.data.id,
-          meal_date_string: meal_date_string
+          meal_date: meal_date,
+          meal_time: meal_time
         })
       });
     }
 
   },
 
-  makeHidden: function (e) {
-    console.log('make hidden')
-    let boxArray = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine'];
-
-    boxArray.forEach(box => {
-      let param = { };
-      let string1, string2, string3, string4;
-        string1 = `${box}.outer`;
-        param[string1] = `box ${box}`
-        string2 = `${box}.inner`; 
-        param[string2] = 'box-content hidden';
-        string3 = `${box}.title`
-        param[string3] = ''
-        string4 = `${box}.bindtap`
-        param[string4] = 'testHidden'
-        this.setData(param);
-    })
-  },
-
- 
-  testHidden: function (e) {
-    console.log('test hidden', e)
-
-    this.showBox(e.currentTarget.id);
-  },
-
-  pickItem: function (e) {
-    const page = this;
-    console.log(e.target.dataset);
-
-    if (this.data.items[e.target.dataset.parentindex][e.target.dataset.index][1]){
-      let params = {};
-      params[`items[${e.target.dataset.parentindex}][${e.target.dataset.index}][1]`] = false;
-      this.setData(params);
-      const newArray = []
-      this.data.choices.forEach(choice => {
-        if (choice != (e.target.dataset.parent + e.target.dataset.item)) {
-          newArray.push(choice);
-        }
-      });
-      params = {}
-      params[`items_number[${e.target.dataset.parentindex}]`] = this.data.items_number[e.target.dataset.parentindex] - 1
-      this.setData(params);
-      this.setData({
-        choices: newArray
-      })
-      
-    } else {
-      if (this.data.choices.length < 3) {
-        let params = {
-          choices: this.data.choices.concat([e.target.dataset.item])
-        }
-        params[`items[${e.target.dataset.parentindex}][${e.target.dataset.index}][1]`] = true;
-        params[`items_number[${e.target.dataset.parentindex}]`] = this.data.items_number[e.target.dataset.parentindex] + 1
-        this.setData(params);
-        this.setData(params);
-      } else {
-        wx.showToast({
-          title: 'wrong!'
-        })
-      }
-    }
-
-    //this.makeHidden();
-
-  },
-
-  showBox: function(boxId) {
-    
-    let string1, string2, string3, string4;
-      let param = { };
-
-      string1 = `${boxId}.outer`;
-        param[string1] = `box large ${boxId}`
-        string2 = `${boxId}.inner`; 
-        param[string2] = 'box-content';
-        string3 = `${boxId}.title`
-        param[string3] = 'hidden'
-        string4 = `${boxId}.bindtap`
-        param[string4] = ''
-        this.setData(param);
-
-    // boxArray.forEach(box => {
-      
-
-    //   if (box === boxId) {
-        
-    //   } else {
-    //     string1 = `${box}.outer`;
-    //     param[string1] = `box ${box}`
-    //     string2 = `${box}.inner`; 
-    //     param[string2] = 'box-content hidden';
-    //     string3 = `${box}.title`
-    //     param[string3] = 'hidden'
-
-    //     this.setData(param);
-    //   }
-    // })
-  },
-
-
-  /**
-   * Lifecycle function--Called when page is initially rendered
-   */
   onReady: function () {
 
   },
 
-  /**
-   * Lifecycle function--Called when page show
-   */
   onShow: function () {
 
   },
 
-  /**
-   * Lifecycle function--Called when page hide
-   */
   onHide: function () {
   },
 
-  /**
-   * Lifecycle function--Called when page unload
-   */
   onUnload: function () {
 
   },
 
-  /**
-   * Page event handler function--Called when user drop down
-   */
   onPullDownRefresh: function () {
 
   },
 
-  /**
-   * Called when page reach bottom
-   */
   onReachBottom: function () {
 
   },
 
-  /**
-   * Called when user click on the top right corner to share
-   */
   onShareAppMessage: function () {
 
+  },
+
+  toHome: function () {
+    wx.redirectTo({
+      url: '/pages/index/index'
+    })
   },
 
   bindPickerChange1: function (e) {
@@ -282,7 +274,6 @@ Page({
           wx.authorize({
             scope: 'scope.userLocation',
             success() {
-              console.log('success');
               wx.chooseLocation({
                 success: res => {
                   this.setData({
@@ -341,14 +332,29 @@ Page({
     //checking if using owner or users location
     if (!page.data.meal.owner_location) {
       if (page.data.user_location) {
-        page.saveMealAndChoices();
+        if (page.data.multiIndex1 === '' || page.data.multiIndex2 === '' || page.data.multiIndex3 === ''){
+          wx.showToast({
+            title: '请做出三个选择',
+            image: '../../images/close.svg'
+          })
+        } else {
+          page.saveMealAndChoices();
+        }
       } else {
         wx.showToast({
-          title: 'select a location',
+          title: '请选择位置',
+          image: '../../images/close.svg'
         })
       }
     } else {
-      page.saveMealAndChoices();
+      if (page.data.multiIndex1 === '' || page.data.multiIndex2 === '' || page.data.multiIndex3 === ''){
+        wx.showToast({
+          title: '请做出三个选择',
+          image: '../../images/close.svg'
+        })
+      } else {
+        page.saveMealAndChoices();
+      }
     }
     
   },
@@ -357,7 +363,9 @@ Page({
     const app = getApp();
     const page = this;
     let ChoicesTable = new wx.BaaS.TableObject("choices" + app.globalData.database);
-   
+    wx.showLoading({
+      title: '加载中'
+    })
     if (app.globalData.tempMeal) {
       console.log("globalData FOUND!");
       app.addMeal(this.data.meal).then(res => {
@@ -371,7 +379,7 @@ Page({
         const newchoice = ChoicesTable.create();
         newchoice.set({
           meal_id: res,
-          category_array: this.data.choices,
+          category_array: [this.data.multiArray1[1][this.data.multiIndex1[1]], this.data.multiArray2[1][this.data.multiIndex2[1]], this.data.multiArray3[1][this.data.multiIndex3[1]]],
           user_location: this.data.user_location
         });
         newchoice.save().then(res => {
@@ -385,7 +393,7 @@ Page({
       const newchoice = ChoicesTable.create();
       newchoice.set({
         meal_id: page.data.mealId,
-        category_array: this.data.choices,
+        category_array: [this.data.multiArray1[1][this.data.multiIndex1[1]], this.data.multiArray2[1][this.data.multiIndex2[1]], this.data.multiArray3[1][this.data.multiIndex3[1]]],
         user_location: page.data.user_location
       });
       newchoice.save().then(res => {

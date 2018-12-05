@@ -1,12 +1,7 @@
-//index.js
-//获取应用实例
 const app = getApp()
 
 Page({
   data: {
-  },
-
-  onLoad: function () {
   },
 
   userInfoHandler(data) {
@@ -18,7 +13,13 @@ Page({
       } else {
         wx.navigateTo({
           url: '/users/show/show'
-        })
+        }),
+          wx.showLoading({
+            title: '加载中',
+          }),
+          setTimeout(function () {
+            wx.hideLoading()
+          }, 1000)
       }
     }, res => {
     })
