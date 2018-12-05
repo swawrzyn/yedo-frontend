@@ -12,16 +12,24 @@ const app = getApp();
 
 Page({
   data: {
-    region_zh: ["浦东新", "徐汇", "长宁", "普陀", "闸北", "虹口", "杨浦", "黄浦", "卢湾", "静安", "宝山", "闵行", "嘉定", "金山", "松江", "青浦", "南汇", "奉贤", "崇明"],
-    region_en: ["pudong dist.", "xuhui dist.", "changning dist.", "putuo dist.", "zhabei dist.", "hongkou dist.", "yangpu dist.", "huangpu dist.", "luwan dist.", "jingan dist.", "baoshan dist.", "minhang dist.", "jiading dist.", "jinshan dist.", "songjiang dist.", "qingpu dist.", "nanhui dist.", "fengxian dist.", "chongming dist."],    
-  region_geo: [[121.535969, 31.233192], [121.443983, 31.201321], [121.441665, 31.208842], [121.413203, 31.252134], [121.459771, 31.282259], [121.487367, 31.268926], [121.525599, 31.308673], [121.498811, 31.22396], [121.497087, 31.208642], [121.455118, 31.230877], [121.356807, 31.409552], [121.325331, 31.202588], [121.269564, 31.376878], [121.34804, 30.75154], [121.234207, 31.034162], [121.136471, 31.154885], [121.767728, 30.968787], [121.48487, 30.91824], [121.488319, 31.63721]]
+    time: '',
+    uploading: false
   },
+
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
     // setting the table as meals, it's tableid is 58396
-
+    let date = new Date();
+    let date_end = new Date();
+    date_end.setFullYear(date.getFullYear() + 1);
+    date_end = date_end.toISOString().substr(0, 10);
+    date = date.toISOString().substr(0,10);
+    this.setData({
+      date: date,
+      date_end: date_end
+    })
   },
 
   /**
@@ -80,9 +88,77 @@ Page({
     });
   },
 
+  useOwnLocation: function (e) {
+    const page = this;
+    
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.userLocation']) {
+          wx.authorize({
+            scope: 'scope.userLocation',
+            success() {
+              console.log('success');
+              wx.chooseLocation({
+                success: res => {
+                  this.setData({
+                    owner_location: true,
+                    meal_location: new wx.BaaS.GeoPoint(res.longitude, res.latitude),
+                  })
+                }
+              });
+            },
+            fail(err) {
+              page.setData({
+                noLoc: true
+              })
+              if (page.data.noLoc) {
+                wx.showModal({
+                  title: 'Location permissions',
+                  content: "yedo requires location permissions to operate. Please check 'Use My Location' on the following screen and click again.",
+                  success: res => {
+                    if (res.confirm) {
+                      wx.openSetting({
+                        success: (res) => {
+                          console.log('fail res: ', res);
+                        },
+                        fail: res => {
+                          console.log('errrr', res)
+                        }
+                      })
+                    }
+                  }
+                })
+              }
+            }
+          })
+        } else {
+          console.log('auth')
+          page.setData({
+            noLoc: false
+          })
+          wx.chooseLocation({
+            success: res => {
+              page.setData({
+                owner_location: true,
+                meal_location: new wx.BaaS.GeoPoint(res.longitude, res.latitude),
+              })
+            }
+          });
+        }
+      }
+    })
+  },
+
+  useAllLocations: function(e) {
+    this.setData({
+      owner_location: false,
+      meal_location: ''
+    })
+  },
+
   uploadImage: function(e) {
     let MyFile = new wx.BaaS.File();
-    
+    this.setData({ uploading: true })
     let metaData = { categoryName: 'group_photos' };
     let deny;
     const page = this;
@@ -107,11 +183,9 @@ Page({
           });
         } else {
           MyFile.upload(fileParams, metaData).then(res => {
-            console.log("uploaded successfully");
             page.setData({
-              photo_url: res.data.path + '!/fw/800'
+              photo_url: res.data.path + '!/fw/800',
             })
-            console.log("photo url: ", page.data.photo_url);
           }, err => {
           })
         }
@@ -119,44 +193,54 @@ Page({
       })
   },
 
+
+  bindDateChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      date: e.detail.value
+    })
+  },
+  bindTimeChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      time: e.detail.value
+    })
+  },
+
   formSubmit: function(e) {
     let { value } = e.detail;
-    value['inputDate'] = 0;
-    const day = getSelectedDay()[0] || 0;
-    let inputDate;
+    value['time'] = this.data.time;
+    value['owner_location'] = this.data.owner_location
+    // if (day) {
+    //   inputDate = new Date(`${day.year}-${day.month}-${day.day}`);
+    //   inputDate = (inputDate.toISOString()).toString()
+    //   value['inputDate'] = 1;
+    //   value['owner_location'] = this.data.owner_location
+    // } 
 
-    if (day) {
-      inputDate = new Date(`${day.year}-${day.month}-${day.day}`);
-      inputDate = (inputDate.toISOString()).toString()
-      value['inputDate'] = 1;
-    } 
-
-    console.log(value);
-
+    this.data.time
+    this.data.date
+    let date_time = new Date(`${this.data.date} ${this.data.time}`);
+    date_time = date_time.toISOString();
     if (!this.oValidator.checkData(value)) return
+
     if (this.data.photo_url) {
       app.globalData.tempMeal = {
         name: e.detail.value.name,
-        location: {
-          coordinates: this.data.region_geo[e.detail.value.district],
-          type: "Point"
-        },
-        meal_date: inputDate,
+        meal_location: this.data.meal_location,
+        owner_location: this.data.owner_location,
+        meal_date: date_time,
         photo_url: this.data.photo_url
       }
     } else {
       app.globalData.tempMeal = {
         name: e.detail.value.name,
-        location: {
-          coordinates: this.data.region_geo[e.detail.value.district],
-          type: "Point"
-        },
-        meal_date: inputDate,
+        meal_location: this.data.meal_location,
+        owner_location: this.data.owner_location, 
+        meal_date: date_time,
         photo_url: 'https://cloud-minapp-22402.cloud.ifanrusercontent.com/1gSJoT23AbOTUZ6J.jpg!/fw/800'
       }
     }
-    
-
     
 
     wx.navigateTo({
@@ -185,22 +269,22 @@ Page({
         name: {
           required: true,
         },
-        district: {
-          intGreater: 0
+        time: {
+          required: true 
         },
-        inputDate: {
-          intGreater: 1 
+        owner_location: {
+          required: true
         }
       },
       messages: {
         name: {
           required: 'Please enter a group name',
         },
-        district: {
-          intGreater: 'Must choose a district'
+        time: {
+          required: 'Please select a time'
         },
-        inputDate: {
-          intGreater: 'Please select a date'
+        owner_location: {
+          required: 'Please select a location type'
         }
       },
     })

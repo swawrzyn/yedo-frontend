@@ -16,7 +16,18 @@ Page({
     this.setData({
       mealId: options.meal_id
     });
-    this.checkUserMealStatus(this);
+    
+    const page = this;
+    this.checkMealLockStatus(options.meal_id).then(res => {
+      if (res) {
+        wx.redirectTo({
+          url: `/groups/show/show?id=${page.data.mealId}`,
+        })
+      } else {
+        page.checkUserMealStatus();
+      }
+    })
+    
   },
 
   /**
@@ -81,9 +92,11 @@ Page({
 
   },
 
-  checkUserMealStatus: function (page) {
+  checkUserMealStatus: function () {
+    const page = this;
+    const app = getApp();
     //checking if user has created any choices for given meal_id passed in parameters
-    const ChoicesTable = new wx.BaaS.TableObject('choices');
+    const ChoicesTable = new wx.BaaS.TableObject('choices' + app.globalData.database);
     let userQuery = new wx.BaaS.Query();
     let mealQuery = new wx.BaaS.Query();
     userQuery.compare('created_by', '=', wx.BaaS.storage.get('uid'));
@@ -100,6 +113,18 @@ Page({
         wx.redirectTo({
           url: `/choices/new/new?group_id=${page.data.mealId}`,
         })
+      }
+    })
+  },
+
+  checkMealLockStatus: function (mealId) {
+    const app = getApp();
+    const MealsTable = new wx.BaaS.TableObject('meals' + app.globalData.database);
+    return MealsTable.get(mealId).then(res => {
+      if (res.data.locked) {
+        return true;
+      } else {
+        return false;
       }
     })
   }

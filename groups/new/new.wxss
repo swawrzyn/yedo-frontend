@@ -1,52 +1,154 @@
 @import '/template/calendar/index.wxss';
+ 
+
+page{
+  /* overflow:hidden; */
+}
 
 .container {
-  background: #FBE251;
+  background:linear-gradient(to bottom, #FBE251 0%,#FBE251 40%,#FBE251 40%,white 40%,white 100%);
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  height: 100vh;
+  height: 100%;
   width: 101vw;
   margin: 0;
   padding: 0;
-  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow:hidden;
+}
+
+.topcard{
+border-radius:5px;
+background-color:white;
+/* padding:10px 0px; */
+position:relative;
+height:264px;
+align-items:center;
+display:flex;
+align-content:center;
+justify-content:center;
+margin-bottom:20px;
+box-shadow:1px 0px 20px 1px rgba(0, 0, 0, 0.2);
+/* margin-top:6%; */
+
+}
+
+.cardBanner{
+  position:absolute;
+  bottom:0px;
+  width:100%;
+  margin-bottom:28px;
+  background-color:rgba(250,250,250,0.8);
+}
+
+.dateCard{
+  display:flex;
+ padding: 0 10px;
+}
+
+.uploadButton{
+  height:70px;
+  width:70px;
+  margin-bottom:12px;
+}
+
+
+.image-upload{
+position:absolute;
+display:flex;
+flex-direction:column;
+align-items:center;
+font-size:15px;
+/* margin-top:38px;
+margin-bottom:94px; */
+width: 100%;
+height: 100%;
+justify-content:center;
+/* top:15px; */
+}
+
+.uploadbutton-box {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 100rpx;
+}
+
+.successImage{
+height:150rpx;
+width:150rpx;
+padding-bottom: 100rpx;
+}
+
+.successImage1{
+height:100%;
+width:100%;
+position:absolute;
+/* margin-top:-53px; */
+border-radius:2%;
+}
+
+.groupTitle{
+  font-size:15px;
+  display:flex;
+  align-items:center;
+  padding: 0 10px;
 }
 
 .title{
-  margin-bottom:50rpx;
+  margin: 10px 0px;
 }
 
 .title text {
-  font-size: 36px;
-  margin-top: 200rpx 0;
-}
-
-.hamburger{
-  height:1000px;
-  width:120px;
+  font-size: 20px;
 }
 
 .input {
-  margin-top:-5px;
-  width: 75%;
+  /* margin-top:-5px; */
+  width: 90%;
 }
 
 .input input {
-  height: 80rpx;
-  padding: 0 25rpx;
-  background: rgba(250,250,250,0.9);
+  height: 30rpx;
   color: black;
-  box-shadow: 1px 4px 7px #c1c1c1;
-  margin: 25rpx 0; 
   border-radius:5px;
-
+  font-size:20px;
+  text-align:center;
+  width:100%;
 }
 
 .input-placeholder {
-  
   color: black;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   opacity: 0.5; 
+  align-text:center;
+}
+
+.section{
+  font-size:15px;
+  display:flex;
+  align-items:center;
+}
+
+.dateTime{
+  height: 30rpx;
+  padding: 0 25rpx;
+  color: black;
+  margin: 25rpx 0; 
+  border-radius:5px;
+  font-size:15px;
+  text-align:center;
+  width:193rpx;
+
+}
+
+.picker{
+  color:grey;
+  display: block;
+  /* padding-top: 12px; */
+  height: 100%;
 }
 
 .district-select {
@@ -54,7 +156,7 @@
   padding: 0 25rpx;
    background: rgba(250,250,250,0.9);
   color: black;
-  box-shadow: 1px 4px 7px #c1c1c1;
+box-shadow:0px 0px 10px 1px rgba(0, 0, 0, 0.2);
    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 25rpx 0;
   display: flex;
@@ -63,96 +165,60 @@
    border-radius:5px;
 }
 
-.input .calendar-wrap {
-  width: calc(100% - 2px);
-  margin: auto 0;
-  height: 570rpx;
-  background: rgba(250,250,250,0.9);
-  color: black;
-  box-shadow: 1px 4px 7px #c1c1c1;
-  border-radius:5px;
+.location-buttons {
+  display:flex;
+  justify-content: space-around;
+  align-items: start;
+  font-size:12px;
+  margin-top:15px;
+margin-bottom:20px;
+flex-direction: column;
+
 }
 
-.pink-color {
-  color:black;
-}
-
-.grid,
-.week {
-  width: 80rpx;
-  height: 60rpx;
-}
-
-.day {
-  width: 60rpx;
-  height: 60rpx;
-  font-size: 26rpx;
-  font-weight: 200;
-  border-radius: 0;
-}
-
-.week {
-  line-height: 74rpx;
-  color: black;
-  font-weight: normal;
-}
-
-.calendar .disable-day-color {
-  color: #c4c4c4;
-}
-
-.calendar .disable-day-circle {
-  background-color: transparent;
-}
-
-.calendar .normal-day-color {
-  color: #000;
-  font-weight: bold;
-}
-
-.calendar .day-choosed-color {
-  color: #000;
-  font-weight: bold;
-}
-
-.calendar .border-radius {
-  border-radius: 0;
+.location-buttons .own-location-button {
   position: relative;
-  left: 0;
-  top: 0;
-}
-
-.calendar .pink-bg {
-  background-color: transparent;
   border: 1px black solid;
-  transition: all 0.3s;
-  animation-name: choosed;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: 1;
+  width:40px;
+  height:40px;
 }
 
-@keyframes choosed {
-  from {
-    transform: scale(1);
-  }
 
-  50% {
-    transform: scale(1.1);
-  }
-
-  to {
-    transform: scale(1);
-  }
+.own-location-button image {
+  height: 50rpx;
+  width: 50rpx;
+  position: absolute;
+  
 }
+
+.location-buttons .everyone-location-button {
+  position: relative;
+border: 1px black solid;
+  width:40px;
+  height:40px;
+}
+
+.everyone-location-button image {
+  height: 50rpx;
+  width: 50rpx;
+  position: absolute;
+}
+
+.location-buttons button {
+  width: 100%;
+}
+
 
 button {
-  background: rgba(250,250,250,0.9);
+ background: rgba(250,250,250,0.8);
   color: black;
-  box-shadow: 1px 4px 7px #c1c1c1;
-  margin: 25rpx 0;
-  border-radius: 5px;
-  margin-bottom:30px;
+  border-radius: 4px;
+  font-size:15px;
+  word-wrap: normal;
+  display:flex;
+justify-content:center;
+align-items:center;
+margin:0px 10px;
 }
 
 .upload-button {
@@ -162,18 +228,51 @@ button {
   position: relative;
 }
 
-.upload-button text {
-}
 
 .upload-button image {
   height: 50rpx;
   width: 50rpx;
   position: absolute;
   right: 25rpx;
-
 }
 
 .button-hover {
   background: black;
   color: white;
+}/* pages/test/test.wxss */
+
+.submitButton{
+   background: #FBE251;
+  color: black;
+  box-shadow: 1px 1px 1px 1.5px grey;
 }
+
+.submitButton:active {
+  top: 2px;
+  -webkit-box-shadow: 0.5px 0.5px 0.5px 1px grey ;
+  box-shadow: 0.5px 0.5px 0.5px 0.5px grey ;
+}
+
+.input-button{
+  margin:25px 50px;
+}
+
+.location-title{
+  font-size:20px;
+  margin-top:25px;
+}
+
+.ownlocation{
+display:flex;
+align-items:center;
+font-size:18px;
+margin:20px 60px;
+}
+
+.alllocation{
+display:flex;
+align-items:center;
+font-size:18px;
+margin:20px 60px;
+}
+

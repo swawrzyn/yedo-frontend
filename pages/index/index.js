@@ -10,7 +10,6 @@ Page({
   },
 
   userInfoHandler(data) {
-    console.log(data);
     wx.BaaS.handleUserInfo(data).then(res => {
       if (data.currentTarget.id === 'newmeal') {
             wx.navigateTo({
