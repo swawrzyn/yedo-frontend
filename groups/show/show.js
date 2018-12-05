@@ -283,7 +283,7 @@ Page({
     let choicesArray = {};
     // adding up all choices
     if (choices.length === 1) {
-      return { recommended_category: choices[0].recommended_category[0], votes: [3, 2, 1] };
+      return { recommended_category: choices[0].category_array[0], votes: [3, 2, 1] };
     }
 
     choices.forEach(choice_array => {
@@ -513,6 +513,7 @@ Page({
       } else {
         if (page.data.recomp) {
           // if recompute is necessary
+          console.log(results[1]);
           const recommendation = page.recomputeRecommendation(results[1]);
           let centreLoc;
           //checking if using owner location or all locations
