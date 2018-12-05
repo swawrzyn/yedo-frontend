@@ -12,7 +12,8 @@ const app = getApp();
 
 Page({
   data: {
-    time: ''
+    time: '',
+    uploading: false
   },
 
   /**
@@ -157,7 +158,7 @@ Page({
 
   uploadImage: function(e) {
     let MyFile = new wx.BaaS.File();
-    
+    this.setData({ uploading: true })
     let metaData = { categoryName: 'group_photos' };
     let deny;
     const page = this;
@@ -182,11 +183,9 @@ Page({
           });
         } else {
           MyFile.upload(fileParams, metaData).then(res => {
-            console.log("uploaded successfully");
             page.setData({
-              photo_url: res.data.path + '!/fw/800'
+              photo_url: res.data.path + '!/fw/800',
             })
-            console.log("photo url: ", page.data.photo_url);
           }, err => {
           })
         }

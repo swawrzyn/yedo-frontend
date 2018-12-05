@@ -10,8 +10,10 @@
 
 <view class="topcard">
     <view class="image-upload">
-        <image class="uploadButton" src="../../images/upload2.png" ontap="uploadImage"/>
-        <text>Upload Group Image</text>
+        <view wx:if="{{!uploading}}" class="uploadbutton-box">
+          <image class="uploadButton" src="../../images/upload2.png" ontap="uploadImage"/>
+          <text>Upload Group Image</text>
+        </view>
         <image wx:if="{{photo_url === true}}" src="../../images/loading.gif" class="successImage" />
         <image wx:elif="{{photo_url === false}}" src="" class="successImage"/>
         <image wx:elif="{{photo_url}}" src="{{photo_url}}" class="successImage1"/>
