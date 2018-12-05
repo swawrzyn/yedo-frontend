@@ -60,6 +60,14 @@ Page({
     locations: [],
     meal_date: "",
     ec: {},
+    marker: [{
+      iconPath: "../../images/maker.png",
+      id: 0,
+      latitude: 0,
+      longitude: 0,
+      width: 50,
+      height: 50
+    }],
   },
 
   echartInit: function (e) {
@@ -144,21 +152,6 @@ Page({
           // isRefreshing: true
           i: 5,
         });
-        // var mks = []
-        // for (var i = 0; i < res.data.length; i++) {
-        //   mks.push({ // 获取返回结果，放到mks数组中
-        //     title: res.data[i].title,
-        //     id: res.data[i].id,
-        //     latitude: res.data[i].location.lat,
-        //     longitude: res.data[i].location.lng,
-        //     iconPath: "../../images/marker.png", //图标路径
-        //     width: 20,
-        //     height: 20
-        //   })
-        // }
-        // page.setData({ //设置markers属性，将搜索结果显示在地图中
-        //   markers: mks
-        // })
       },
     });
     return locations;
@@ -250,10 +243,22 @@ Page({
         success(res) {
           if (res.confirm) {
             page.lockRestaurant(selectedRestaurant).then(res => {
+              let markers = [];
+              markers.push({
+                title: res.title,
+                // id: res.data[i].id,
+                latitude: res.location.lat,
+                longitude: res.location.lng,
+                iconPath: "/images/marker.png", //图标路径
+                width: 50,
+                height: 50
+              })
+              // page.data.marker.latitude = res.location.lat;
+              // page.data.marker.longitude = res.location.lng;
               page.setData({
                 selected_restaurant: res,
                 locked: true,
-                direction: 'none',
+                marker: marker,
               })
             });
           }
