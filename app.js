@@ -1,7 +1,7 @@
   const keys = require('/keys.js');
 const QQMapWX = require('/libs/qqmap-wx-jssdk.js');
 const qqMap = new QQMapWX({
-  key: keys.qqMapKey 
+  key: keys.qqMapKey
 });
 
 
@@ -20,7 +20,7 @@ App({
 
     wx.BaaS.init('86e9cea993a138b9109a')
     wx.BaaS.ErrorTracker.enable();
-    
+
     wx.BaaS.login(false).then(res => {
       this.fetchMeals();
     }, err => {
@@ -48,7 +48,7 @@ App({
       }
     })
   },
-  
+
   fetchMealsFromCloud: function () {
     const self = this;
     const MealsTable = new wx.BaaS.TableObject('meals' + this.globalData.database);
@@ -60,7 +60,6 @@ App({
     choicesQuery.compare('created_by', '=', wx.BaaS.storage.get('uid'));
 
     ChoicesTable.setQuery(choicesQuery).limit(0).find().then(res => {
-      console.log(res.data.objects);
       res.data.objects.forEach((choice) => {
         if (!mealsArray.includes(choice.meal_id)){
           mealsArray.push(choice.meal_id)
