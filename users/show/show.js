@@ -6,11 +6,15 @@ Page({
    * Page initial data
    */
   data: {
-    meals: []
+    meals: [],
+    show: 0,
+    loaded: false
   },
 
+
+  
   yourMeals:function(e){
-    console.log(e)
+    console.log("yourmeals",e)
     wx.navigateTo({
       url:`/groups/show/show?id=${e.currentTarget.dataset.meal_id}`
       })
@@ -19,29 +23,38 @@ Page({
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-    this.fetchUserMeals(this);
-    this.fetchUserDetails(this);
+    setTimeout(function () {
+      this.fetchUserMeals(this);
+      this.fetchUserDetails(this);
+    }.bind(this), 0);
   },
 
   /**
    * Lifecycle function--Called when page is initially rendered
    */
   onReady: function () {
-
+    // this.fetchUserMeals(this);
+    // this.fetchUserDetails(this);
   },
 
   /**
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-
-  },
+    // setTimeout(function () {
+    //   this.fetchUserMeals(this);
+    //   this.fetchUserDetails(this);
+    // }.bind(this), 500);
+    },
 
   /**
    * Lifecycle function--Called when page hide
    */
   onHide: function () {
-
+    setTimeout(function () {
+      this.fetchUserMeals(this);
+      this.fetchUserDetails(this);
+    }.bind(this), 5000);
   },
 
   /**
@@ -81,12 +94,12 @@ Page({
   fetchUserMeals: (page) => {
     const app = getApp();
     app.globalData.meals.forEach((meal) => {
-    meal.meal_date = meal.meal_date.substr(0,10)
-    return meal.meal_date
-  })
-    page.setData({
-      meals: app.globalData.meals
-  })
+      meal.meal_date = meal.meal_date.substr(0, 10)
+      page.setData({
+        meals: app.globalData.meals
+      })
+      return meal.meal_date
+    })
 },
   
 fetchUserDetails: (page) => {
@@ -113,5 +126,4 @@ app.globalData.meals.forEach(meal=>
       user_avatars: user_avatars
     })
   })
-}
-})
+}})

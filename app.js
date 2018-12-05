@@ -1,7 +1,7 @@
   const keys = require('/keys.js');
 const QQMapWX = require('/libs/qqmap-wx-jssdk.js');
 const qqMap = new QQMapWX({
-  key: keys.qqMapKey 
+  key: keys.qqMapKey
 });
 
 
@@ -20,7 +20,7 @@ App({
 
     wx.BaaS.init('86e9cea993a138b9109a')
     wx.BaaS.ErrorTracker.enable();
-    
+
     wx.BaaS.login(false).then(res => {
       this.fetchMeals();
     }, err => {
@@ -39,6 +39,7 @@ App({
     wx.getStorage({
       key: 'meals',
       success: function(res) {
+        console.log("what is this", res)
         self.globalData.meals = res.data
       },
       fail: function(res) {
@@ -47,7 +48,7 @@ App({
       }
     })
   },
-  
+
   fetchMealsFromCloud: function () {
     const self = this;
     const MealsTable = new wx.BaaS.TableObject('meals' + this.globalData.database);

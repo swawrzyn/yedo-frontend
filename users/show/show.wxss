@@ -17,6 +17,8 @@ background-color: #FBE251;
   background-repeat: no-repeat;
 }
 
+
+
 .card {
 height:80px;
 background-size:cover !important;
@@ -30,8 +32,12 @@ align-items:center;
 flex-direction:row;
 justify-content:space-around;
 margin:10px 10px;
-border-radius:5px;
-
+border-radius:2px;
+animation-duration: 0.5s;
+-webkit-animation-name: fadeInDown;
+animation-name: fadeInDown;
+opacity:0;
+animation-fill-mode: forwards;
 }
 
 
@@ -41,6 +47,22 @@ height:50px;
 border-radius:50%;
 }
 
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+    visibility:visible;
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    visibility:visible;
+  }
+}
+
 
 .card-text{
   display:flex;
@@ -48,7 +70,6 @@ border-radius:50%;
   font-size: 15px;
   color:#1C1B1B;
   width:200px;
-  
 }
 
 .PlanButton{
