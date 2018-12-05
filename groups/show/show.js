@@ -188,7 +188,6 @@ Page({
    * Called when user click on the top right corner to share
    */
   onShareAppMessage: function (res) {
-    let encodedText = Base64.encode(this.data.meal.name + '!')
     if (res.from === 'button') {
     } return {
       title: `${this.data.meal.name} | ${this.data.meal_date} @ ${this.data.meal_time}`,
