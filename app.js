@@ -105,7 +105,7 @@ App({
 
   addMealFromChoices: function(meal) {
     const app = getApp();
-    app.globalData.meals.push(res.data);
+    app.globalData.meals.push(meal);
     wx.setStorage({
       key: 'meals',
       data: app.globalData.meals

@@ -50,11 +50,13 @@ Page({
    * Lifecycle function--Called when page show
    */
   onShow: function () {
-    // setTimeout(function () {
-    //   this.fetchUserMeals(this);
-    //   this.fetchUserDetails(this);
-    // }.bind(this), 500);
+    setTimeout(function () {
+      this.fetchUserMeals(this);
+      this.fetchUserDetails(this);
+    }.bind(this), 500);
+    wx.hideLoading();
     },
+    
 
   /**
    * Lifecycle function--Called when page hide
