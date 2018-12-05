@@ -48,6 +48,7 @@ Page({
     });
     //fetching all info on the current meal
     this.fetchAllInfo(this.data.mealId);
+    this.popover = this.selectComponent('#popover');
   },
 
   popOver: function (e) {

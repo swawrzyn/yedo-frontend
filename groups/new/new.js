@@ -7,7 +7,7 @@ const app = getApp();
 
 Page({
   data: {
-    time: '',
+    time: '00:00',
     uploading: false
   },
   

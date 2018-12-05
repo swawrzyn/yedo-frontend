@@ -5,8 +5,8 @@
   border-radius: 8rpx;
   z-index:3;
   top:130rpx !important;
-  left:340rpx !important;
-  width:50% !important;
+  left:277rpx !important;
+  width:400rpx !important;
 }
 /* 实现三角形 */
 .popover-view::before {
