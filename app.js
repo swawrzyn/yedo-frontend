@@ -9,7 +9,7 @@ App({
   onLaunch: function () {
 
     //dev database stuff, REMOVE FOR PRODUCTION RELEASES
-    this.globalData.database = '_dev';
+    // this.globalData.database = '_dev';
     wx.removeStorageSync('meals');
 
     wx.BaaS = requirePlugin('sdkPlugin')
