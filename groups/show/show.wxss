@@ -4,26 +4,54 @@ page {
   height: 100%;
 }
 
+.loading {
+  margin-top: 20%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading image {
+  margin-top: 20rpx;
+  height: 50rpx;
+  width: 50rpx;
+}
+
+.waiting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.waiting image {
+  margin-top: 20rpx;
+  height: 100rpx;
+  width: 100rpx;
+}
+
 .card {
   position: relative;
-  height: 50%;
+  height: 450rpx;
   width: 90vw;
   margin: 0 auto;
   border-radius: 10rpx;
   background-size: cover;
   background-position: center;
+  margin-bottom: 50rpx;
 }
 
 .info {
   position: absolute;
-  width: 80vw;
-  background-color: #fff;
-  height: 30%;
+  width: 100%;
+  background-color: #fffefbc0;
+  height: 150rpx;
   margin: 0 auto;
-  bottom: 20rpx;
-  border-radius: 10rpx;
-  left: 5vw;
-
+  bottom: 30rpx;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .top-bar {
@@ -34,7 +62,9 @@ page {
   text-align:center;
   position: relative;
   width: 90vw;
-  height: 8%;
+  height: 125rpx;
+  font-size: 55rpx;
+  font-weight: bold;
 }
 
 .top-bar image {
@@ -43,7 +73,7 @@ page {
 }
 
 .home {
-  margin-right:90rpx;
+  margin-right:80rpx;
 }
 
 .top-image {
@@ -167,7 +197,8 @@ button::after {
 }
 
 .user-image {
-  height: 16px;
+  height: 30rpx;
+  width: 30rpx;
   border-radius: 50%;
   margin-right: 25rpx;
 }
@@ -286,7 +317,7 @@ movable-view {
   margin: 25rpx auto;
   height: 150rpx;
   width: 90vw;
-  z-index: 999;
+  z-index: 2;
   position:relative;
 }
 
@@ -322,7 +353,7 @@ movable-area {
 
 .delete-btn {
   width: 120rpx;
-  height: 75rpx;
+  height: 72rpx;
   background: #E66671;
   line-height:90rpx;
   border-radius:0 0 5rpx 0;
@@ -330,8 +361,14 @@ movable-area {
 
 .lock-btn {
   width: 120rpx;
-  height: 75rpx;
+  height: 72rpx;
   background: #FBE251;
   line-height:90rpx;
   border-radius:0 5rpx 0 0;
+}
+
+.popover {
+  position: absolute;
+  top: 0;
+  left: 0;
 }

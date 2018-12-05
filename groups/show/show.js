@@ -61,6 +61,7 @@ Page({
     meal_date: "",
     ec: {},
     markers: [],
+    hidden: true,
   },
 
   echartInit: function (e) {
@@ -80,31 +81,23 @@ Page({
   },
 
   onLoad: function (options) {
-    this.popover = this.selectComponent('#popover');
+    
     const recompRec = (options.new === 'true');
     this.setData({
       mealId: options.id,
       recomp: recompRec
     });
-
     //fetching all info on the current meal
     this.fetchAllInfo(this.data.mealId);
   },
 
   popOver: function (e) {
     // 获取按钮元素的坐标信息
-    var id = 'members' // 或者 e.target.id 获取点击元素的 ID 值
-    var popover;
-    var button = wx.createSelectorQuery().select('#' + id);
-    button.boundingClientRect(res => {
-      popover = this;
+    let id = 'members' // 或者 e.target.id 获取点击元素的 ID 值
+    wx.createSelectorQuery().select('#' + id).boundingClientRect(res => {
       // 调用自定义组件 popover 中的 onDisplay 方法
       this.popover.onDisplay(res);
-
     }).exec();
-    setTimeout(function () {
-      popover.popover.onHide();
-    }, 3000)
   },
 
   toHome: function () {
@@ -125,7 +118,6 @@ Page({
       latitude = loc.coordinates[1];
       longitude = loc.coordinates[0];
     }
-
     let locations;
     const page = this;
     const app = getApp();
@@ -138,6 +130,7 @@ Page({
       address_format: 'short',
       page_size: 20,
       success: function (res) {
+        console.log('search res:', res);
         locations = res.data;
         page.setData({
           locations: res.data,
@@ -153,25 +146,44 @@ Page({
   location: function (e) {
     const page = this;
     wx.openLocation({
-      latitude: page.data.locations[parseInt(e.currentTarget.id)].location.lat,
-      longitude: page.data.locations[parseInt(e.currentTarget.id)].location.lng,
-      name: page.data.locations[parseInt(e.currentTarget.id)].title,
-      address: page.data.locations[parseInt(e.currentTarget.id)].address,
+      latitude: page.data.locationsplice[parseInt(e.currentTarget.id)].location.lat,
+      longitude: page.data.locationsplice[parseInt(e.currentTarget.id)].location.lng,
+      name: page.data.locationsplice[parseInt(e.currentTarget.id)].title,
+      address: page.data.locationsplice[parseInt(e.currentTarget.id)].address,
+      scale: 14
+    })
+  },
+
+  selectedlocation: function (e) {
+    const page = this;
+    wx.openLocation({
+      latitude: page.data.locations[0].location.lat,
+      longitude: page.data.locations[0].location.lng,
+      name: page.data.locations[0].title,
+      address: page.data.locations[0].address,
       scale: 14
     })
   },
 
   makeCall: function (e) {
     const page = this;
-    wx.makePhoneCall({
-      phoneNumber: page.data.locations[parseInt(e.currentTarget.id)].tel,
-    })
+
+    if (page.data.meal.selected_restaurant) {
+      wx.makePhoneCall({
+        phoneNumber: page.data.meal.selected_restaurant.tel,
+      })
+    } else {
+      wx.makePhoneCall({
+        phoneNumber: page.data.locationsplice[parseInt(e.currentTarget.id)].tel,
+      })
+    }
+    
   },
   /**
    * Lifecycle function--Called when page is initially rendered
    */
   onReady: function () {
-
+    this.popover = this.selectComponent('#popover');
   },
 
   /**
@@ -202,6 +214,7 @@ Page({
   onPullDownRefresh: function () {
     wx.showNavigationBarLoading();
     this.fetchAllInfo(this.data.mealId);
+    wx.stopPullDownRefresh();
   },
 
   /**
@@ -399,9 +412,13 @@ Page({
     const page = this;
     const MealsTable = new wx.BaaS.TableObject('meals' + app.globalData.database);
     return MealsTable.get(mealId).then(res => {
-      res.data.meal_date = res.data.meal_date.substr(0, 10)
+      const mealDateObj = new Date(res.data.meal_date);
+      const meal_date = mealDateObj.toLocaleDateString('zh-Hans');
+      const meal_time = mealDateObj.toLocaleTimeString('zh-Hans', { hour12: false, hour: '2-digit', minute:'2-digit'});
       page.setData({
-        meal: res.data
+        meal: res.data,
+        meal_date: meal_date,
+        meal_time: meal_time
       })
       // checking if the owner is looking at the page
       if (res.data.created_by === wx.BaaS.storage.get('uid')) {
@@ -499,8 +516,12 @@ Page({
         page.setData({
           locations: [results[0].selected_restaurant],
           recommendation: results[0].recommended_category,
-          markers: markers
+          markers: markers,
+          hidden: false,
+          loading: true
         })
+        wx.hideNavigationBarLoading();
+        this.popover = this.selectComponent('#popover');
       } else {
         if (page.data.recomp) {
           // if recompute is necessary
@@ -525,9 +546,12 @@ Page({
               })
             });
             page.recommendSearch(results[2], results[1].recommended_category);
+            page.setData({
+              hidden: false,
+              loading: true
+            })
           })
-
-
+          this.popover = this.selectComponent('#popover');
         } else {
           // aka. if recompute is not necessary
           page.setData({
@@ -541,7 +565,14 @@ Page({
           });
 
           page.recommendSearch(results[0].meal_location, results[0].recommended_category);
+          page.setData({
+            hidden: false,
+            loading: true
+          })
+          this.popover = this.selectComponent('#popover');
         }
+        wx.hideNavigationBarLoading();
+        this.popover = this.selectComponent('#popover');
       }
     });
   },
