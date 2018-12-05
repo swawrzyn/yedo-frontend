@@ -2,7 +2,7 @@
 const QQMapWX = require('/libs/qqmap-wx-jssdk.js');
 const qqMap = new QQMapWX({
   key: keys.qqMapKey
-});
+})
 
 
 App({

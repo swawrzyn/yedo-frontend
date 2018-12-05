@@ -370,7 +370,6 @@ Page({
     }
 
     let total = userLocs.length;
-
     x = x / total;
     y = y / total;
     z = z / total;
