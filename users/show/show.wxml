@@ -1,18 +1,22 @@
 <!--users/show/show.wxml-->
 
-  <view class="meal-title"> 
+  <view class="meal-title">
     <text>Your Upcoming Meals</text>
   </view>
 
-  <block wx:key="index" wx:for="{{meals}}" wx:for-item="meal" wx:for-index="index">
-    <view bindtap="yourMeals" data-meal_id="{{meal.id}}" class='card' style="animation-delay: {{(index+1)*0.1}}s">
+  <block wx:for="{{meals}}" wx:for-item="meal">
+  <view class='meal-card' style="background-image: linear-gradient(-200deg, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.5) 50%), url('{{meal.photo_url}}')">
+    <view bindtap="yourMeals" data-meal_id="{{meal.id}}" class="card">
       <view class="card-text">
-        <view class="card-title">Meal: <text style="font-weight:bold;">{{meal.name}}</text></view>
-        <view class ="card-date">Date: <text style="font-weight:bold;">{{meal.meal_date}}</text></view>
+        <view class="card-title"><text style="font-weight:bold;">{{meal.name}}</text></view>
+        <view class ="card-date">Date: <text>{{meal.meal_date}}</text></view>
       </view>
-        <image class="user-avatar" src="{{user_avatars[meal.created_by]}}"/> 
+
+        <image class="user-avatar" src="{{user_avatars[meal.created_by]}}"/>
     </view>
+  </view>
   </block>
+
   <view class="PlanButton">
     <button bindtap="toNewMeal" class="btn">Plan a new meal!</button>
   </view>
