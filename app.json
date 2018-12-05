@@ -13,7 +13,7 @@
     "navigationBarBackgroundColor": "#FBE251",
     "navigationBarTitleText": "yedo!",
     "navigationBarTextStyle":"black",
-    "enablePullDownRefresh": false
+    "enablePullDownRefresh": true
   },
   "plugins": {
     "sdkPlugin": {

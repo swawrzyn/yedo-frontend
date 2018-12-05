@@ -26,6 +26,7 @@
 </view>
 </view>
 
+<view class="form">
   <view class="section">
     <view class="section__title">Date*:</view>
     <picker mode="date" value="{{date}}" start="{{date}}" end="{{date_end}}" bindchange="bindDateChange" class="dateTime">
@@ -56,6 +57,7 @@
       <text>use everyone's location</text>
 </view>
     
+    </view>
     </view>
 
     <view class="input-button">

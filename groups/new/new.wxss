@@ -5,6 +5,8 @@ page{
   /* overflow:hidden; */
 }
 
+
+
 .container {
   background:linear-gradient(to bottom, #FBE251 0%,#FBE251 40%,#FBE251 40%,white 40%,white 100%);
   display: flex;
@@ -23,7 +25,8 @@ border-radius:5px;
 background-color:white;
 /* padding:10px 0px; */
 position:relative;
-height:264px;
+height:450rpx;
+width:90wh;
 align-items:center;
 display:flex;
 align-content:center;
@@ -104,7 +107,7 @@ border-radius:2%;
 }
 
 .groupTitle{
-  font-size:15px;
+  font-size:21px;
   display:flex;
   align-items:center;
   padding: 0 10px;
@@ -116,7 +119,9 @@ border-radius:2%;
 }
 
 .title{
-  margin: 10px 0px;
+  height: 125rpx;
+  font-size: 55rpx;
+  font-weight:bold;
 }
 
 .title text {
@@ -149,6 +154,7 @@ border-radius:2%;
   display:flex;
   align-items:center;
   padding: 0px 10px;
+  border-bottom:1px lightgray solid;
 }
 
 .dateTime{
@@ -191,6 +197,8 @@ box-shadow:0px 0px 10px 1px rgba(0, 0, 0, 0.2);
   margin-top:5px;
 margin-bottom:5px;
 flex-direction: column;
+border-bottom:1px lightgray solid;
+
 
 }
 

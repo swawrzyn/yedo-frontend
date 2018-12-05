@@ -6,9 +6,6 @@ Page({
   data: {
   },
 
-  onLoad: function () {
-  },
-
   userInfoHandler(data) {
     wx.BaaS.handleUserInfo(data).then(res => {
       if (data.currentTarget.id === 'newmeal') {
@@ -18,7 +15,13 @@ Page({
       } else {
         wx.navigateTo({
           url: '/users/show/show'
-        })
+        }),
+          wx.showLoading({
+            title: '加载中',
+          }),
+          setTimeout(function () {
+            wx.hideLoading()
+          }, 1000)
       }
     }, res => {
     })
