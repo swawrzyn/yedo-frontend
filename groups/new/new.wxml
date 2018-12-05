@@ -21,7 +21,7 @@
   
   <view class="cardBanner">
     <view class="groupTitle">
-      <text style='width:20%;'>名称*:</text>
+      <text style='width:200rpx;'>名称*:</text>
         <input name="name" placeholder-class="input-placeholder" placeholder="我的晚餐" class="groupname"/>
     </view>
 </view>
@@ -41,7 +41,7 @@
     <view class="section__title" style='width:30%;'>时间 *：</view>
     <picker mode="time" value="{{time}}" start="01:01" end="25:01" bindchange="bindTimeChange" class="dateTime">
       <view class="picker">
-      {{time}}-
+      <text style="padding-right: 35rpx;">{{time}}</text> 
       </view>
     </picker>
   </view>
