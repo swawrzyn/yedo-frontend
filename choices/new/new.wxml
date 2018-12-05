@@ -42,7 +42,7 @@
         </view>
       </picker>
     </view>
-    <view class="button-box">
+    <view class="button-box {{meal.owner_location ? 'single' : ''}}">
         <button wx:if="{{!meal.owner_location}}" class="button" hover-class='button-hover' ontap="findLocation">你的位置<image wx:if="{{user_location != ''}}"class="green-check" src="../../images/green-check.svg"></image></button>
         <button class="button bold" hover-class='button-hover' open-type="getUserInfo" bindgetuserinfo="userInfoHandler">一道吃吧!</button>
     </view>

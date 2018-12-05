@@ -137,6 +137,10 @@ width: 50rpx;
   margin: 25rpx 0;
 }
 
+.button-box.single {
+  justify-content: center;
+}
+
 /* 
 .button-box .button.bold {
   font-weight: bold;
@@ -158,6 +162,7 @@ width: 50rpx;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 0;
 }
 
 .button .green-check {
