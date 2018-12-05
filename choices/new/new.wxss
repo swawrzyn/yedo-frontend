@@ -134,7 +134,7 @@ width: 50rpx;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  margin: 0;
+  margin: 25rpx 0;
 }
 
 /* 
@@ -149,7 +149,6 @@ width: 50rpx;
 
 .button-box .button{
   width: 300rpx;
-  margin: 25rpx 0;
   height: 100rpx;
   border: 1rpx solid black;
   background: whitesmoke;
