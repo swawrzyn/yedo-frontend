@@ -18,6 +18,7 @@ flex-direction: column;
   flex-direction:row;
   justify-content:space-around;
   margin: 15px auto;
+  margin-top: 0;
   border-radius:5px;
    animation-duration: 1s;
 -webkit-animation-name: fadeInDown;
@@ -44,6 +45,7 @@ animation-fill-mode: forwards;
   font-weight: bold;
   align-content: center;
   margin: 0px auto;
+  align-items: center;
 }
 
 
@@ -61,7 +63,6 @@ align-items:center;
 flex-direction: row;
 justify-content:space-around;
 padding: 10px;
-margin-top: 45px;
 /* margin:10px 10px; */
 /* border-radius:5px; */
 }
