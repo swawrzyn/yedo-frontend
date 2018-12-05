@@ -1,7 +1,7 @@
   const keys = require('/keys.js');
 const QQMapWX = require('/libs/qqmap-wx-jssdk.js');
 const qqMap = new QQMapWX({
-  key: keys.qqMapKey 
+  key: keys.qqMapKey
 });
 
 
@@ -9,7 +9,7 @@ App({
   onLaunch: function () {
 
     //dev database stuff, REMOVE FOR PRODUCTION RELEASES
-    this.globalData.database = '_dev';
+    // this.globalData.database = '_dev';
     wx.removeStorageSync('meals');
 
     wx.BaaS = requirePlugin('sdkPlugin')
@@ -20,7 +20,7 @@ App({
 
     wx.BaaS.init('86e9cea993a138b9109a')
     wx.BaaS.ErrorTracker.enable();
-    
+
     wx.BaaS.login(false).then(res => {
       this.fetchMeals();
     }, err => {
@@ -39,6 +39,7 @@ App({
     wx.getStorage({
       key: 'meals',
       success: function(res) {
+        console.log("what is this", res)
         self.globalData.meals = res.data
       },
       fail: function(res) {
@@ -47,7 +48,7 @@ App({
       }
     })
   },
-  
+
   fetchMealsFromCloud: function () {
     const self = this;
     const MealsTable = new wx.BaaS.TableObject('meals' + this.globalData.database);
@@ -93,6 +94,9 @@ App({
       data: app.globalData.meals
     });
     return res.data;
+  },
+  err => {
+    console.log('add meal error:', err);
   },
     err => {
      console.log('saving error: ', err)

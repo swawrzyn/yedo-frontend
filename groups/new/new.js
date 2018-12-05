@@ -12,13 +12,24 @@ const app = getApp();
 
 Page({
   data: {
+    time: '',
+    uploading: false
   },
 
   /**
    * Lifecycle function--Called when page load
    */
   onLoad: function (options) {
-
+    // setting the table as meals, it's tableid is 58396
+    let date = new Date();
+    let date_end = new Date();
+    date_end.setFullYear(date.getFullYear() + 1);
+    date_end = date_end.toISOString().substr(0, 10);
+    date = date.toISOString().substr(0,10);
+    this.setData({
+      date: date,
+      date_end: date_end
+    })
   },
 
   /**
@@ -147,7 +158,7 @@ Page({
 
   uploadImage: function(e) {
     let MyFile = new wx.BaaS.File();
-    
+    this.setData({ uploading: true })
     let metaData = { categoryName: 'group_photos' };
     let deny;
     const page = this;
@@ -172,11 +183,9 @@ Page({
           });
         } else {
           MyFile.upload(fileParams, metaData).then(res => {
-            console.log("uploaded successfully");
             page.setData({
-              photo_url: res.data.path + '!/fw/800'
+              photo_url: res.data.path + '!/fw/800',
             })
-            console.log("photo url: ", page.data.photo_url);
           }, err => {
           })
         }
@@ -184,28 +193,43 @@ Page({
       })
   },
 
+
+  bindDateChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      date: e.detail.value
+    })
+  },
+  bindTimeChange: function (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      time: e.detail.value
+    })
+  },
+
   formSubmit: function(e) {
     let { value } = e.detail;
-    value['inputDate'] = 0;
-    const day = getSelectedDay()[0] || 0;
-    let inputDate;
+    value['time'] = this.data.time;
+    value['owner_location'] = this.data.owner_location
+    // if (day) {
+    //   inputDate = new Date(`${day.year}-${day.month}-${day.day}`);
+    //   inputDate = (inputDate.toISOString()).toString()
+    //   value['inputDate'] = 1;
+    //   value['owner_location'] = this.data.owner_location
+    // } 
 
-    if (day) {
-      inputDate = new Date(`${day.year}-${day.month}-${day.day}`);
-      inputDate = (inputDate.toISOString()).toString()
-      value['inputDate'] = 1;
-      value['owner_location'] = this.data.owner_location
-    } 
-
-    console.log(value);
-
+    this.data.time
+    this.data.date
+    let date_time = new Date(`${this.data.date} ${this.data.time}`);
+    date_time = date_time.toISOString();
     if (!this.oValidator.checkData(value)) return
+
     if (this.data.photo_url) {
       app.globalData.tempMeal = {
         name: e.detail.value.name,
         meal_location: this.data.meal_location,
         owner_location: this.data.owner_location,
-        meal_date: inputDate,
+        meal_date: date_time,
         photo_url: this.data.photo_url
       }
     } else {
@@ -213,12 +237,10 @@ Page({
         name: e.detail.value.name,
         meal_location: this.data.meal_location,
         owner_location: this.data.owner_location, 
-        meal_date: inputDate,
+        meal_date: date_time,
         photo_url: 'https://cloud-minapp-22402.cloud.ifanrusercontent.com/1gSJoT23AbOTUZ6J.jpg!/fw/800'
       }
     }
-    
-
     
 
     wx.navigateTo({
@@ -247,8 +269,8 @@ Page({
         name: {
           required: true,
         },
-        inputDate: {
-          intGreater: 1 
+        time: {
+          required: true 
         },
         owner_location: {
           required: true
@@ -258,8 +280,8 @@ Page({
         name: {
           required: 'Please enter a group name',
         },
-        inputDate: {
-          intGreater: 'Please select a date'
+        time: {
+          required: 'Please select a time'
         },
         owner_location: {
           required: 'Please select a location type'

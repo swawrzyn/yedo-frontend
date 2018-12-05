@@ -169,7 +169,8 @@
         </view>
       </view>
     </view>
-    <button class="submit-button" disabled="{{!(choices.length === 3)}}" bindtap="submitChoices">let's do it!</button>
+    <button wx:if="{{!meal.owner_location}}" class="button" hover-class='button-hover' ontap="findLocation">choose your location</button>
+      <button class="button" disabled="{{choices.length < 3}}" hover-class='button-hover' open-type="getUserInfo" bindgetuserinfo="userInfoHandler">Let's Eat!</button>
   </view>
   
   
