@@ -24,7 +24,7 @@ Component({
     // 垂直方向 top/bottom
     vertical: '',
     // 水平方向 left/center/right
-    align: 'left'
+    align: 'right'
   },
 
   methods: {
