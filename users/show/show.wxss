@@ -126,7 +126,7 @@ margin-top: 75rpx;
 
 .card-date {
     font-weight: bolder;
-    text-decoration: none;
+    font-style: italic;
 }
 
 .PlanButton{
