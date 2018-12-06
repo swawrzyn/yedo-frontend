@@ -34,6 +34,15 @@ Page({
     this.initValidator();
   },
 
+  onPageScroll: e => {
+    if (e.scrollTop < 0) {
+      wx.pageScrollTo({
+        scrollTop: 0,
+        duration: 0
+      })
+    }
+  },
+
   /**
    * Lifecycle function--Called when page show
    */
@@ -202,6 +211,7 @@ Page({
   },
 
   formSubmit: function(e) {
+    const page = this;
     let { value } = e.detail;
     value['time'] = this.data.time;
     value['owner_location'] = this.data.owner_location
@@ -211,11 +221,20 @@ Page({
     //   value['inputDate'] = 1;
     //   value['owner_location'] = this.data.owner_location
     // } 
-
-    this.data.time
-    this.data.date
-    let date_time = new Date(`${this.data.date} ${this.data.time}`);
-    date_time = date_time.toISOString();
+    let date_time;
+    wx.getSystemInfo({
+      success: function(res) {
+        if (res.platform === 'ios') {
+          date_time = new Date(`${page.data.date}T${page.data.time}`);
+          date_time = new Date(date_time.getTime() + ( date_time.getTimezoneOffset() * 60000 ));
+        } else {
+          date_time = new Date(`${page.data.date} ${page.data.time} GMT+0800`);
+        }
+      }
+    })
+    
+    console.log('datetime: ', date_time);
+    const date_time_string = date_time.toISOString();
     if (!this.oValidator.checkData(value)) return
 
     if (this.data.photo_url) {
@@ -223,7 +242,7 @@ Page({
         name: e.detail.value.name,
         meal_location: this.data.meal_location,
         owner_location: this.data.owner_location,
-        meal_date: date_time,
+        meal_date: date_time_string,
         photo_url: this.data.photo_url
       }
     } else {
@@ -231,7 +250,7 @@ Page({
         name: e.detail.value.name,
         meal_location: this.data.meal_location,
         owner_location: this.data.owner_location, 
-        meal_date: date_time,
+        meal_date: date_time_string,
         photo_url: 'https://cloud-minapp-22402.cloud.ifanrusercontent.com/1gSJoT23AbOTUZ6J.jpg!/fw/800'
       }
     }

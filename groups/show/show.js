@@ -204,7 +204,7 @@ Page({
     } return {
       title: `${this.data.meal.name} | ${this.data.meal_date} @ ${this.data.meal_time}`,
       path: `/pages/landing/landing?meal_id=${this.data.mealId}`,
-      imageUrl: `${this.data.meal.photo_url}/watermark/url/MWdUaVc5RTFyRkxMakc0Si5wbmc=/percent/100/align/center/repeat/true/opacity/50/watermark/text/5LiA6YGT5ZCD5ZCnIQ==/font/simhei/color/ffffff/size/102/align/center`
+      imageUrl: `${this.data.meal.photo_url}/both/800x640/watermark/url/MWdUaVc5RTFyRkxMakc0Si5wbmc=/percent/100/align/center/repeat/true/opacity/50/watermark/text/5LiA6YGT5ZCD5ZCnIQ==/font/simhei/color/ffffff/size/128/align/center`
     }
   },
 
