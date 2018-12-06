@@ -35,7 +35,7 @@
       </view> -->
       <view class="group-members" id="members" hover-class='group-right-hover' bindtap='popOver'>
         <image src="../../images/users.svg" mode="aspectFill"></image>
-        <text wx:if="{{group_users_count}}" class="small-text">{{group_users_count > 1 ? group_users_count + ' 人' : group_users_count + ' 人' }}</text>
+        <text wx:if="{{group_users_count}}" class="small-text">{{group_users_count}}人</text>
         <text class="small-text" wx:elif='{{!group_users_count}}'>Loading...</text>
       </view>
       <popover id='popover'>

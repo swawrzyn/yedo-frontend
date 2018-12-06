@@ -1,1 +1,5 @@
-{}
+{ 
+    "enablePullDownRefresh": false,
+    "backgroundColor": "#FBE251",
+    "disableScroll": true
+}
