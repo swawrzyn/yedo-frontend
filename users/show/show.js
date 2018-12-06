@@ -104,13 +104,77 @@ Page({
 
   fetchUserMeals: (page) => {
     const app = getApp();
-    app.globalData.meals.forEach((meal) => {
-      meal.meal_date = meal.meal_date.substr(0, 10)
+    if (app.globalData.meals) {
+      page.setData(page.sortMeals(app.globalData.meals));
+    } else {
       page.setData({
-        meals: app.globalData.meals
+        new_meals: [],
+        old_meals: []
       })
-      return meal.meal_date
+    }
+},
+
+sortMeals: function (meals) {
+  const page = this;
+  const unsortedMeals = meals;
+  let oldMeals = [];
+  let newMeals = [];
+  let platform;
+    wx.getSystemInfo({
+      success: function(res) {
+        platform = res.platform;
+      }
     })
+
+    unsortedMeals.map(meal => {
+        // stupid platform issue workaround
+
+          const mealDateObj = new Date(meal.meal_date);
+          meal.meal_date = mealDateObj;
+          if (meal.meal_date < Date.now()) {
+            oldMeals.push(meal);
+          } else {
+            newMeals.push(meal);
+          }
+      //    
+    })
+
+    console.log('meals', meals);
+
+    oldMeals.sort((a, b) => {
+      return b.meal_date - a.meal_date
+    })
+    newMeals.sort((a, b) => {
+      return a.meal_date - b.meal_date
+    })
+
+    oldMeals.forEach(oldmeal => {
+      let meal_date;
+          let meal_time;
+          if(platform === 'android') {
+            meal_date = `${oldmeal.meal_date.getFullYear()}/${oldmeal.meal_date.getMonth() + 1}/${oldmeal.meal_date.getDate()}`
+            meal_time = `${oldmeal.meal_date.getHours()}:${oldmeal.meal_date.getMinutes()}`
+          } else {
+            meal_date = oldmeal.meal_date.toLocaleDateString('zh-hans');
+            meal_time = oldmeal.meal_date.toLocaleTimeString('zh-hans', { hour12: false, hour: '2-digit', minute:'2-digit'});
+          }
+      oldmeal.meal_date = `${meal_date} ${meal_time}`
+    })
+
+    newMeals.forEach(newmeal => {
+      let meal_date;
+          let meal_time;
+          if(platform === 'android') {
+            meal_date = `${newmeal.meal_date.getFullYear()}/${newmeal.meal_date.getMonth() + 1}/${newmeal.meal_date.getDate()}`
+            meal_time = `${newmeal.meal_date.getHours()}:${newmeal.meal_date.getMinutes()}`
+          } else {
+            meal_date = newmeal.meal_date.toLocaleDateString('zh-hans');
+            meal_time = newmeal.meal_date.toLocaleTimeString('zh-hans', { hour12: false, hour: '2-digit', minute:'2-digit'});
+          }
+      newmeal.meal_date = `${meal_date} ${meal_time}`
+    })
+
+  return { new_meals: newMeals, old_meals: oldMeals };
 },
   
 fetchUserDetails: (page) => {

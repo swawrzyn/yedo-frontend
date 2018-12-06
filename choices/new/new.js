@@ -190,8 +190,20 @@ Page({
     
     if (app.globalData.tempMeal){
       const mealDateObj = new Date(app.globalData.tempMeal.meal_date);
-      const meal_date = mealDateObj.toLocaleDateString('zh-hans');
-      const meal_time = mealDateObj.toLocaleTimeString('zh-hans', { hour12: false, hour: '2-digit', minute:'2-digit'});
+      let meal_date;
+      let meal_time;
+      wx.getSystemInfo({
+        // stupid platform issue workaround
+        success: function(res) {
+          if(res.platform === 'android') {
+            meal_date = `${mealDateObj.getFullYear()}/${mealDateObj.getMonth() + 1}/${mealDateObj.getDate()}`
+            meal_time = `${mealDateObj.getHours()}:${mealDateObj.getMinutes()}`
+          } else {
+            meal_date = mealDateObj.toLocaleDateString('zh-hans');
+            meal_time = mealDateObj.toLocaleTimeString('zh-hans', { hour12: false, hour: '2-digit', minute:'2-digit'});
+          }
+        }
+      })
       this.setData({
         meal: app.globalData.tempMeal,
         meal_date: meal_date,
@@ -201,8 +213,20 @@ Page({
       const MealTable = new wx.BaaS.TableObject('meals' + app.globalData.database);
       MealTable.get(options.group_id).then( res => {
         const mealDateObj = new Date(res.data.meal_date);
-        const meal_date = mealDateObj.toLocaleDateString('zh-hans');
-        const meal_time = mealDateObj.toLocaleTimeString('zh-hans', { hour12: false, hour: '2-digit', minute:'2-digit'});
+        let meal_date;
+      let meal_time;
+      wx.getSystemInfo({
+        // stupid platform issue workaround
+        success: function(res) {
+          if(res.platform === 'android') {
+            meal_date = `${mealDateObj.getFullYear()}/${mealDateObj.getMonth() + 1}/${mealDateObj.getDate()}`
+            meal_time = `${mealDateObj.getHours()}:${mealDateObj.getMinutes()}`
+          } else {
+            meal_date = mealDateObj.toLocaleDateString('zh-hans');
+            meal_time = mealDateObj.toLocaleTimeString('zh-hans', { hour12: false, hour: '2-digit', minute:'2-digit'});
+          }
+        }
+      })
         page.setData({
           meal: res.data,
           mealId: res.data.id,

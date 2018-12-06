@@ -1,19 +1,37 @@
   <view class="meal-title">
-    <text>饭局清单</text>
+    <text>将来的饭局清单</text>
   </view>
 
-  <block wx:for="{{meals}}" wx:for-item="meal">
+  <block wx:for="{{new_meals}}" wx:for-item="meal">
   <view bindtap="yourMeals" data-meal_id="{{meal.id}}"class='meal-card' style="animation-delay: {{(index+1)*0.1}}s;background-image: linear-gradient(-200deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{meal.photo_url}}');"
 >
     <view class="card">
       <view class="card-text">
         <view class="card-title"><text style="font-weight:bold;">{{meal.name}}</text></view>
-        <view class ="card-date">Date: <text>{{meal.meal_date}}</text></view>
+        <view class ="card-date"><text>{{meal.meal_date}}</text></view>
       </view>
 
         <image class="user-avatar" src="{{user_avatars[meal.created_by]}}"/>
     </view>
   </view>
+  </block>
+
+  <view class="meal-title">
+      <text>过去的饭局清单</text>
+  </view>
+
+  <block wx:for="{{old_meals}}" wx:for-item="meal">
+      <view bindtap="yourMeals" data-meal_id="{{meal.id}}"class='meal-card old' style="animation-delay: {{(index+1)*0.1}}s;background-image: linear-gradient(-200deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('{{meal.photo_url}}');"
+    >
+        <view class="card old">
+          <view class="card-text old">
+            <view class="card-title"><text style="font-weight:bold;">{{meal.name}}</text></view>
+            <view class ="card-date"><text>{{meal.meal_date}}</text></view>
+          </view>
+    
+            <image class="user-avatar old" src="{{user_avatars[meal.created_by]}}"/>
+        </view>
+      </view>
   </block>
 
   <view class="PlanButton">

@@ -51,7 +51,7 @@ animation-fill-mode: forwards;
 
 
 .card {
-height:30px;
+height: 60rpx;
 width: 100%;
 /* border:1px #1C1B1B solid; */
 /* box-shadow:2px 2px 5px grey; */
@@ -68,11 +68,27 @@ margin-top: 75rpx;
 /* border-radius:5px; */
 }
 
+.meal-card.old {
+  height: 120rpx;
+  filter: grayscale(0.75);
+}
+
+.card.old {
+  height: 30rpx;
+  margin-top: 30rpx;
+  filter: grayscale(0.75);
+}
+
 
 .user-avatar {
-width:40px;
-height:40px;
-border-radius:50%;
+  width:80rpx;
+  height:80rpx;
+  border-radius:50%;
+}
+
+.user-avatar.old {
+  width: 60rpx;
+  height: 60rpx;
 }
 
 @keyframes fadeInDown {
@@ -95,9 +111,13 @@ border-radius:50%;
 .card-text{
   display:flex;
   flex-direction:column;
-  font-size: 15px;
+  font-size: 30rpx;
   color:#1C1B1B;
-  width:220px;
+  width: 440rpx;
+}
+
+.card-text.old {
+  font-size: 20rpx;
 }
 
 .card-title {

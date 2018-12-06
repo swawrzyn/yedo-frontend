@@ -193,7 +193,7 @@ Page({
     } return {
       title: `${this.data.meal.name} | ${this.data.meal_date} @ ${this.data.meal_time}`,
       path: `/pages/landing/landing?meal_id=${this.data.mealId}`,
-      imageUrl: `${this.data.meal.photo_url}/watermark/url/MWdUaVc5RTFyRkxMakc0Si5wbmc=/percent/100/align/center/repeat/true/opacity/40/watermark/text/5LiA6YGT5ZCD5ZCnIQ==/font/simhei/color/ffffff/size/128/align/center`
+      imageUrl: `${this.data.meal.photo_url}/watermark/url/MWdUaVc5RTFyRkxMakc0Si5wbmc=/percent/100/align/center/repeat/true/opacity/50/watermark/text/5LiA6YGT5ZCD5ZCnIQ==/font/simhei/color/ffffff/size/102/align/center`
     }
   },
 
@@ -372,8 +372,21 @@ Page({
     const MealsTable = new wx.BaaS.TableObject('meals' + app.globalData.database);
     return MealsTable.get(mealId).then(res => {
       const mealDateObj = new Date(res.data.meal_date);
-      const meal_date = mealDateObj.toLocaleDateString('zh-Hans');
-      const meal_time = mealDateObj.toLocaleTimeString('zh-Hans', { hour12: false, hour: '2-digit', minute:'2-digit'});
+      let meal_date;
+      let meal_time;
+      wx.getSystemInfo({
+        // stupid platform issue workaround
+        success: function(res) {
+          if(res.platform === 'android') {
+            meal_date = `${mealDateObj.getFullYear()}/${mealDateObj.getMonth() + 1}/${mealDateObj.getDate()}`
+            meal_time = `${mealDateObj.getHours()}:${mealDateObj.getMinutes()}`
+          } else {
+            meal_date = mealDateObj.toLocaleDateString('zh-hans');
+            meal_time = mealDateObj.toLocaleTimeString('zh-hans', { hour12: false, hour: '2-digit', minute:'2-digit'});
+          }
+        }
+      })
+      
       page.setData({
         meal: res.data,
         meal_date: meal_date,
