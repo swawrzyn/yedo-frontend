@@ -49,6 +49,7 @@ Page({
     //fetching all info on the current meal
     this.fetchAllInfo(this.data.mealId);
     this.popover = this.selectComponent('#popover');
+    this.popover_probability = this.selectComponent('#popover_probability');
   },
 
   popOver: function (e) {
@@ -57,6 +58,15 @@ Page({
     wx.createSelectorQuery().select('#' + id).boundingClientRect(res => {
       // 调用自定义组件 popover 中的 onDisplay 方法
       this.popover.onDisplay(res);
+    }).exec();
+  },
+
+  popOver_probability: function (e) {
+    // 获取按钮元素的坐标信息
+    let id = 'recommendation' // 或者 e.target.id 获取点击元素的 ID 值
+    wx.createSelectorQuery().select('#' + id).boundingClientRect(res => {
+      // 调用自定义组件 popover 中的 onDisplay 方法
+      this.popover_probability.onDisplay(res);
     }).exec();
   },
 
@@ -144,6 +154,7 @@ Page({
    */
   onReady: function () {
     this.popover = this.selectComponent('#popover');
+    this.popover_probability = this.selectComponent('#popover_probability');
   },
 
   /**
@@ -495,6 +506,7 @@ Page({
         });
         wx.hideNavigationBarLoading();
         this.popover = this.selectComponent('#popover');
+        this.popover_probability = this.selectComponent('#popover_probability');
       } else {
         // if not locked
         if (page.data.recomp) {
@@ -524,6 +536,7 @@ Page({
             })
           })
           this.popover = this.selectComponent('#popover');
+          this.popover_probability = this.selectComponent('#popover_probability');
         } else {
           // aka. if recompute is not necessary
           page.setData({
@@ -543,6 +556,7 @@ Page({
         }
         wx.hideNavigationBarLoading();
         this.popover = this.selectComponent('#popover');
+        this.popover_probability = this.selectComponent('#popover_probability');
       }
     });
   },
