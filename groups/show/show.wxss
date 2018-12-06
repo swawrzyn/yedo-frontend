@@ -82,7 +82,7 @@ Page {
   background-position: center;
 }
 
-.group-left {
+.top-bar .group-left {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -90,6 +90,7 @@ Page {
   width: 80%;
   position: absolute;
   left: 0;
+  margin: 0;
 }
 
 .rec-left {
@@ -159,23 +160,30 @@ Page {
 
 .group-content {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: space-between;
   width: 80%;
   height: 100%;
   margin-left: 25rpx;
 }
 
-.group-content .group-name {
-  padding-top: 10rpx;
-  font-size: 52rpx;
+.group-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  margin-left: 20rpx;
 }
 
-.group-content .group-date {
+.group-left .group-name {
+  font-size: 52rpx;
+  padding-bottom: 10rpx;
+  font-weight: bold;
+}
+
+.group-left .group-date {
   font-size: 36rpx;
   font-style: italic;
-  padding-bottom: 25rpx;
 }
 
 button {

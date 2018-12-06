@@ -26,8 +26,11 @@
 <view class="card" style="background-image: url('{{meal.photo_url}}')" wx:if="{{loading}}">
   <view class="info">
     <view class="group-content">
-      <text class="group-name">{{meal.name}}</text>
-      <text class="group-date">{{meal_date}} {{meal_time}}</text>
+      <view class="group-left">
+          <text class="group-name">{{meal.name}}</text>
+          <text class="group-date">{{meal_date}} {{meal_time}}</text>
+      </view>
+      
       <!-- <view class="rec-right">
         <view class="container">
           <ec-canvas id="mychart-dom-pie" canvas-id="mychart-pie" ec="{{ ec }}" bind:init="echartInit"></ec-canvas>
