@@ -11,7 +11,7 @@
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#FBE251",
-    "navigationBarTitleText": "yedo!",
+    "navigationBarTitleText": "一道! | yedo!",
     "navigationBarTextStyle":"black",
     "enablePullDownRefresh": true
   },
