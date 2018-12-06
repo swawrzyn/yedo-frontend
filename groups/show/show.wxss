@@ -132,6 +132,16 @@ page {
   right: 0;
 }
 
+.group-right .home {
+  width: 100rpx;
+  height: 100rpx;
+}
+
+.group-right .group-share {
+  width: 100rpx;
+  height: 100rpx;
+}
+
 .group-members {
   display: flex;
   flex-direction: column;
@@ -169,7 +179,7 @@ page {
 
 button {
   border: 0 !important;
-  background: none !important;
+  background: none;
   padding: 0 !important;
   display: flex;
   align-items: center;
@@ -195,8 +205,11 @@ button::after {
 }
 
 .group-right-hover {
-  background: #d5d5d5;
+  background-color: rgba(0, 0, 0, 0.25);
   transition: all 0.2s ease;
+  border-radius: 50%;
+  width: 100rpx;
+  height: 100rpx;
 }
 
 .button-selected {

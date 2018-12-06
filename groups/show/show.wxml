@@ -15,7 +15,7 @@
     </popover>
   </view>
   <view class="group-right">
-    <button class="home" bindtap='toHome'>
+    <button class="home" bindtap='toHome' hover-class="group-right-hover">
       <image src="../../images/home-interface.svg" class="home-button" />
     </button>
     <button class="group-share" open-type="share" hover-class='group-right-hover'>

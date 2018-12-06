@@ -156,7 +156,7 @@ sortMeals: function (meals) {
           let meal_time;
           if(platform === 'android') {
             meal_date = `${oldmeal.meal_date.getFullYear()}/${oldmeal.meal_date.getMonth() + 1}/${oldmeal.meal_date.getDate()}`
-            meal_time = `${oldmeal.meal_date.getHours()}:${oldmeal.meal_date.getMinutes()}`
+            meal_time = `${oldmeal.meal_date.getHours()}:${oldmeal.meal_date.getMinutes() < 10 ? '0' + oldmeal.meal_date.getMinutes() : oldmeal.meal_date.getMinutes()}`
           } else {
             meal_date = oldmeal.meal_date.toLocaleDateString('zh-hans');
             meal_time = oldmeal.meal_date.toLocaleTimeString('zh-hans', { hour12: false, hour: '2-digit', minute:'2-digit'});
@@ -169,7 +169,7 @@ sortMeals: function (meals) {
           let meal_time;
           if(platform === 'android') {
             meal_date = `${newmeal.meal_date.getFullYear()}/${newmeal.meal_date.getMonth() + 1}/${newmeal.meal_date.getDate()}`
-            meal_time = `${newmeal.meal_date.getHours()}:${newmeal.meal_date.getMinutes()}`
+            meal_time = `${newmeal.meal_date.getHours()}:${newmeal.meal_date.getMinutes() < 10 ? '0' + newmeal.meal_date.getMinutes() : newmeal.meal_date.getMinutes()}`
           } else {
             meal_date = newmeal.meal_date.toLocaleDateString('zh-hans');
             meal_time = newmeal.meal_date.toLocaleTimeString('zh-hans', { hour12: false, hour: '2-digit', minute:'2-digit'});
