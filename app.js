@@ -39,7 +39,6 @@ App({
     wx.getStorage({
       key: 'meals',
       success: function(res) {
-        console.log("what is this", res)
         self.globalData.meals = res.data
       },
       fail: function(res) {
@@ -70,6 +69,7 @@ App({
       const mealsQuery = new wx.BaaS.Query();
       mealsQuery.in('id', res);
       MealsTable.setQuery(mealsQuery).limit(0).find().then(res => {
+        console.log('results from cloud: ', res.data)
         wx.setStorage({
           key: 'meals',
           data: res.data.objects,

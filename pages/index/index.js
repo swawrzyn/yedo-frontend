@@ -5,18 +5,21 @@ Page({
   },
 
   userInfoHandler(data) {
+    wx.showLoading({
+      title: '加载中',
+    })
     wx.BaaS.handleUserInfo(data).then(res => {
       if (data.currentTarget.id === 'newmeal') {
             wx.navigateTo({
               url: '/groups/new/new'
             })
+            setTimeout(function () {
+              wx.hideLoading()
+            }, 1000)
       } else {
         wx.navigateTo({
           url: '/users/show/show'
         }),
-          wx.showLoading({
-            title: '加载中',
-          }),
           setTimeout(function () {
             wx.hideLoading()
           }, 1000)
