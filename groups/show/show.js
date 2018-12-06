@@ -197,13 +197,21 @@ Page({
     }
   },
 
+  percentage: function (e) {
+    wx.showToast({
+      title: '投票率',
+      icon: 'success',
+      duration: 2000
+    })
+  },
+
   tapLockSetRestaurant: function (e) {
     const page = this;
     const selectedRestaurant = page.data.locationsplice[parseInt(e.currentTarget.id)];
     if (page.data.owner && !page.data.meal.locked) {
       wx.showModal({
         title: '想去吗？',
-        content: `确定去${selectedRestaurant.title}吗?`,
+        content: `确定去 ${selectedRestaurant.title} 吗?`,
         cancelText: '不想去！',
         confirmText: "走吧！",
         success(res) {

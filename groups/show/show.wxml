@@ -5,7 +5,8 @@
 <view class="top-bar" wx:if="{{loading}}">
   <view class="group-left">
     <view class="rec-left">
-      <text class="recommend">一道推荐: {{recommendation}}</text>
+      <text class="recommend">一道推荐:</text>
+      <text class="title" bindtap="percentage">{{recommendation}}</text>
     </view>
   </view>
   <view class="group-right">
