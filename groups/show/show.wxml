@@ -6,8 +6,13 @@
   <view class="group-left">
     <view class="rec-left">
       <text class="recommend">一道推荐:</text>
-      <text class="title" bindtap="percentage">{{recommendation}}</text>
+      <text class="title"  bindtap='popOver_probability' id="recommendation">{{recommendation}}</text>
     </view>
+    <popover id='popover_probability'>
+      <!-- <block wx:for="{{users}}" wx:for-item="user" wx:key=""> -->
+        <popover-item><view class="user-line"><text class="user-name">推荐指数：{{probability}} %</text></view></popover-item>
+      <!-- </block> -->
+    </popover>
   </view>
   <view class="group-right">
     <button class="home" bindtap='toHome'>
