@@ -199,7 +199,7 @@ Page({
 
   percentage: function (e) {
     wx.showToast({
-      title: '投票率',
+      title: `投票率: ${this.data.probability}`,
       icon: 'success',
       duration: 2000
     })
@@ -296,6 +296,9 @@ Page({
       } else {
         topThree.push(unsorted[counter]);
       }
+      if (unsorted[counter] === undefined) {
+        break;
+      }
     }
     topThree.forEach(obj => {
       let accum = 0;
@@ -310,10 +313,17 @@ Page({
     });
     // sort one more time
     const sorted = topThree.sort((a, b)=> {
-                      b.value - a.value
+                      return b.value - a.value
                     });
+    console.log('after sorting top three: ', sorted);
       return { recommended_category: sorted[0].name, votes: sorted.map(cat => {
         return cat.value}) }
+  },
+
+  findProbability: (value, users) => {
+    return new Promise(res => {
+      res(Math.floor((value / (users * 3)) * 100))
+    })
   },
 
   setRecommended: function (page, meal, recCat) {
@@ -429,28 +439,6 @@ Page({
     })
   },
 
-  setPieData: function (recCat, votes) {
-    // setting the pie chart data
-    const page = this;
-    let first = true;
-    let pieData = votes.map(vote => {
-      if (first) {
-        first = false;
-        return {
-          name: recCat,
-          value: vote,
-          label: {
-            show: true,
-          }
-        }
-      } else {
-        return { value: vote };
-      }
-    })
-    console.log('pieData: ', pieData);
-    return new Promise((res, reject) => { res(pieData.slice(0, 6)) });
-  },
-
   fetchUserInfo: function (choices) {
     //fetching all users attached to the choices attached to the meals... from the cloud
     const Users = new wx.BaaS.User();
@@ -500,12 +488,17 @@ Page({
           hidden: false,
           loading: true
         })
+        page.findProbability(results[0].votes[0], results[1].length).then(res => {
+          page.setData({
+            probability: res
+          })
+        });
         wx.hideNavigationBarLoading();
         this.popover = this.selectComponent('#popover');
       } else {
+        // if not locked
         if (page.data.recomp) {
           // if recompute is necessary
-          console.log(results[1]);
           const recommendation = page.recomputeRecommendation(results[1]);
           let centreLoc;
           //checking if using owner location or all locations
@@ -516,15 +509,14 @@ Page({
             centreLoc = page.computeLoc(results[1]);
           }
 
-          Promise.all([results[0], recommendation, centreLoc]).then(results => {
-            console.log('centreloc: ', results[2]);
-            page.setRecommended(page, results[0], results[1]);
-            page.setLoc(results[2], results[0].id);
-            page.setPieData(results[1].recommended_category, results[1].votes).then(res => {
+          Promise.all([results[0], recommendation, centreLoc, results[1]]).then(results => {
+            page.findProbability(results[1].votes[0], results[3].length).then(res => {
               page.setData({
-                pieData: res
+                probability: res
               })
             });
+            page.setRecommended(page, results[0], results[1]);
+            page.setLoc(results[2], results[0].id);
             page.recommendSearch(results[2], results[1].recommended_category);
             page.setData({
               hidden: false,
@@ -537,13 +529,11 @@ Page({
           page.setData({
             recommendation: results[0].recommended_category
           })
-          page.setPieData(results[0].recommended_category, results[0].votes).then(res => {
-            // hacky way of waiting for the chart canvas to init
+          page.findProbability(results[0].votes[0], results[1].length).then(res => {
             page.setData({
-              pieData: res
+              probability: res
             })
           });
-
           page.recommendSearch(results[0].meal_location, results[0].recommended_category);
           page.setData({
             hidden: false,
