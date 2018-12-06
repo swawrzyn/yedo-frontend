@@ -99,6 +99,20 @@ page {
   left: 0;
 }
 
+.title {
+  background-color: rgba(10, 10, 10,0.8);
+  color: #fff;
+  box-shadow: 2rpx 4rpx 0.5rpx 2.5rpx rgba(20,20,20,1);
+  padding: 0 10rpx;
+  border-radius: 10rpx;
+}
+
+.title:active {
+  top: 2px;
+  -webkit-box-shadow: 1.5rpx 3rpx 0.5rpx 2rpx rgba(20,20,20,1) ;
+  box-shadow: 1.5rpx 3rpx 0.5rpx 2rpx rgba(20,20,20,1) ;
+}
+
 .rec-left .recommend {
   margin-right: 10rpx;
 }
