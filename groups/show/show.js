@@ -397,7 +397,7 @@ Page({
         success: function(res) {
           if(res.platform === 'android') {
             meal_date = `${mealDateObj.getFullYear()}/${mealDateObj.getMonth() + 1}/${mealDateObj.getDate()}`
-            meal_time = `${mealDateObj.getHours()}:${mealDateObj.getMinutes()}`
+            meal_time = `${mealDateObj.getHours()}:${mealDateObj.getMinutes() < 10 ? '0' + mealDateObj.getMinutes() : mealDateObj.getMinutes()}`
           } else {
             meal_date = mealDateObj.toLocaleDateString('zh-hans');
             meal_time = mealDateObj.toLocaleTimeString('zh-hans', { hour12: false, hour: '2-digit', minute:'2-digit'});
